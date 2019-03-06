@@ -1,1 +1,0 @@
-python yys.py
