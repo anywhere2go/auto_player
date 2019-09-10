@@ -27,7 +27,7 @@ def log(f):
 
 @log
 def select_mode():
-    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面, 
+    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面,
         1 结界自动合卡，自动选择前三张合成 
         2 自动通关魂十，自动接受组队并确认通关
         3 自动通关业原火，单刷
@@ -53,8 +53,8 @@ def card():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -90,8 +90,8 @@ def yuhun():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -190,8 +190,8 @@ def yeyuanhuo():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -228,8 +228,8 @@ def goliang():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -240,7 +240,7 @@ def goliang():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        print('screen shot ok',time.ctime())
+        print('cursor:',pyautogui.position())
         
         #设定目标，开始查找
         #进入后
@@ -322,8 +322,8 @@ def solo():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -455,8 +455,8 @@ def baigui():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -562,8 +562,8 @@ def douji():
             select_mode()
 
         screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
