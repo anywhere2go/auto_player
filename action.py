@@ -4,7 +4,7 @@ from PIL import ImageGrab
 from winsound import Beep
 
  #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
-def locate(target,want, show=0, msg=0):
+def locate(target,want, show=bool(0), msg=bool(0)):
     loc_pos=[]
     want,treshold,c_name=want[0],want[1],want[2]
     result=cv2.matchTemplate(target,want,cv2.TM_CCOEFF_NORMED)
@@ -31,12 +31,14 @@ def locate(target,want, show=0, msg=0):
         loc_pos.append([x,y])
 
     if show:  #在图上显示寻找的结果，调试时开启
+        print('Debug: show action.locate')
         cv2.imshow('we get',target)
         cv2.waitKey(0) 
         cv2.destroyAllWindows()
 
     if len(loc_pos)==0:
-        print(c_name,'not find')
+        #print(c_name,'not find')
+        pass
 
     return loc_pos
 
