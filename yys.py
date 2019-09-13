@@ -612,14 +612,14 @@ def rilun():
         #print('cursor:',pyautogui.position())
         
         #设定目标，开始查找
-        for i in ['ying','jiangli','jixu','zhunbei','xiayiceng','danren','queding','yuhunjiacheng','queren','gaoliang','zhunbeirita']:
+        for i in ['queren','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('领取奖励')
+                print('进行中。。。')
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
