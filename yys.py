@@ -35,12 +35,13 @@ def select_mode():
         5 单刷探索副本，无法区分经验BUFF
         6 百鬼夜行
         7 斗技
+        8 日轮之塔
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, card, yuhun, yeyuanhuo, goliang, solo, baigui, douji]
+    mode = [0, card, yuhun, yeyuanhuo, goliang, solo, baigui, douji, rilun]
     comand = mode[index]
     comand()
 
@@ -221,7 +222,7 @@ def yeyuanhuo():
                 break
 
 ########################################################
-    #狗粮通关
+#狗粮通关
 def goliang():
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -586,6 +587,43 @@ def douji():
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
                 time.sleep
+                break
+
+########################################################
+#
+def rilun():
+    while True:   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        screen = ImageGrab.grab()
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 768)
+        downright2 = (2550, 768)
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        #print('cursor:',pyautogui.position())
+        
+        #设定目标，开始查找
+        for i in ['ying','jiangli','jixu','zhunbei','xiayiceng','danren','queding','yuhunjiacheng','queren','gaoliang','zhunbeirita']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('领取奖励')
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(15,30) / 100
+                time.sleep(t)
                 break
 
 ####################################################
