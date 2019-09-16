@@ -620,7 +620,7 @@ def rilun():
             select_mode()
         
         #设定目标，开始查找
-        for i in ['querenrilun','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
+        for i in ['querenrilun','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','xiayiceng3','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
