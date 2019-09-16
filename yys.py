@@ -610,9 +610,17 @@ def rilun():
         screen = screen[b:d,a:c]
 
         #print('cursor:',pyautogui.position())
+        want = imgs['nosuyu']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('溯玉不足: ',pts[0])
+            select_mode()
         
         #设定目标，开始查找
-        for i in ['queren','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
+        for i in ['querenrilun','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
