@@ -28,20 +28,21 @@ def log(f):
 @log
 def select_mode():
     print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面,
-        1 结界自动合卡，自动选择前三张合成 
-        2 自动通关魂十，自动接受组队并确认通关
-        3 自动通关业原火，单刷
-        4 自动刷组队狗粮（打手模式），          
-        5 单刷探索副本，无法区分经验BUFF
+        1 结界自动合卡 
+        2 自动御魂通关(打手)
+        3 自动通关业原火(单刷)
+        4 自动刷组队狗粮(打手)，          
+        5 自动探索副本(单刷)
         6 百鬼夜行
         7 斗技
         8 日轮之塔
+        9 修罗战场
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, card, yuhun, yeyuanhuo, goliang, solo, baigui, douji, rilun]
+    mode = [0, card, yuhun, yeyuanhuo, goliang, solo, baigui, douji, rilun, xiuluo]
     comand = mode[index]
     comand()
 
@@ -83,7 +84,7 @@ def card():
 
 
 ########################################################
-#魂十通关
+#御魂通关
 def yuhun():
     while True :
         #鼠标移到最右侧中止    
@@ -241,7 +242,7 @@ def goliang():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        print('cursor:',pyautogui.position())
+        #print('cursor:',pyautogui.position())
         
         #设定目标，开始查找
         #进入后
@@ -590,7 +591,7 @@ def douji():
                 break
 
 ########################################################
-#
+#日轮之塔
 def rilun():
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -609,7 +610,6 @@ def rilun():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        #print('cursor:',pyautogui.position())
         want = imgs['nosuyu']
         size = want[0].shape
         h, w , ___ = size
@@ -633,6 +633,50 @@ def rilun():
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 break
+
+########################################################
+#修罗战场
+def xiuluo():
+    while True:   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        screen = ImageGrab.grab()
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 768)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        for i in ['cuishui','xiuluotiaozhan','zhunbeirita','jiangli','jixu']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('修罗战斗中。。。')
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(15,30) / 100
+                time.sleep
+                break
+
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足')
+            select_mode()
 
 ####################################################
 if __name__ == '__main__':
