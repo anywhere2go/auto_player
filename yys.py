@@ -228,7 +228,7 @@ def yuhun2():
                 continue
 
         #自动点击通关结束后的页面
-        for i in ['ying','jiangli','kaishi','jixu' ]:
+        for i in ['ying','jiangli','kaishi','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -241,7 +241,6 @@ def yuhun2():
                     t = random.randint(100,200) / 1000
                     time.sleep(t)
                 break
-    select_mode()
 
 ########################################################
 #业原火通关
