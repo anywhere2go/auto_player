@@ -28,21 +28,21 @@ def log(f):
 @log
 def select_mode():
     print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面,
-        1 结界自动合卡 
-        2 自动御魂通关(打手)
-        3 自动通关业原火(单刷)
-        4 自动刷组队狗粮(打手)，          
-        5 自动探索副本(单刷)
-        6 百鬼夜行
-        7 斗技
-        8 日轮之塔
+        1 结界自动合卡
+        2 自动御魂通关(司机)
+        3 自动御魂通关(打手)
+        4 自动通关业原火(单刷)
+        5 自动刷组队狗粮(打手)，          
+        6 自动探索副本(单刷)
+        7 百鬼夜行
+        8 斗技
         9 修罗战场
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, card, yuhun, yeyuanhuo, goliang, solo, baigui, douji, rilun, xiuluo]
+    mode = [0, card, yuhun, yuhun2, yeyuanhuo, goliang, solo, baigui, douji, xiuluo]
     comand = mode[index]
     comand()
 
@@ -84,8 +84,67 @@ def card():
 
 
 ########################################################
-#御魂通关
+#御魂司机
 def yuhun():
+    while True :
+        #鼠标移到最右侧中止    
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        screen = ImageGrab.grab()
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (2550, 770) #上部并排
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        #print('screen shot ok',time.ctime())
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足: ',pts[0])
+            select_mode()
+
+        #确定退出
+        want = imgs['queding']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('确定退出')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
+            
+        #自动点击通关结束后的页面
+        for i in ['yuhuntiaozhan','ying','jiangli']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                for pt in pts:
+                    pt = action.cheat(pt, w, h)
+                    pyautogui.click(pt)
+                    t = random.randint(100,200) / 1000
+                    time.sleep(t)
+                break
+    
+########################################################
+#御魂打手
+def yuhun2():
     while True :
         #鼠标移到最右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -588,50 +647,6 @@ def douji():
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
                 time.sleep
-                break
-
-########################################################
-#日轮之塔
-def rilun():
-    while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
-
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
-
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 768)
-        downright2 = (2550, 768)
-
-        a,b = upleft
-        c,d = downright
-        screen = screen[b:d,a:c]
-
-        want = imgs['nosuyu']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('溯玉不足: ',pts[0])
-            select_mode()
-        
-        #设定目标，开始查找
-        for i in ['querenrilun','queding','baoxiang','yueliang','ying','jiangli','jixu','zhunbei','xiayiceng','xiayiceng2','xiayiceng3','danren','yuhunjiacheng','gaoliang','zhunbeirita']:
-            want = imgs[i]
-            size = want[0].shape
-            h, w , ___ = size
-            target = screen
-            pts = action.locate(target,want,0)
-            if not len(pts) == 0:
-                print('进行中。。。')
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                t = random.randint(15,30) / 100
-                time.sleep(t)
                 break
 
 ########################################################
