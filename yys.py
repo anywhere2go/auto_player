@@ -238,7 +238,7 @@ def yuhun2():
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(100,200) / 1000
+                    t = random.randint(50,100) / 1000
                     time.sleep(t)
                 break
 
@@ -370,7 +370,7 @@ def goliang():
                 print('领取奖励')
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(15,30) / 100
+                t = random.randint(30,80) / 100
                 time.sleep(t)
                 break
 
@@ -416,7 +416,7 @@ def solo():
         target = action.cut(screen, x1, x2)
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('确认退出: ',pts[1])
+            print('确认退出')
             try:
                 queding = pts[1]
             except:
