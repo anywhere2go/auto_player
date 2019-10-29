@@ -261,9 +261,17 @@ def yeyuanhuo():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        print('screen shot ok',time.ctime())
+        #print('screen shot ok',time.ctime())
         
-        #设定目标，开始查找
+        #挑战券不足
+        want = imgs['nochi']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('挑战券不足')
+            select_mode()
 
         #过关
         for i in ['ying','jiangli','tiaozhan','jixu']:
