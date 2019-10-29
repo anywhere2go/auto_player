@@ -206,29 +206,8 @@ def yuhun2():
                 time.sleep(t)
                 
         
-        #这里是自动接受组队
-        for i in ['jieshou2',"jieshou"]:
-            want = imgs[i]
-            size = want[0].shape
-            h, w , ___ = size
-            x1,x2 = upleft, (430, 358)
-            target = action.cut(screen, x1, x2)
-            pts = action.locate(target,want,0)
-            if not len(pts) == 0:
-                print('接受组队')
-                xx = pts[0]
-                xx = action.cheat(xx, w, h)
-                if xx[0] > 120:           
-                    pyautogui.click(xx)
-                    t = random.randint(40,80) / 100
-                    time.sleep(t)
-                    break
-                else:
-                    pass
-                continue
-
         #自动点击通关结束后的页面
-        for i in ['ying','jiangli','kaishi','jixu']:
+        for i in ['jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -241,6 +220,7 @@ def yuhun2():
                     t = random.randint(50,100) / 1000
                     time.sleep(t)
                 break
+            
 
 ########################################################
 #业原火通关
