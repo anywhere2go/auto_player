@@ -28,7 +28,7 @@ def log(f):
 @log
 def select_mode():
     print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面,
-        1 结界自动合卡
+        1 结界突破
         2 自动御魂通关(司机)
         3 自动御魂通关(打手)
         4 自动通关业原火(单刷)
@@ -42,45 +42,91 @@ def select_mode():
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, card, yuhun, yuhun2, yeyuanhuo, goliang, solo, baigui, douji, xiuluo]
+    mode = [0, tupo, yuhun, yuhun2, yeyuanhuo, goliang, solo, baigui, douji, xiuluo]
     comand = mode[index]
     comand()
 
 ##########################################################
-#合成结界卡，较简单，未偏移直接点
-def card():
-    while True:
-        #鼠标移到右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.7:
+#个人/寮结节突破
+def tupo():
+    cishu = 0
+    while True :   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
-
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
-        downright2 = (1280, 720)
-
+        downright = (1426, 798)
         a,b = upleft
         c,d = downright
+        
+        screen = ImageGrab.grab()
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
         screen = screen[b:d,a:c]
 
-        want = imgs['taiyin']
+        #确定刷新
+        want = imgs['queding']
         size = want[0].shape
         h, w , ___ = size
         target = screen
         pts = action.locate(target,want,0)
-        if len(pts) == 0:
-            select_mode()
+        if not len(pts) == 0:
+            print('选择结节')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
         
-        x, y, z = (370, 238), (384, 385), (391, 525)  #前三张卡的位置
-        zz = (871, 615)               #合成按钮位置
-        for i in [x, y, z ,zz]:
-            pyautogui.click(i)
-            time.sleep(0.1)
-        time.sleep(0.5)
+        #选择突破
+        want = imgs['lingxunzhang']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('选择结节')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
+
+        #截屏
+        screen = ImageGrab.grab()
+        screen.save('screen.png')
+        screen = cv2.imread('screen.png')
+        screen = screen[b:d,a:c]
+
+        #开始突破
+        want = imgs['jingong']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            if cishu >= 30:
+                select_mode()
+            cishu = cishu + 1
+            print('进攻次数：',cishu)
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            t = random.randint(150,300) / 100
+            time.sleep(t)
+        
+        #奖励
+        for i in ['shuaxin','jiangli','jixu']:
+            want=imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target=screen
+            pts=action.locate(target,want,0)
+            if not len(pts)==0:
+                for pt in pts:
+                    pt = action.cheat(pt, w, h)
+                    pyautogui.click(pt)
+                    t = random.randint(100,200) / 100
+                    time.sleep(t)
+                break
 
 
 ########################################################
@@ -156,7 +202,7 @@ def yuhun2():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (2550, 770) #上部并排
+        downright = (1426, 798)
 
         a,b = upleft
         c,d = downright
