@@ -114,7 +114,7 @@ def tupo():
             time.sleep(t)
         
         #奖励
-        for i in ['shuaxin','jiangli','jixu']:
+        for i in ['shuaxin','jiangli','jixu','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
