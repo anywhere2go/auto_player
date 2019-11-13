@@ -307,6 +307,7 @@ def yeyuanhuo():
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
+                print('挑战中。。。')
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
