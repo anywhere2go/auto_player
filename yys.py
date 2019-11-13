@@ -299,6 +299,16 @@ def yuhundanren():
             print('挑战券不足')
             select_mode()
 
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足')
+            select_mode()
+            
         #过关
         for i in ['ying','jiangli','tiaozhan','jixu']:
             want=imgs[i]
