@@ -31,8 +31,8 @@ def select_mode():
         1 结界突破
         2 自动御魂通关(司机)
         3 自动御魂通关(打手)
-        4 自动通关业原火(单刷)
-        5 自动刷组队狗粮(打手)，          
+        4 自动御魂通关(单刷)
+        5 自动探索副本(打手)，          
         6 自动探索副本(单刷)
         7 百鬼夜行
         8 斗技
@@ -42,7 +42,7 @@ def select_mode():
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, tupo, yuhun, yuhun2, yeyuanhuo, goliang, solo, baigui, douji, xiuluo]
+    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, xiuluo]
     comand = mode[index]
     comand()
 
@@ -270,7 +270,7 @@ def yuhun2():
 
 ########################################################
 #业原火通关
-def yeyuanhuo():
+def yuhundanren():
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
