@@ -36,13 +36,13 @@ def select_mode():
         6 自动探索副本(单刷)
         7 百鬼夜行
         8 斗技
-        9 修罗战场
+        9 当前活动
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, xiuluo]
+    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong]
     comand = mode[index]
     comand()
 
@@ -694,8 +694,8 @@ def douji():
                 break
 
 ########################################################
-#修罗战场
-def xiuluo():
+#当前活动
+def huodong():
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -713,14 +713,14 @@ def xiuluo():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        for i in ['cuishui','xiuluotiaozhan','zhunbeirita','jiangli','jixu']:
+        for i in ['huodongtiaozhan','zhunbeirita','jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('修罗战斗中。。。')
+                print('活动中。。。')
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
