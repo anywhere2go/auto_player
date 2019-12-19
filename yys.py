@@ -174,7 +174,7 @@ def yuhun():
             time.sleep(t)
             
         #自动点击通关结束后的页面
-        for i in ['yuhuntiaozhan','ying','jiangli']:
+        for i in ['yuhuntiaozhan','ying','jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
