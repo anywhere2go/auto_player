@@ -263,7 +263,7 @@ def yuhun2():
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(50,100) / 1000
+                    t = random.randint(80,150) / 1000
                     time.sleep(t)
                 break
             
