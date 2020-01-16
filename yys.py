@@ -182,9 +182,10 @@ def yuhun():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 for pt in pts:
+                    print('挑战中。。。')
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(100,200) / 1000
+                    t = random.randint(200,300) / 1000
                     time.sleep(t)
                 break
     
@@ -261,9 +262,10 @@ def yuhun2():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 for pt in pts:
+                    print('挑战中。。。')
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(80,150) / 1000
+                    t = random.randint(200,350) / 1000
                     time.sleep(t)
                 break
             
@@ -703,7 +705,20 @@ def huodong():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        for i in ['huodongtiaozhan','zhunbeirita','jiangli','jixu']:
+        want = imgs['xiayihui']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('下一回 ',pts[0])
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            pyautogui.moveTo(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
+
+        for i in ['huodongtiaozhan','jiangli','jixu','zhunbei']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
