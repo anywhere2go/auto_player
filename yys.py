@@ -37,12 +37,13 @@ def select_mode():
         7 百鬼夜行
         8 斗技
         9 当前活动
+        10 结界自动合卡，自动选择前三张合成
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong]
+    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong, card]
     comand = mode[index]
     comand()
 
@@ -682,7 +683,7 @@ def douji():
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
-                time.sleep
+                time.sleep(t)
                 break
 
 ########################################################
@@ -718,7 +719,7 @@ def huodong():
             t = random.randint(15,30) / 100
             time.sleep(t)
 
-        for i in ['huodongtiaozhan','jiangli','jixu','zhunbei']:
+        for i in ['huodongtiaozhan','jiangli','jixu','zhunbei','yun']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -729,7 +730,7 @@ def huodong():
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
-                time.sleep
+                time.sleep(t)
                 break
 
         #体力不足
@@ -742,6 +743,104 @@ def huodong():
             print('体力不足')
             select_mode()
 
+##########################################################
+#合成结界卡，较简单，未偏移直接点
+def card():
+    while True:
+        #鼠标移到右侧中止    
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截图
+        screen = ImageGrab.grab()
+        screen.save('screen.jpg')
+        screen = cv2.imread('screen.jpg')
+        
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 768)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        want = imgs['taiyin2']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if len(pts) == 0:
+                print('结界卡不足')
+                select_mode()
+        else:
+            print('结界卡*')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            pyautogui.moveTo(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
+
+        for i in range(2):
+            #截图
+            screen = ImageGrab.grab()
+            screen.save('screen.jpg')
+            screen = cv2.imread('screen.jpg')
+
+            #截屏，并裁剪以加速
+            upleft = (0, 0)
+            downright = (1358, 768)
+            downright2 = (1280, 720)
+
+            a,b = upleft
+            c,d = downright
+            screen = screen[b:d,a:c]
+
+            want = imgs['taiyin']
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if len(pts) == 0:
+                print('结界卡不足')
+                select_mode()
+            else:
+                print('结界卡',i)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                pyautogui.moveTo(xy)
+                t = random.randint(15,30) / 100
+                time.sleep(t)
+
+        #截图
+        screen = ImageGrab.grab()
+        screen.save('screen.jpg')
+        screen = cv2.imread('screen.jpg')
+        
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 768)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        want = imgs['hecheng']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('合成中。。。')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            pyautogui.moveTo(xy)
+            t = random.randint(15,30) / 100
+            time.sleep(t)
+
+        t = random.randint(15,30) / 100
+        time.sleep(1)
 ####################################################
 if __name__ == '__main__':
     select_mode()
