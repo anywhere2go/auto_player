@@ -7,7 +7,6 @@
 2. 配置程序环境
 安装好python后还需要另外安装两个python库，分别是opencv和pyautogui。这个步骤Windows和Mac略有不同：
 Windows：管理员身份打开命令行（cmd）或者powershell，然后分别运行 pip install opencv-python 和 pip install pyautogui
-
 Mac：在终端（terminal）下分别运行 pip3 install opencv-python 和 pip3 install pyautogui
 
 3. 运行脚本
