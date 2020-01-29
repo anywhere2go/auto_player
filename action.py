@@ -1,6 +1,7 @@
 
 import cv2,numpy,time,os, random
-from PIL import ImageGrab
+#from PIL import ImageGrab
+import pyscreenshot as ImageGrab
 
  #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
 def locate(target,want, show=bool(0), msg=bool(0)):

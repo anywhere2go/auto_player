@@ -1,6 +1,7 @@
 import cv2,numpy,time,random
 import os,sys,pyautogui, traceback
-from PIL import ImageGrab
+#from PIL import ImageGrab
+import pyscreenshot as ImageGrab
 import action
 
 # 读取文件 精度控制   显示名字
@@ -38,12 +39,13 @@ def select_mode():
         8 斗技
         9 当前活动
         10 结界自动合卡，自动选择前三张合成
+        11 抽卡
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong, card]
+    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong, card,chouka]
     comand = mode[index]
     comand()
 
@@ -841,6 +843,42 @@ def card():
 
         t = random.randint(15,30) / 100
         time.sleep(1)
+
+##########################################################
+#抽卡
+def chouka():
+    while True:
+        #鼠标移到右侧中止    
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截图
+        screen = ImageGrab.grab()
+        screen.save('screen.jpg')
+        screen = cv2.imread('screen.jpg')
+        
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 768)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+        screen = screen[b:d,a:c]
+
+        for i in ['cezhi','zaicizhaohuan']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('抽卡中。。。')
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                #t = random.randint(1,3) / 100
+                #time.sleep(t)
+                break
 ####################################################
 if __name__ == '__main__':
     select_mode()
