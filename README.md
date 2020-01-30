@@ -5,9 +5,9 @@
 3.7.6版本下载地址: https://www.python.org/downloads/release/python-376/， 选择对应的系统就好。
 
 2. 配置程序环境
-安装好python后还需要另外安装两个python库，分别是opencv和pyautogui。这个步骤Windows和Mac略有不同：
-Windows：管理员身份打开命令行（cmd）或者powershell，然后分别运行 pip install opencv-python 和 pip install pyautogui。
-Mac：在终端（terminal）下分别运行 pip3 install opencv-python 和 pip3 install pyautogui
+安装好python后还需要另外安装三个python库，分别是opencv，pyautogui和pyscreenshot。这个步骤Windows和Mac略有不同：
+Windows：管理员身份打开命令行（cmd）或者powershell，然后分别运行 pip install opencv-python 和 pip install pyautogui 和 pip install pyscreenshot。
+Mac：在终端（terminal）下分别运行 pip3 install opencv-python 和 pip3 install pyautogui 和 pip3 install pyscreenshot
 
 3. 运行脚本
 打开IDLE程序，然后打开yys.py脚本源代码，点击运行（F5）则开启脚本。
