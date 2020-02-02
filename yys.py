@@ -2,6 +2,7 @@ import cv2,numpy,time,random
 import os,sys,pyautogui, traceback
 #from PIL import ImageGrab
 import pyscreenshot as ImageGrab
+import numpy as np
 import action
 
 # 读取文件 精度控制   显示名字
@@ -50,7 +51,7 @@ def select_mode():
     comand()
 
 ##########################################################
-#个人/寮结节突破
+#结节突破
 def tupo():
     cishu = 0
     while True :   #直到取消，或者出错
@@ -63,9 +64,7 @@ def tupo():
         a,b = upleft
         c,d = downright
         
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         screen = screen[b:d,a:c]
 
         #确定刷新
@@ -95,9 +94,7 @@ def tupo():
             time.sleep(t)
 
         #截屏
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         screen = screen[b:d,a:c]
 
         #开始突破
@@ -117,7 +114,7 @@ def tupo():
             time.sleep(t)
         
         #奖励
-        for i in ['shuaxin','jiangli','jixu','shibai']:
+        for i in ['jujue','shuaxin','jiangli','jixu','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -140,9 +137,7 @@ def yuhun():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -177,7 +172,7 @@ def yuhun():
             time.sleep(t)
             
         #自动点击通关结束后的页面
-        for i in ['yuhuntiaozhan','ying','jiangli','jiangli2','jixu']:
+        for i in ['jujue','yuhuntiaozhan','ying','jiangli','jiangli2','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -200,9 +195,7 @@ def yuhun2():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -257,7 +250,7 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
+        for i in ['jujue','jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -274,15 +267,13 @@ def yuhun2():
             
 
 ########################################################
-#业原火通关
+#御魂单人
 def yuhundanren():
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -305,7 +296,7 @@ def yuhundanren():
             select_mode()
             
         #过关
-        for i in ['ying','jiangli','tiaozhan','jixu']:
+        for i in ['jujue','ying','jiangli','tiaozhan','jixu']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -321,15 +312,16 @@ def yuhundanren():
                 break
 
 ########################################################
-#狗粮通关
+#组队探索
 def goliang():
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        #screen = ImageGrab.grab()
+        #screen.save('screen.png')
+        #screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -357,6 +349,7 @@ def goliang():
             x1,x2 = (5, 405), (119, 560)
             target = action.cut(screen, x1, x2)
             pts = action.locate(target,want,0)
+            
             if not len(pts) == 0:
                 print('组队状态中')
             else:
@@ -369,8 +362,9 @@ def goliang():
                     x1,x2 = upleft, (965, 522)
                     target = action.cut(screen, x1, x2)
                     pts = action.locate(target,want,0)
+                    
                     if not len(pts) == 0:
-                        print('退出中')
+                        print('退出中',pts[0])
                         try:
                             queding = pts[1]
                         except:
@@ -400,7 +394,7 @@ def goliang():
                 pass
             continue
 
-        for i in ['ying','jiangli','jixu']:
+        for i in ['jujue','ying','jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -421,9 +415,7 @@ def solo():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -520,7 +512,7 @@ def solo():
                         break
                 continue
 
-        for i in ['ying','jiangli','jixu']:
+        for i in ['jujue','ying','jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -554,9 +546,7 @@ def baigui():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -661,9 +651,7 @@ def douji():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -695,9 +683,7 @@ def huodong():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen = ImageGrab.grab()
-        screen.save('screen.png')
-        screen = cv2.imread('screen.png')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -754,9 +740,7 @@ def card():
             select_mode()
 
         #截图
-        screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -785,9 +769,7 @@ def card():
 
         for i in range(2):
             #截图
-            screen = ImageGrab.grab()
-            screen.save('screen.jpg')
-            screen = cv2.imread('screen.jpg')
+            screen=np.array(ImageGrab.grab().convert('RGB'))
 
             #截屏，并裁剪以加速
             upleft = (0, 0)
@@ -815,9 +797,7 @@ def card():
                 time.sleep(t)
 
         #截图
-        screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -853,9 +833,7 @@ def chouka():
             select_mode()
 
         #截图
-        screen = ImageGrab.grab()
-        screen.save('screen.jpg')
-        screen = cv2.imread('screen.jpg')
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
