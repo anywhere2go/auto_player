@@ -419,7 +419,7 @@ def solo():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -443,7 +443,6 @@ def solo():
         want = imgs['queren']
         size = want[0].shape
         h, w , ___ = size
-        target = screen
         x1,x2 = upleft, (965, 522)
         target = action.cut(screen, x1, x2)
         pts = action.locate(target,want,0)
