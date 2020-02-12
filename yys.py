@@ -60,7 +60,7 @@ def tupo():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1426, 798)
+        downright = (1358, 900)
         a,b = upleft
         c,d = downright
         
@@ -110,7 +110,7 @@ def tupo():
             print('进攻次数：',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(150,200) / 100
+            t = random.randint(30,80) / 100
             time.sleep(t)
         
         #奖励
@@ -124,7 +124,7 @@ def tupo():
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(100,200) / 100
+                    t = random.randint(30,80) / 100
                     time.sleep(t)
                 break
 
@@ -141,7 +141,7 @@ def yuhun():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (2550, 770) #上部并排
+        downright = (1358, 900) #上部并排
 
         a,b = upleft
         c,d = downright
@@ -199,7 +199,7 @@ def yuhun2():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1426, 798)
+        downright = (1358, 900)
 
         a,b = upleft
         c,d = downright
@@ -277,7 +277,7 @@ def yuhundanren():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1426, 798)
+        downright = (1358, 900)
 
         a,b = upleft
         c,d = downright
@@ -325,8 +325,8 @@ def goliang():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
-        downright2 = (2550, 768)
+        downright = (1358, 900)
+        downright2 = (2550, 900)
 
         a,b = upleft
         c,d = downright
@@ -394,7 +394,7 @@ def goliang():
                 pass
             continue
 
-        for i in ['jujue','ying','jiangli','jixu']:
+        for i in ['jujue','ying','jiangli','jixu','zhunbei']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -549,7 +549,7 @@ def baigui():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -654,7 +654,7 @@ def douji():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -686,7 +686,7 @@ def huodong():
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -743,7 +743,7 @@ def card():
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -772,7 +772,7 @@ def card():
 
             #截屏，并裁剪以加速
             upleft = (0, 0)
-            downright = (1358, 768)
+            downright = (1358, 900)
             downright2 = (1280, 720)
 
             a,b = upleft
@@ -800,7 +800,7 @@ def card():
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
@@ -836,7 +836,7 @@ def chouka():
         
         #截屏，并裁剪以加速
         upleft = (0, 0)
-        downright = (1358, 768)
+        downright = (1358, 900)
         downright2 = (1280, 720)
 
         a,b = upleft
