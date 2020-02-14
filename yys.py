@@ -90,7 +90,7 @@ def tupo():
             print('选择结节')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(50,100) / 100
+            t = random.randint(10,20) / 100
             time.sleep(t)
 
         #截屏
@@ -110,7 +110,7 @@ def tupo():
             print('进攻次数：',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(30,80) / 100
+            t = random.randint(20,60) / 100
             time.sleep(t)
         
         #奖励
