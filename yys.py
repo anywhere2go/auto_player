@@ -38,7 +38,7 @@ def select_mode():
         6 自动探索副本(单刷)
         7 百鬼夜行
         8 斗技
-        9 当前活动
+        9 当前活动（超鬼王）
         10 结界自动合卡，自动选择前三张合成
         11 抽卡
         ''')
@@ -661,7 +661,7 @@ def douji():
         c,d = downright
         screen = screen[b:d,a:c]
 
-        for i in ['douji','doujiend','ying','doujiqueren','tui','doujiother']:
+        for i in ['queren','douji','doujiend','ying','doujiqueren','tui','doujiother']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -682,44 +682,29 @@ def huodong():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
+        screen=np.array(ImageGrab.grab().convert('RGB'))
         upleft = (0, 0)
         downright = (1358, 900)
         downright2 = (1280, 720)
-
         a,b = upleft
         c,d = downright
         screen = screen[b:d,a:c]
 
-        want = imgs['xiayihui']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('下一回 ',pts[0])
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
-
-        for i in ['jujue','huodongtiaozhan','jiangli','jixu','zhunbei','yun']:
+        for i in ['jujue','liaotianguanbi','ditu','huodongguanbi','huodongtiaozhan','jiangli','jixu','zhunbei','yun','shibai','huodongrukou2']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('活动中。。。')
+                print('活动中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(15,30) / 100
+                t = random.randint(50,100) / 100
                 time.sleep(t)
                 break
-
+        
         #体力不足
         want = imgs['notili']
         size = want[0].shape
