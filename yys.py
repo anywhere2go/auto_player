@@ -258,7 +258,7 @@ def yuhun2():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 for pt in pts:
-                    print('挑战中。。。')
+                    print('挑战中。。。',i)
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
                     t = random.randint(200,350) / 1000
@@ -303,7 +303,7 @@ def yuhundanren():
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
-                print('挑战中。。。')
+                print('挑战中。。。',i)
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
