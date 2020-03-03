@@ -3,6 +3,7 @@ import os,sys,pyautogui, traceback
 #from PIL import ImageGrab
 import pyscreenshot as ImageGrab
 import numpy as np
+import mss
 import action
 
 # 读取文件 精度控制   显示名字
@@ -64,8 +65,11 @@ def tupo():
         a,b = upleft
         c,d = downright
         
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-        screen = screen[b:d,a:c]
+        #screen=np.array(ImageGrab.grab().convert('RGB'))
+        #screen = screen[b:d,a:c]
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
         #确定刷新
         want = imgs['queding']
@@ -77,7 +81,7 @@ def tupo():
             print('选择结节')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(15,30) / 100
+            t = random.randint(30,100) / 100
             time.sleep(t)
         
         #选择突破
@@ -90,12 +94,12 @@ def tupo():
             print('选择结节')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(10,20) / 100
+            t = random.randint(30,100) / 100
             time.sleep(t)
 
         #截屏
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-        screen = screen[b:d,a:c]
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
         #开始突破
         want = imgs['jingong']
@@ -110,21 +114,24 @@ def tupo():
             print('进攻次数：',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
-            t = random.randint(20,60) / 100
+            t = random.randint(30,100) / 100
             time.sleep(t)
         
         #奖励
-        for i in ['jujue','shuaxin','jiangli','jixu','shibai']:
+        for i in ['jujue','shibai','shuaxin','jiangli','jixu']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
+                if i == 'shibai':
+                    cishu = cishu - 1
+                print('突破中。。。',i)
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(30,80) / 100
+                    t = random.randint(30,100) / 100
                     time.sleep(t)
                 break
 
@@ -137,15 +144,17 @@ def yuhun():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900) #上部并排
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
+
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
         #print('screen shot ok',time.ctime())
         #体力不足
@@ -195,15 +204,17 @@ def yuhun2():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
+
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
         #print('screen shot ok',time.ctime())
         #体力不足
@@ -250,7 +261,7 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
+        for i in ['jujue','querenyuhun','jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -269,11 +280,10 @@ def yuhun2():
 ########################################################
 #御魂单人
 def yuhundanren():
+    cishu=0
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
-
-        screen=np.array(ImageGrab.grab().convert('RGB'))
 
         #截屏，并裁剪以加速
         upleft = (0, 0)
@@ -281,9 +291,11 @@ def yuhundanren():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
-
-        #print('screen shot ok',time.ctime())
+        
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         #体力不足
         want = imgs['notili']
@@ -294,7 +306,12 @@ def yuhundanren():
         if not len(pts) == 0:
             print('体力不足')
             select_mode()
-            
+
+        #次数检查
+        if cishu > 200:
+            print('次数上限')
+            select_mode()
+        
         #过关
         for i in ['jujue','ying','jiangli','tiaozhan','jixu']:
             want=imgs[i]
@@ -304,10 +321,13 @@ def yuhundanren():
             pts=action.locate(target,want,0)
             if not len(pts)==0:
                 print('挑战中。。。',i)
+                if i == 'tiaozhan':
+                    cishu=cishu+1
+                    print('挑战次数：',cishu)
                 for pt in pts:
                     pt = action.cheat(pt, w, h)
                     pyautogui.click(pt)
-                    t = random.randint(20,50) / 100
+                    t = random.randint(100,300) / 100
                     time.sleep(t)
                 break
 
@@ -318,11 +338,6 @@ def goliang():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #screen = ImageGrab.grab()
-        #screen.save('screen.png')
-        #screen = cv2.imread('screen.png')
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -330,9 +345,11 @@ def goliang():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
-        #print('cursor:',pyautogui.position())
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         #设定目标，开始查找
         #进入后
@@ -364,7 +381,7 @@ def goliang():
                     pts = action.locate(target,want,0)
                     
                     if not len(pts) == 0:
-                        print('退出中',pts[0])
+                        print('退出中',i)
                         try:
                             queding = pts[1]
                         except:
@@ -415,8 +432,6 @@ def solo():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -424,10 +439,16 @@ def solo():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
-        #print('screen shot ok',time.ctime())
-        #print(pyautogui.position())
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        #debug
+        #cv2.imshow('image',im)
+        #return
+        ############################
+        
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -435,16 +456,15 @@ def solo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('体力不足: ',pts[0])
+            print('体力不足 ')
             select_mode()
 
-
-        
         want = imgs['queren']
         size = want[0].shape
         h, w , ___ = size
-        x1,x2 = upleft, (965, 522)
-        target = action.cut(screen, x1, x2)
+        target = screen
+        #x1,x2 = upleft, (965, 522)
+        #target = action.cut(screen, x1, x2)
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
             print('确认退出')
@@ -499,7 +519,7 @@ def solo():
                     target = action.cut(screen, x1, x2)
                     pts = action.locate(target,want,0)
                     if not len(pts) == 0:
-                        print('退出中')
+                        print('退出中',i)
                         try:
                             queding = pts[1]
                         except:
@@ -518,7 +538,7 @@ def solo():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('领取奖励')
+                print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
@@ -531,7 +551,7 @@ def solo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('进入地图: ',pts[0])
+            print('进入地图')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             pyautogui.moveTo(xy)
@@ -545,8 +565,6 @@ def baigui():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -554,10 +572,11 @@ def baigui():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
-        #print('screen shot ok',time.ctime())
-        #print(pyautogui.position())
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         #设定目标，开始查找
         #进入后
@@ -650,8 +669,6 @@ def douji():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -659,8 +676,12 @@ def douji():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
         for i in ['queren','douji','doujiend','ying','doujiqueren','tui','doujiother']:
             want = imgs[i]
             size = want[0].shape
@@ -668,7 +689,7 @@ def douji():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('领取奖励')
+                print('斗技中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
@@ -683,14 +704,17 @@ def huodong():
             select_mode()
 
         #截屏，并裁剪以加速
-        screen=np.array(ImageGrab.grab().convert('RGB'))
         upleft = (0, 0)
         downright = (1358, 900)
         downright2 = (1280, 720)
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
         for i in ['jujue','liaotianguanbi','ditu','huodongguanbi','huodongtiaozhan','jiangli','jixu','zhunbei','yun','shibai','huodongrukou2']:
             want = imgs[i]
             size = want[0].shape
@@ -723,9 +747,6 @@ def card():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截图
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-        
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -733,8 +754,12 @@ def card():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
         want = imgs['taiyin2']
         size = want[0].shape
         h, w , ___ = size
@@ -752,17 +777,10 @@ def card():
             time.sleep(t)
 
         for i in range(2):
-            #截图
-            screen=np.array(ImageGrab.grab().convert('RGB'))
-
-            #截屏，并裁剪以加速
-            upleft = (0, 0)
-            downright = (1358, 900)
-            downright2 = (1280, 720)
-
-            a,b = upleft
-            c,d = downright
-            screen = screen[b:d,a:c]
+            #截屏
+            monitor = {"top": b, "left": a, "width": c, "height": d}
+            im = np.array(mss.mss().grab(monitor))
+            screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
             want = imgs['taiyin']
             size = want[0].shape
@@ -780,17 +798,10 @@ def card():
                 t = random.randint(15,30) / 100
                 time.sleep(t)
 
-        #截图
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-        
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-        screen = screen[b:d,a:c]
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
         want = imgs['hecheng']
         size = want[0].shape
@@ -816,9 +827,6 @@ def chouka():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截图
-        screen=np.array(ImageGrab.grab().convert('RGB'))
-        
         #截屏，并裁剪以加速
         upleft = (0, 0)
         downright = (1358, 900)
@@ -826,8 +834,12 @@ def chouka():
 
         a,b = upleft
         c,d = downright
-        screen = screen[b:d,a:c]
 
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
         for i in ['cezhi','zaicizhaohuan']:
             want = imgs[i]
             size = want[0].shape

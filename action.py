@@ -48,11 +48,10 @@ def load_imgs():
     mubiao = {}
     path = os.getcwd() + '/jpg'
     file_list = os.listdir(path)
-
     for file in file_list:
         name = file.split('.')[0]
         file_path = path + '/' + file
-        a = [ cv2.imread(file_path) , 0.8, name]
+        a = [ cv2.imread(file_path) , 0.95, name]
         mubiao[name] = a
 
     return mubiao
