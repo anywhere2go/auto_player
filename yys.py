@@ -1,7 +1,5 @@
 import cv2,numpy,time,random
 import os,sys,pyautogui, traceback
-#from PIL import ImageGrab
-import pyscreenshot as ImageGrab
 import numpy as np
 import mss
 import action
