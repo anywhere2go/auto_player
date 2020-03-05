@@ -713,7 +713,10 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        for i in ['jujue','liaotianguanbi','ditu','danren','jiangli','jixu','zhunbei','yun','shibai']:
+        for i in ['jujue','liaotianguanbi','ditu',\
+                  'danren','jiangli','jixu','zhunbei',\
+                  'yun','shibai','querenyuhun','hdtiaozhan',\
+                  'hdqueren']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
