@@ -49,7 +49,7 @@ def load_imgs():
     for file in file_list:
         name = file.split('.')[0]
         file_path = path + '/' + file
-        a = [ cv2.imread(file_path) , 0.95, name]
+        a = [ cv2.imread(file_path) , 0.85, name]
         mubiao[name] = a
 
     return mubiao

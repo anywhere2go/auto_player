@@ -37,7 +37,7 @@ def select_mode():
         6 自动探索副本(单刷)
         7 百鬼夜行
         8 斗技
-        9 当前活动（超鬼王）
+        9 当前活动（缘结神）
         10 结界自动合卡，自动选择前三张合成
         11 抽卡
         ''')
@@ -76,7 +76,7 @@ def tupo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('选择结节')
+            print('确定')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             t = random.randint(30,100) / 100
@@ -116,7 +116,7 @@ def tupo():
             time.sleep(t)
         
         #奖励
-        for i in ['jujue','shibai','shuaxin','jiangli','jixu']:
+        for i in ['jujue','shibai','jiangli','jixu','shuaxin']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
