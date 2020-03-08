@@ -69,54 +69,13 @@ def tupo():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        #确定刷新
-        want = imgs['queding']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('确定')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(30,100) / 100
-            time.sleep(t)
-        
-        #选择突破
-        want = imgs['lingxunzhang']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('选择结节')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(30,100) / 100
-            time.sleep(t)
-
-        #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-
-        #开始突破
-        want = imgs['jingong']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            if cishu >= 30:
-                select_mode()
-            cishu = cishu + 1
-            print('进攻次数：',cishu)
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(30,100) / 100
-            time.sleep(t)
-        
+        if cishu >= 30:
+            print('进攻次数上限')
+            select_mode()
         #奖励
-        for i in ['jujue','shibai','jiangli','jixu','shuaxin']:
+        for i in ['jujue','queding',\
+                  'shibai','jiangli','jixu','shuaxin','jingong',\
+                  'jingong2','lingxunzhang']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -125,13 +84,15 @@ def tupo():
             if not len(pts)==0:
                 if i == 'shibai':
                     cishu = cishu - 1
+                    print('进攻次数：',cishu)
+                elif i=='jingong' or i=='jingong2':
+                    cishu = cishu + 1
+                    print('进攻次数：',cishu)
                 print('突破中。。。',i)
-                for pt in pts:
-                    pt = action.cheat(pt, w, h)
-                    pyautogui.click(pt)
-                    t = random.randint(30,100) / 100
-                    time.sleep(t)
-                break
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(15,30) / 100
+                time.sleep(t)
 
 
 ########################################################
