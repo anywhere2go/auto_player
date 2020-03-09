@@ -91,7 +91,7 @@ def tupo():
                 print('突破中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(15,30) / 100
+                t = random.randint(30,80) / 100
                 time.sleep(t)
 
 
