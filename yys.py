@@ -677,7 +677,7 @@ def huodong():
         for i in ['jujue','liaotianguanbi','ditu',\
                   'danren','jiangli','jixu','zhunbei',\
                   'yun','shibai','querenyuhun','hdtiaozhan',\
-                  'hdqueren']:
+                  'hdqueren','huodongjiangli','huodonglupai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -687,7 +687,7 @@ def huodong():
                 print('活动中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(50,100) / 100
+                t = random.randint(30,80) / 100
                 time.sleep(t)
                 break
         
