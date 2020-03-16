@@ -642,7 +642,9 @@ def douji():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        for i in ['queren','douji','doujiend','ying','doujiqueren','tui','doujiother']:
+        for i in ['queren','douji','doujiend','ying',\
+                  'doujiqueren','tui','doujiother',
+                  'liaotianguanbi']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
