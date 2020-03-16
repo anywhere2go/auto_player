@@ -75,7 +75,7 @@ def tupo():
         #奖励
         for i in ['jujue','queding',\
                   'shibai','jiangli','jixu','shuaxin','jingong',\
-                  'jingong2','lingxunzhang']:
+                  'jingong2','lingxunzhang','lingxunzhang2']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -91,8 +91,9 @@ def tupo():
                 print('突破中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
+                t = random.randint(60,100) / 100
                 time.sleep(t)
+                break
 
 
 ########################################################
