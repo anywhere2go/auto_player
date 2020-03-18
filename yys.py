@@ -92,7 +92,7 @@ def tupo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            cishu=cishu+30
+            cishu=cishu+1
             print('进攻次数上限:',cishu)
         
         #奖励
