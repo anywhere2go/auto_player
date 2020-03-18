@@ -69,12 +69,36 @@ def tupo():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        if cishu >= 30:
+        #寮突破CD
+        want = imgs['liaotupo']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('寮突破')
+            if cishu > 6:
+                print('等待5分钟CD')
+                t = 5*60
+                time.sleep(t)
+                cishu=0
+        elif cishu >= 30:
             print('进攻次数上限')
             select_mode()
+
+        want = imgs['jingonghuise']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            cishu=cishu+30
+            print('进攻次数上限:',cishu)
+        
         #奖励
         for i in ['jujue','queding',\
-                  'shibai','jiangli','jixu','shuaxin','jingong',\
+                  'shibai','jiangli','jixu','shuaxin',\
+                  'jingong',\
                   'jingong2','lingxunzhang','lingxunzhang2']:
             want=imgs[i]
             size = want[0].shape
@@ -99,6 +123,7 @@ def tupo():
 ########################################################
 #御魂司机
 def yuhun():
+    cishu=0
     while True :
         #鼠标移到最右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -148,17 +173,20 @@ def yuhun():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                for pt in pts:
-                    print('挑战中。。。')
-                    pt = action.cheat(pt, w, h)
-                    pyautogui.click(pt)
-                    t = random.randint(200,300) / 1000
-                    time.sleep(t)
+                if i == 'yuhuntiaozhan':
+                    cishu = cishu + 1
+                    print('挑战次数：',cishu)
+                print('挑战中。。。',i)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(100,200) / 100
+                time.sleep(t)
                 break
     
 ########################################################
 #御魂打手
 def yuhun2():
+    cishu=0
     while True :
         #鼠标移到最右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -221,19 +249,19 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','querenyuhun','jieshou2','jieshou','ying','jiangli','kaishi','jixu']:
+        for i in ['jujue','querenyuhun','jieshou2',\
+                  'jieshou','ying','jiangli','kaishi','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                for pt in pts:
-                    print('挑战中。。。',i)
-                    pt = action.cheat(pt, w, h)
-                    pyautogui.click(pt)
-                    t = random.randint(200,350) / 1000
-                    time.sleep(t)
+                print('挑战中。。。',i)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(100,200) / 100
+                time.sleep(t)
                 break
             
 
