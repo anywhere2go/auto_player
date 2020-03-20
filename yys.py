@@ -40,12 +40,15 @@ def select_mode():
         9 当前活动（缘结神）
         10 结界自动合卡，自动选择前三张合成
         11 抽卡
+        12 式神升星
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
     index = int(raw)
 
-    mode = [0, tupo, yuhun, yuhun2, yuhundanren, goliang, solo, baigui, douji, huodong, card,chouka]
+    mode = [0, tupo, yuhun, yuhun2, yuhundanren,\
+            goliang, solo, baigui, douji, huodong,\
+            card, chouka, shengxing]
     comand = mode[index]
     comand()
 
@@ -106,16 +109,17 @@ def tupo():
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(30,80) / 100
                 if i == 'shibai':
                     cishu = cishu - 1
                     print('进攻次数：',cishu)
                 elif i=='jingong' or i=='jingong2':
                     cishu = cishu + 1
                     print('进攻次数：',cishu)
+                    t = random.randint(300,500) / 100
                 print('突破中。。。',i)
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                t = random.randint(30,80) / 100
                 time.sleep(t)
                 break
 
@@ -845,6 +849,42 @@ def chouka():
                 pyautogui.click(xy)
                 #t = random.randint(1,3) / 100
                 #time.sleep(t)
+                break
+
+##########################################################
+#式神升星
+cishu=0
+def shengxing():
+    while True:
+        #鼠标移到右侧中止    
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 900)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
+        for i in ['jixushengxing','querenshengxing']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('升星中。。。',i)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(30,100) / 100
+                time.sleep(t)
                 break
 ####################################################
 if __name__ == '__main__':
