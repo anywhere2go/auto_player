@@ -95,7 +95,7 @@ def tupo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            cishu=cishu+1
+            cishu=cishu+7
             print('进攻次数上限:',cishu)
         
         #奖励
@@ -170,7 +170,8 @@ def yuhun():
             time.sleep(t)
             
         #自动点击通关结束后的页面
-        for i in ['jujue','yuhuntiaozhan','ying','jiangli','jiangli2','jixu']:
+        for i in ['jujue','yuhuntiaozhan','liaotianguanbi',\
+                  'ying','jiangli','jiangli2','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -183,7 +184,7 @@ def yuhun():
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(100,200) / 100
+                t = random.randint(200,300) / 100
                 time.sleep(t)
                 break
     
@@ -253,8 +254,9 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','querenyuhun','jieshou2',\
-                  'jieshou','ying','jiangli','kaishi','jixu']:
+        for i in ['jujue','querenyuhun','jieshou2','jieshou1',\
+                  'jieshou','ying','jiangli','kaishi','jixu',\
+                  'shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -531,7 +533,7 @@ def solo():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 print('领取奖励',i)
-                xy = action.cheat(pts[0], w, h-10 )
+                xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
@@ -756,22 +758,24 @@ def card():
         monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
-        want = imgs['taiyin2']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
+
+        for i in ['taiyin2','sanshinei']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('结界卡*',i)
+                xy = action.cheat(pts[0], w/2, h-10)
+                pyautogui.click(xy)
+                t = random.randint(30,80) / 100
+                time.sleep(t)
+                break
         if len(pts) == 0:
                 print('结界卡不足')
                 select_mode()
-        else:
-            print('结界卡*')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
+        
 
         for i in range(2):
             #截屏
@@ -789,7 +793,7 @@ def card():
                 select_mode()
             else:
                 print('结界卡',i)
-                xy = action.cheat(pts[0], w, h-10 )
+                xy = action.cheat(pts[0], w/2, h-10 )
                 pyautogui.click(xy)
                 pyautogui.moveTo(xy)
                 t = random.randint(15,30) / 100
@@ -883,7 +887,10 @@ def shengxing():
                 print('升星中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,100) / 100
+                if i=='querenshengxing':
+                    t=random.randint(250,300) / 100
+                else:
+                    t = random.randint(30,100) / 100
                 time.sleep(t)
                 break
 ####################################################
