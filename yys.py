@@ -266,7 +266,7 @@ def yuhun2():
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(100,200) / 100
+                t = random.randint(70,150) / 100
                 time.sleep(t)
                 break
             
@@ -715,7 +715,7 @@ def huodong():
                   'danren','jiangli','jixu','zhunbei',\
                   'yun','shibai','querenyuhun','hdtouzi','hdtiaozhan',\
                   'hdqueren','huodongjiangli','huodonglupai',\
-                  'hdtufa',\
+                  'hdtufa','hddiaocha','hdshijian',\
                   'hdlingqu','hdqianwang']:
             want = imgs[i]
             size = want[0].shape
