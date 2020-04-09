@@ -37,7 +37,7 @@ def select_mode():
         6 自动探索副本(单刷)
         7 百鬼夜行
         8 斗技
-        9 当前活动（缘结神）
+        9 当前活动（万事屋）
         10 结界自动合卡，自动选择前三张合成
         11 抽卡
         12 式神升星
@@ -713,8 +713,10 @@ def huodong():
         
         for i in ['jujue','liaotianguanbi','ditu',\
                   'danren','jiangli','jixu','zhunbei',\
-                  'yun','shibai','querenyuhun','hdtiaozhan',\
-                  'hdqueren','huodongjiangli','huodonglupai']:
+                  'yun','shibai','querenyuhun','hdtouzi','hdtiaozhan',\
+                  'hdqueren','huodongjiangli','huodonglupai',\
+                  'hdtufa',\
+                  'hdlingqu','hdqianwang']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -739,7 +741,7 @@ def huodong():
             select_mode()
 
 ##########################################################
-#合成结界卡，较简单，未偏移直接点
+#合成结界卡
 def card():
     while True:
         #鼠标移到右侧中止    
