@@ -695,7 +695,6 @@ def douji():
 ########################################################
 #当前活动
 def huodong():
-    count=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -727,7 +726,8 @@ def huodong():
         
         for i in ['jujue','liaotianguanbi','ditu',\
                   'danren','jiangli','jixu','zhunbei',\
-                  'yun','shibai','querenyuhun','hdtouzi','hdtiaozhan',\
+                  'yun','shibai','querenyuhun','hdtouzi',\
+                  'hdtiaozhan','hdtiaozhan2',\
                   'hdqueren','huodongjiangli','huodonglupai',\
                   'hdtufa','hddiaocha','hdshijian','hdjuexing',\
                   'hdlingqu','hdqianwang']:
@@ -737,9 +737,6 @@ def huodong():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i=='hdlingqu' or i=='hdqianwang':
-                    count=count+1
-                    print('领取次数:',count)
                 print('活动中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
