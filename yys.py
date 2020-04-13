@@ -695,6 +695,7 @@ def douji():
 ########################################################
 #当前活动
 def huodong():
+    count=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -710,12 +711,25 @@ def huodong():
         monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+
+        #委派任务
+        want = imgs['hdchufa']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('出发',i)
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            t = random.randint(30,80) / 100
+            time.sleep(t)
         
         for i in ['jujue','liaotianguanbi','ditu',\
                   'danren','jiangli','jixu','zhunbei',\
                   'yun','shibai','querenyuhun','hdtouzi','hdtiaozhan',\
                   'hdqueren','huodongjiangli','huodonglupai',\
-                  'hdtufa','hddiaocha','hdshijian',\
+                  'hdtufa','hddiaocha','hdshijian','hdjuexing',\
                   'hdlingqu','hdqianwang']:
             want = imgs[i]
             size = want[0].shape
@@ -723,6 +737,9 @@ def huodong():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if i=='hdlingqu' or i=='hdqianwang':
+                    count=count+1
+                    print('领取次数:',count)
                 print('活动中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
