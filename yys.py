@@ -725,13 +725,12 @@ def huodong():
             t = random.randint(30,80) / 100
             time.sleep(t)
         
-        for i in ['jujue','liaotianguanbi','ditu',\
-                  'danren','jiangli','jixu','zhunbei',\
-                  'yun','shibai','querenyuhun','hdtouzi',\
+        for i in ['jujue','liaotianguanbi','jiangli','jixu','zhunbei',\
+                  'shibai','querenyuhun','hdtouzi',\
                   'hdtiaozhan','hdtiaozhan2',\
-                  'hdqueren','huodongjiangli','huodonglupai',\
-                  'hdtufa','hddiaocha','hdshijian','hdjuexing',\
-                  'hdlingqu','hdqianwang']:
+                  'hdqueren','huodongjiangli',\
+                  'hdtufa','hddiaocha','hdshijian','hdjuexing','hdtijiao',\
+                  'hdlingqu','hdqianwang','hdqianwang2']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
