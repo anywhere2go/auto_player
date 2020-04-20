@@ -100,9 +100,9 @@ def tupo():
         
         #奖励
         for i in ['jujue','queding',\
-                  'shibai','jiangli','jixu','shuaxin',\
-                  'jingong',\
-                  'jingong2','lingxunzhang','lingxunzhang2']:
+                  'shibai','jiangli','jixu',\
+                  'jingong','jingong2',\
+                  'lingxunzhang','lingxunzhang2','shuaxin']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -659,6 +659,7 @@ def baigui():
 ########################################################
 #斗技
 def douji():
+    doujiauto=True
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -675,22 +676,44 @@ def douji():
         monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+
+        #判断人机
+        want = imgs['shoudong']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('对面是真人，准备退出',i)
+            doujiauto=False
         
-        for i in ['queren','douji','doujiend','ying',\
-                  'doujiqueren','tui','doujiother',
-                  'liaotianguanbi']:
+        for i in ['queren','douji','douji2','doujiend','ying',\
+                  'doujiqueren','doujiother','duanwei',\
+                  'liaotianguanbi','zhunbei','zhunbei2','tui']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('斗技中。。。',i)
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                t = random.randint(15,30) / 100
-                time.sleep(t)
-                break
+                if doujiauto==True and i=='tui':
+                    #print('准备退出',i)
+                    break
+                elif i=='douji':
+                    doujiauto=True
+                    print('斗技开始',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(15,30) / 100
+                    time.sleep(t)
+                    break
+                else:
+                    print('斗技中。。。',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(15,30) / 100
+                    time.sleep(t)
+                    break
 
 ########################################################
 #当前活动
@@ -729,7 +752,8 @@ def huodong():
                   'shibai','querenyuhun','hdtouzi',\
                   'hdtiaozhan','hdtiaozhan2',\
                   'hdqueren','huodongjiangli',\
-                  'hdtufa','hddiaocha','hdshijian','hdjuexing','hdtijiao',\
+                  'hdtufa','hddiaocha','hdshijian','hdshijian2',\
+                  'hdjuexing','hdtijiao',\
                   'hdlingqu','hdqianwang','hdqianwang2']:
             want = imgs[i]
             size = want[0].shape
