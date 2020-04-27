@@ -266,7 +266,7 @@ def yuhun2():
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(70,150) / 100
+                t = random.randint(20,80) / 100
                 time.sleep(t)
                 break
             
@@ -412,7 +412,7 @@ def goliang():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('领取奖励')
+                print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(30,80) / 100
@@ -495,16 +495,20 @@ def solo():
                 time.sleep(t)
                 continue
 
-            want = imgs['jian']
-            target = screen
-            pts = action.locate(target,want,0)
-            if not len(pts) == 0:
-                print('点击小怪')
-                xx = action.cheat(pts[0], 10, 10)        
-                pyautogui.click(xx)
-                time.sleep(0.5)
-                continue
-            else:
+            for i in ['boss', 'jian']:
+                want = imgs[i]
+                size = want[0].shape
+                h, w , ___ = size
+                target = screen
+                pts = action.locate(target,want,0)
+                if not len(pts) == 0:
+                    print('点击小怪',i)
+                    xx = action.cheat(pts[0], w, h)        
+                    pyautogui.click(xx)
+                    time.sleep(0.5)
+                    break
+
+            if i=='jian' and len(pts)==0:
                 for i in ['queren', 'tuichu']:
                     want = imgs[i]
                     size = want[0].shape
@@ -525,7 +529,7 @@ def solo():
                         break
                 continue
 
-        for i in ['jujue','ying','jiangli','jixu']:
+        for i in ['jujue','tansuo','ying','jiangli','jixu','c28','ditu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -538,19 +542,6 @@ def solo():
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 break
-
-        want = imgs['tansuo']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('进入地图')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
 
 ########################################################
 #百鬼
@@ -684,10 +675,10 @@ def douji():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('对面是真人，准备退出',i)
+            print('对面是真人，准备退出')
             doujiauto=False
         
-        for i in ['queren','douji','douji2','doujiend','ying',\
+        for i in ['jujue','queren','douji','douji2','doujiend','ying',\
                   'doujiqueren','doujiother','duanwei',\
                   'liaotianguanbi','zhunbei','zhunbei2','tui']:
             want = imgs[i]
@@ -802,7 +793,7 @@ def card():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        for i in ['taiyin2','sanshinei']:
+        for i in ['taiyin2','sanshinei','taiyin3']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
