@@ -495,7 +495,7 @@ def gouliang2():
             else:
                 print('退出重新组队')
                 
-                for i in ['queren', 'tuichu']:
+                for i in ['queren', 'queren2','tuichu']:
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
@@ -516,25 +516,8 @@ def gouliang2():
                         break
                 continue
 
-        want = imgs['jieshou']
-        size = want[0].shape
-        h, w , ___ = size
-        x1,x2 = upleft, (250, 380)
-        target = action.cut(screen, x1, x2)
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('接受组队')
-            xx = pts[0]
-            xx = action.cheat(xx, w, h)
-            if xx[0] > 120:           
-                pyautogui.click(xx)
-                t = random.randint(40,80) / 100
-                time.sleep(t)
-            else:
-                pass
-            continue
-
-        for i in ['jujue','ying','jiangli','jixu','zhunbei']:
+        for i in ['jujue','jieshou','jieshou1','ying',\
+                  'jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -544,7 +527,11 @@ def gouliang2():
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
+                if i=='jieshou' or i=='jieshou1':
+                    t = random.randint(80,120) / 100
+                else:
+                    t = random.randint(15,30) / 100
+                time.sleep(t)
                 time.sleep(t)
                 break
             
