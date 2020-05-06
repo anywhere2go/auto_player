@@ -7,6 +7,7 @@ import action
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
 pyautogui.PAUSE = 0.1
+pyautogui.FAILSAFE=False
 
 start_time = time.time()
 #print('程序启动，现在时间', time.ctime())
@@ -38,21 +39,34 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（万事屋）
+        10 当前活动（？？？）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
+        14 秘境召唤
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
-    index = int(raw)
+    try:
+        index = int(raw)
+    except:
+        print('请输入数字')
+        select_mode()
 
     mode = [0, tupo, yuhun, yuhun2, yuhundanren,\
             gouliang, gouliang2, gouliang3,\
             baigui, douji, huodong,\
-            card, chouka, shengxing]
-    comand = mode[index]
-    comand()
+            card, chouka, shengxing, mijing]
+    try:
+        comand = mode[index]
+    except:
+        print('数字超出范围')
+        select_mode()
+    try:
+        comand()
+    except:
+        print('出现错误')
+        select_mode()
 
 ##########################################################
 #结节突破
@@ -794,8 +808,19 @@ def douji():
         if not len(pts) == 0:
             print('对面是真人，准备退出')
             doujiauto=False
+
+        #判断选人
+        want = imgs['zidong']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('选人界面，准备退出')
+            doujiauto=False
         
-        for i in ['jujue','queren','douji','douji2','doujiend','ying',\
+        for i in ['jujue','queren','douji','douji2','douji3',\
+                  'doujiend','ying',\
                   'doujiqueren','doujiother','duanwei',\
                   'liaotianguanbi','zhunbei','zhunbei2','tui',\
                   'doujiquxiao']:
@@ -933,8 +958,6 @@ def card():
                 print('结界卡*',i)
                 xy = action.cheat(pts[0], w/2, h-10)
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
-                time.sleep(t)
                 break
         if len(pts) == 0:
                 print('结界卡不足')
@@ -960,8 +983,6 @@ def card():
                 xy = action.cheat(pts[0], w/2, h-10 )
                 pyautogui.click(xy)
                 pyautogui.moveTo(xy)
-                t = random.randint(15,30) / 100
-                time.sleep(t)
 
         #截屏
         monitor = {"top": b, "left": a, "width": c, "height": d}
@@ -978,10 +999,7 @@ def card():
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
 
-        t = random.randint(15,30) / 100
         time.sleep(1)
 
 ##########################################################
@@ -1005,19 +1023,17 @@ def chouka():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        for i in ['cezhi','zaicizhaohuan']:
-            want = imgs[i]
-            size = want[0].shape
-            h, w , ___ = size
-            target = screen
-            pts = action.locate(target,want,0)
-            if not len(pts) == 0:
-                print('抽卡中。。。')
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                #t = random.randint(1,3) / 100
-                #time.sleep(t)
-                break
+        want = imgs['zaicizhaohuan']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('抽卡中。。。')
+            xy = action.cheat(pts[0], w, h-10 )
+            pyautogui.click(xy)
+            #t = random.randint(1,3) / 100
+            #time.sleep(t)
 
 ##########################################################
 #式神升星
@@ -1056,6 +1072,41 @@ def shengxing():
                 else:
                     t = random.randint(30,100) / 100
                 time.sleep(t)
+                break
+
+##########################################################
+#秘境召唤
+def mijing():
+    while True:
+        #鼠标移到右侧中止    
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 900)
+        downright2 = (1280, 720)
+
+        a,b = upleft
+        c,d = downright
+
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        
+        for i in ['jujue','canjia','mijingzhaohuan']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('秘境召唤。。。',i)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                #t = random.randint(10,100) / 100
+                #time.sleep(t)
                 break
 ####################################################
 if __name__ == '__main__':
