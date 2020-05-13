@@ -39,7 +39,7 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（？？？）
+        10 当前活动（鬼王之宴）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
@@ -169,7 +169,7 @@ def yuhun():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('体力不足: ',pts[0])
+            print('体力不足')
             select_mode()
 
         #确定退出
@@ -233,7 +233,7 @@ def yuhun2():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('体力不足: ',pts[0])
+            print('体力不足')
             select_mode()
 
         #确定退出
@@ -271,7 +271,7 @@ def yuhun2():
         
         #自动点击通关结束后的页面
         for i in ['jujue','querenyuhun','jieshou2','jieshou1',\
-                  'jieshou','ying','jiangli','kaishi','jixu',\
+                  'jieshou','ying','jiangli','kaishi','jixu','yuhunbeijing',\
                   'shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -695,6 +695,20 @@ def baigui():
         
         #设定目标，开始查找
         #进入后
+        for i in ['gailv','douzihuoqu']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                print('点击加成',i)
+                xy = action.cheat(pts[0], w, h )
+                pyautogui.click(xy)
+                t = random.randint(15,30) / 100
+                time.sleep(t)
+                continue
+                
         want=imgs['inbaigui']
         target = screen
         pts = action.locate(target,want,0)
@@ -895,21 +909,23 @@ def huodong():
             time.sleep(t)
         
         for i in ['jujue','liaotianguanbi','jiangli','jixu','zhunbei',\
-                  'shibai','querenyuhun','hdtouzi',\
-                  'hdtiaozhan','hdtiaozhan2',\
+                  'shibai','queding','hdtuizhi','hdlingqu','hdyuhun',\
+                  'hdtiaozhan',\
                   'hdqueren','huodongjiangli',\
-                  'hdtufa','hddiaocha','hdshijian','hdshijian2',\
-                  'hdjuexing','hdtijiao',\
-                  'hdlingqu','hdqianwang','hdqianwang2']:
+                  'hdlingqu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i=='hdtiaozhan' or i=='hdtiaozhan2' or i=='hdlingqu':
+                if i=='hdtiaozhan':
                     count=count+1
                     print('活动次数：',count)
+                    time.sleep(1)
+                elif i=='queding':
+                    print('活动次数不足')
+                    select_mode()
                 print('活动中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -1056,7 +1072,7 @@ def shengxing():
         monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
+            
         for i in ['jixushengxing','querenshengxing']:
             want = imgs[i]
             size = want[0].shape
@@ -1076,6 +1092,7 @@ def shengxing():
 
 ##########################################################
 #秘境召唤
+chat=False
 def mijing():
     while True:
         #鼠标移到右侧中止    
@@ -1094,20 +1111,44 @@ def mijing():
         monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
-        for i in ['jujue','canjia','mijingzhaohuan']:
-            want = imgs[i]
-            size = want[0].shape
-            h, w , ___ = size
-            target = screen
-            pts = action.locate(target,want,0)
-            if not len(pts) == 0:
-                print('秘境召唤。。。',i)
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                #t = random.randint(10,100) / 100
-                #time.sleep(t)
-                break
+
+        #检测聊天界面
+        want = imgs['liaotianguanbi']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            #print('搜索秘境车中。。。')
+
+            for i in ['jujue','mijingzhaohuan','mijingzhaohuan2']:
+                want = imgs[i]
+                size = want[0].shape
+                h, w , ___ = size
+                target = screen
+                pts = action.locate(target,want,0)
+                if not len(pts) == 0:
+                    print('秘境召唤。。。',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    #t = random.randint(10,100) / 100
+                    #time.sleep(t)
+                    break
+        else:
+            for i in ['jujue','canjia','liaotian']:
+                want = imgs[i]
+                size = want[0].shape
+                h, w , ___ = size
+                target = screen
+                pts = action.locate(target,want,0)
+                if not len(pts) == 0:
+                    if i=='canjia':
+                        print('加入秘境召唤！',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(10,30) / 100
+                    time.sleep(t)
+                    break
 ####################################################
 if __name__ == '__main__':
     select_mode()
