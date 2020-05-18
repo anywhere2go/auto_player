@@ -187,7 +187,7 @@ def yuhun():
             
         #自动点击通关结束后的页面
         for i in ['jujue','yuhuntiaozhan','liaotianguanbi',\
-                  'ying','jiangli','jiangli2','jixu']:
+                  'ying','jiangli','jiangli2','yuhunbeijing','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -279,10 +279,13 @@ def yuhun2():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if i=='yuhunbeijing':
+                    cishu=cishu+1
+                    print('挑战次数：',cishu)
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(80,150) / 100
+                t = random.randint(30,80) / 100
                 time.sleep(t)
                 break
             
@@ -323,7 +326,7 @@ def yuhundanren():
             select_mode()
         
         #过关
-        for i in ['jujue','ying','jiangli','tiaozhan','jixu']:
+        for i in ['jujue','ying','jiangli','tiaozhan','tiaozhan2','jixu','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -331,7 +334,7 @@ def yuhundanren():
             pts=action.locate(target,want,0)
             if not len(pts)==0:
                 print('挑战中。。。',i)
-                if i == 'tiaozhan':
+                if i == 'tiaozhan' or i=='tiaozhan2':
                     cishu=cishu+1
                     print('挑战次数：',cishu)
                 for pt in pts:
@@ -909,10 +912,10 @@ def huodong():
             time.sleep(t)
         
         for i in ['jujue','liaotianguanbi','jiangli','jixu','zhunbei',\
-                  'shibai','queding','hdtuizhi','hdlingqu','hdyuhun',\
+                  'shibai','queding','hdshenyu','hdtuizhi',\
+                  'hdlingqu','hdyuhun',\
                   'hdtiaozhan',\
-                  'hdqueren','huodongjiangli',\
-                  'hdlingqu']:
+                  'hdqueren','huodongjiangli']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -922,14 +925,15 @@ def huodong():
                 if i=='hdtiaozhan':
                     count=count+1
                     print('活动次数：',count)
-                    time.sleep(1)
+                    t=100/100
                 elif i=='queding':
                     print('活动次数不足')
                     select_mode()
-                print('活动中。。。',i)
+                else:
+                    print('活动中。。。',i)
+                    t = random.randint(30,80) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
                 time.sleep(t)
                 break
         
