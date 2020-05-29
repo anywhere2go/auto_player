@@ -44,6 +44,7 @@ def select_mode():
         12 抽卡
         13 式神升星
         14 秘境召唤
+        15 妖气封印
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
@@ -56,7 +57,7 @@ def select_mode():
     mode = [0, tupo, yuhun, yuhun2, yuhundanren,\
             gouliang, gouliang2, gouliang3,\
             baigui, douji, huodong,\
-            card, chouka, shengxing, mijing]
+            card, chouka, shengxing, mijing, yaoqi]
     try:
         comand = mode[index]
     except:
@@ -187,7 +188,8 @@ def yuhun():
             
         #自动点击通关结束后的页面
         for i in ['jujue','yuhuntiaozhan','liaotianguanbi',\
-                  'ying','jiangli','jiangli2','yuhunbeijing','jixu']:
+                  'ying','jiangli','jiangli2','yuhunbeijing','jixu',\
+                  'shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -197,10 +199,12 @@ def yuhun():
                 if i == 'yuhuntiaozhan':
                     cishu = cishu + 1
                     print('挑战次数：',cishu)
-                print('挑战中。。。',i)
+                    t = random.randint(1000,1200) / 100
+                else:
+                    print('挑战中。。。',i)
+                    t = random.randint(50,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(200,300) / 100
                 time.sleep(t)
                 break
     
@@ -272,7 +276,7 @@ def yuhun2():
         #自动点击通关结束后的页面
         for i in ['jujue','querenyuhun','jieshou2','jieshou1',\
                   'jieshou','ying','jiangli','kaishi','jixu','yuhunbeijing',\
-                  'shibai']:
+                  'zhunbei','shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -285,7 +289,7 @@ def yuhun2():
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
+                t = random.randint(30,50) / 100
                 time.sleep(t)
                 break
             
@@ -555,6 +559,7 @@ def gouliang2():
 ########################################################
 #探索单人
 def gouliang3():
+    cishu=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -642,7 +647,7 @@ def gouliang3():
                     break
 
             if i=='jian' and len(pts)==0:
-                for i in ['queren', 'tuichu']:
+                for i in ['queren','queren2','tuichu']:
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
@@ -662,13 +667,17 @@ def gouliang3():
                         break
                 continue
 
-        for i in ['jujue','tansuo','ying','jiangli','jixu','c28','ditu']:
+        for i in ['jujue','querenyuhun',\
+                  'tansuo','ying','jiangli','jixu','c28','ditu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if i=='tansuo':
+                    cishu=cishu+1
+                    print('探索次数：',cishu)
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
@@ -911,9 +920,9 @@ def huodong():
             t = random.randint(30,80) / 100
             time.sleep(t)
         
-        for i in ['jujue','liaotianguanbi','jiangli','jixu','zhunbei',\
+        for i in ['jujue','jiangli','jixu','zhunbei',\
                   'shibai','queding','hdshenyu','hdtuizhi',\
-                  'hdlingqu','hdyuhun',\
+                  'hdlingqu','hdtili',\
                   'hdtiaozhan',\
                   'hdqueren','huodongjiangli']:
             want = imgs[i]
@@ -1153,6 +1162,58 @@ def mijing():
                     t = random.randint(10,30) / 100
                     time.sleep(t)
                     break
+
+########################################################
+#妖气封印
+def yaoqi():
+    count=0
+    while True:   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截屏，并裁剪以加速
+        upleft = (0, 0)
+        downright = (1358, 900)
+        downright2 = (1280, 720)
+        a,b = upleft
+        c,d = downright
+
+        #截屏
+        monitor = {"top": b, "left": a, "width": c, "height": d}
+        im = np.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+
+        #委派任务
+        for i in ['jujue','jiangli','jixu','zhunbei',\
+                  'shibai','zidongpipei','zudui2']:
+            want = imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts = action.locate(target,want,0)
+            if not len(pts) == 0:
+                if i=='zidongpipei':
+                    count=count+1
+                    print('次数：',count)
+                    t=100/100
+                else:
+                    print('活动中。。。',i)
+                    t = random.randint(30,80) / 100
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                time.sleep(t)
+                break
+        
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足')
+            select_mode()
+            
 ####################################################
 if __name__ == '__main__':
     select_mode()
