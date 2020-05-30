@@ -12,6 +12,14 @@ pyautogui.FAILSAFE=False
 start_time = time.time()
 #print('程序启动，现在时间', time.ctime())
 
+#截屏，并裁剪以加速
+upleft = (0, 0)
+downright = (1358, 900)
+downright2 = (1280, 720)
+a,b = upleft
+c,d = downright
+monitor = {"top": b, "left": a, "width": c, "height": d}
+
 
 #以上启动，载入设置
 ##########################################################
@@ -77,15 +85,7 @@ def tupo():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        a,b = upleft
-        c,d = downright
-        
-        #screen=np.array(ImageGrab.grab().convert('RGB'))
-        #screen = screen[b:d,a:c]
-        monitor = {"top": b, "left": a, "width": c, "height": d}
+        #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -895,36 +895,14 @@ def huodong():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        #委派任务
-        want = imgs['hdchufa']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('出发',i)
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(30,80) / 100
-            time.sleep(t)
-        
-        for i in ['jujue','jiangli','jixu','zhunbei',\
-                  'shibai','queding','hdshenyu','hdtuizhi',\
+        for i in ['jujue','jiangli','jixu',\
+                  'shibai','hdtuizhi',\
                   'hdlingqu','hdtili',\
-                  'hdtiaozhan',\
-                  'hdqueren','huodongjiangli']:
+                  'hdtiaozhan']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -934,13 +912,13 @@ def huodong():
                 if i=='hdtiaozhan':
                     count=count+1
                     print('活动次数：',count)
-                    t=100/100
+                    t=500/100
                 elif i=='queding':
                     print('活动次数不足')
                     select_mode()
                 else:
                     print('活动中。。。',i)
-                    t = random.randint(30,80) / 100
+                    t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
@@ -1171,15 +1149,7 @@ def yaoqi():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
