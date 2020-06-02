@@ -116,7 +116,7 @@ def tupo():
             print('进攻次数上限:',cishu)
         
         #奖励
-        for i in ['jujue','queding',\
+        for i in ['jujue','queding','queding2',\
                   'shibai','jiangli','jixu',\
                   'jingong','jingong2',\
                   'lingxunzhang','lingxunzhang2','shuaxin']:
