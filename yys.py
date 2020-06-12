@@ -81,6 +81,7 @@ def select_mode():
 #结节突破
 def tupo():
     cishu = 0
+    refresh=False
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -130,13 +131,20 @@ def tupo():
                 pyautogui.click(xy)
                 t = random.randint(30,80) / 100
                 if i == 'shibai':
+                    refresh=False
                     cishu = cishu - 1
                     print('进攻次数：',cishu)
                 elif i=='jingong' or i=='jingong2':
+                    if refresh==True:
+                        print('需要刷新')
+                        select_mode()
+                    refresh=True
                     cishu = cishu + 1
                     print('进攻次数：',cishu)
                     t = random.randint(300,500) / 100
-                print('突破中。。。',i)
+                else:
+                    refresh=False
+                    print('突破中。。。',i)
                 time.sleep(t)
                 break
 
@@ -289,7 +297,7 @@ def yuhun2():
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,50) / 100
+                t = random.randint(15,30) / 100
                 time.sleep(t)
                 break
             
@@ -458,7 +466,8 @@ def gouliang():
                         break
                 continue
 
-        for i in ['jujue','queding','ying','jiangli','jixu','c28','zudui','ditu']:
+        for i in ['jujue','queding','ying','jiangli','jixu',\
+                  'yuhuntiaozhan','ditu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -549,10 +558,9 @@ def gouliang2():
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 if i=='jieshou' or i=='jieshou1':
-                    t = random.randint(80,120) / 100
+                    t = random.randint(15,30) / 100
                 else:
                     t = random.randint(15,30) / 100
-                time.sleep(t)
                 time.sleep(t)
                 break
             
@@ -688,6 +696,7 @@ def gouliang3():
 ########################################################
 #百鬼
 def baigui():
+    cishu=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -707,25 +716,42 @@ def baigui():
         
         #设定目标，开始查找
         #进入后
-        for i in ['gailv','douzihuoqu']:
+        for i in ['baigui','gailv','douzihuoqu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('点击加成',i)
+                print('点击',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 continue
+
+        want=imgs['youxiang']
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('正在邮箱中')
+            want = imgs['guanbi']
+            size = want[0].shape
+            h, w , ___ = size
+            target = screen
+            pts2 = action.locate(target,want,0)
+            if not len(pts2) == 0:
+                print('关闭窗口',pts2)
+                xx = action.cheat(pts2[0], w, h)
+                pyautogui.click(xx)
+                time.sleep(0.5)
                 
+        
         want=imgs['inbaigui']
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('正在百鬼中')
+            #print('正在百鬼中')
             
             want = imgs['blank']
             target = screen
@@ -734,7 +760,7 @@ def baigui():
                 #小怪出现！
                 print('点击小怪')
                 pts2 = (640, 450)
-                xx = action.cheat(pts2, 10, 10)        
+                xx = action.cheat(pts2, 100, 80)        
                 pyautogui.click(xx)
                 time.sleep(0.5)
                 continue
@@ -745,11 +771,12 @@ def baigui():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('进入百鬼: ',pts[0])
+            cishu=cishu+1
+            print('进入百鬼:',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
+            t = random.randint(300,400) / 100
             time.sleep(t)
 
         want = imgs['kaishi']
