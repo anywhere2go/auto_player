@@ -6,7 +6,7 @@ import action
 
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
-pyautogui.PAUSE = 0.1
+#pyautogui.PAUSE = 0.05
 pyautogui.FAILSAFE=False
 
 start_time = time.time()
@@ -113,8 +113,12 @@ def tupo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
+            if refresh==True:
+                print('需要刷新')
+                select_mode()
             cishu=cishu+7
             print('进攻次数上限:',cishu)
+            refresh=True
         
         #奖励
         for i in ['jujue','queding','queding2',\
@@ -282,9 +286,9 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','querenyuhun','jieshou2','jieshou1',\
-                  'jieshou','ying','jiangli','kaishi','jixu','yuhunbeijing',\
-                  'zhunbei','shibai']:
+        for i in ['jujue','jiangli','jixu','ying',\
+                  'querenyuhun','jieshou2','jieshou1',\
+                  'jieshou','shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -338,7 +342,9 @@ def yuhundanren():
             select_mode()
         
         #过关
-        for i in ['jujue','ying','jiangli','tiaozhan','tiaozhan2','jixu','shibai']:
+        for i in ['jujue','jixu','ying','jiangli',\
+                  'tiaozhan','tiaozhan2',\
+                  'shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -349,11 +355,12 @@ def yuhundanren():
                 if i == 'tiaozhan' or i=='tiaozhan2':
                     cishu=cishu+1
                     print('挑战次数：',cishu)
-                for pt in pts:
-                    pt = action.cheat(pt, w, h)
-                    pyautogui.click(pt)
-                    t = random.randint(100,300) / 100
-                    time.sleep(t)
+                    t = random.randint(150,300) / 100
+                else:
+                    t = random.randint(15,30) / 100
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                time.sleep(t)
                 break
 
 ########################################################
@@ -1071,8 +1078,9 @@ def chouka():
 
 ##########################################################
 #式神升星
-cishu=0
 def shengxing():
+    cishu=0
+    refresh=False
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -1102,9 +1110,14 @@ def shengxing():
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 if i=='querenshengxing':
+                    if refresh==True:
+                        print('无式神')
+                        select_mode()
                     t=random.randint(250,300) / 100
+                    refresh=True
                 else:
                     t = random.randint(30,100) / 100
+                    refresh=False
                 time.sleep(t)
                 break
 
