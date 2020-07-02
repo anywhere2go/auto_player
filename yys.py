@@ -200,7 +200,8 @@ def yuhun():
             
         #自动点击通关结束后的页面
         for i in ['jujue','yuhuntiaozhan','liaotianguanbi',\
-                  'ying','jiangli','jiangli2','yuhunbeijing','jixu',\
+                  'querenyuhun','ying','jiangli','jiangli2',\
+                  'yuhunbeijing','jixu',\
                   'shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -337,14 +338,16 @@ def yuhundanren():
             select_mode()
 
         #次数检查
-        if cishu > 200:
+        if cishu > 500:
             print('次数上限')
             select_mode()
         
         #过关
+        if cishu>=500:
+            print('挑战次数上限')
+            select_mode()
         for i in ['jujue','jixu','ying','jiangli',\
-                  'tiaozhan','tiaozhan2',\
-                  'shibai']:
+                  'tiaozhan','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
