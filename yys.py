@@ -287,8 +287,9 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','jiangli','jixu','ying',\
-                  'querenyuhun','jieshou2','jieshou1',\
+        for i in ['jujue','querenyuhun',\
+                  'jiangli','jixu','ying',\
+                  'jieshou2','jieshou1',\
                   'jieshou','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -347,7 +348,7 @@ def yuhundanren():
             print('挑战次数上限')
             select_mode()
         for i in ['jujue','jixu','ying','jiangli',\
-                  'tiaozhan','shibai']:
+                  'querenyuhun','tiaozhan','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -936,9 +937,10 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        for i in ['jujue','jiangli','jixu',\
-                  'shibai','hdtuizhi',\
-                  'hdlingqu','hdtili',\
+        for i in ['jujue','hdshengli',\
+                  'ying','jiangli',\
+                  'shibai','hdjieshou',\
+                  'hdkaizhan',\
                   'hdtiaozhan']:
             want = imgs[i]
             size = want[0].shape
