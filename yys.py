@@ -47,7 +47,7 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（鬼王之宴）
+        10 当前活动（紧那罗）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
@@ -288,8 +288,7 @@ def yuhun2():
         #自动点击通关结束后的页面
         for i in ['jujue','querenyuhun',\
                   'jiangli','jixu','ying',\
-                  'jieshou2','jieshou1',\
-                  'jieshou','shibai']:
+                  'jieshou2','jieshou','shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -936,10 +935,20 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
+        #体力不足
+        want = imgs['queding']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足')
+            select_mode()
+        
         for i in ['jujue','hdshengli',\
                   'ying','jiangli',\
-                  'shibai','hdjieshou',\
-                  'hdkaizhan',\
+                  'shibai',\
+                  'hdyinfu',\
                   'hdtiaozhan']:
             want = imgs[i]
             size = want[0].shape
@@ -962,15 +971,7 @@ def huodong():
                 time.sleep(t)
                 break
         
-        #体力不足
-        want = imgs['notili']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('体力不足')
-            select_mode()
+        
 
 ##########################################################
 #合成结界卡
