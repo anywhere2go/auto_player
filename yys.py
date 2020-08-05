@@ -121,8 +121,8 @@ def tupo():
             refresh=True
         
         #奖励
-        for i in ['jujue','queding','queding2',\
-                  'shibai','jiangli','jixu',\
+        for i in ['jujue','queding',\
+                  'shibai','ying','jiangli','jixu',\
                   'jingong','jingong2',\
                   'lingxunzhang','lingxunzhang2','shuaxin']:
             want=imgs[i]
@@ -145,7 +145,7 @@ def tupo():
                     refresh=True
                     cishu = cishu + 1
                     print('进攻次数：',cishu)
-                    t = random.randint(300,500) / 100
+                    t = random.randint(500,800) / 100
                 else:
                     refresh=False
                     print('突破中。。。',i)
@@ -287,7 +287,7 @@ def yuhun2():
         
         #自动点击通关结束后的页面
         for i in ['jujue','querenyuhun',\
-                  'jiangli','jixu','ying',\
+                  'ying','jiangli','jixu',\
                   'jieshou2','jieshou','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -345,7 +345,7 @@ def yuhundanren():
         if cishu>=500:
             print('挑战次数上限')
             select_mode()
-        for i in ['jujue','jixu','ying','jiangli',\
+        for i in ['jujue','ying','jiangli','jixu',\
                   'querenyuhun','tiaozhan','shibai']:
             want=imgs[i]
             size = want[0].shape
@@ -949,14 +949,14 @@ def huodong():
                   'ying','jiangli',\
                   'shibai',\
                   'hdyinfu',\
-                  'hdtiaozhan']:
+                  'hdtiaozhan','hdtiaozhan2']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i=='hdtiaozhan':
+                if i=='hdtiaozhan' or i=='hdtiaozhan2':
                     count=count+1
                     print('活动次数：',count)
                     t=500/100
