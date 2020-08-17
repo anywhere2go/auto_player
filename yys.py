@@ -662,7 +662,7 @@ def gouliang3():
                     xx = action.cheat(pts[0], w, h)        
                     pyautogui.click(xx)
                     time.sleep(0.5)
-                    break
+                    #break
 
             if i=='jian' and len(pts)==0:
                 for i in ['queren','queren2','tuichu']:
@@ -962,8 +962,8 @@ def huodong():
             doujiauto=False
         
         for i in ['jujue','queren','pipei',\
-                  'doujiend','ying',\
-                  'doujiqueren','doujiother','xunzhang',\
+                  'doujiend','ying','hdjiangli',\
+                  'doujiqueren','xunzhang','xunzhang2',\
                   'zhunbei','tui',\
                   'doujiquxiao']:
             want = imgs[i]
