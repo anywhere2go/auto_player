@@ -978,7 +978,7 @@ def huodong():
                     break
                 elif i=='pipei':
                     if refresh==True:
-                        print('无法斗技')
+                        print('无法斗技',i)
                         select_mode()
                     doujipaidui=0
                     doujiauto=True
@@ -1006,7 +1006,7 @@ def huodong():
                     print('斗技中。。。',i)
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
-                    t = random.randint(15,30) / 100
+                    t = random.randint(45,80) / 100
                     time.sleep(t)
                     break
 
