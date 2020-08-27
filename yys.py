@@ -515,6 +515,16 @@ def gouliang2():
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         #设定目标，开始查找
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足 ')
+            select_mode()
+        
         #进入后
         want = imgs['guding']
 
@@ -981,7 +991,7 @@ def huodong():
                         print('无法斗技',i)
                         select_mode()
                     doujipaidui=0
-                    doujiauto=True
+                    doujiauto=False
                     refresh=True
                     print('斗技开始',i)
                     xy = action.cheat(pts[0], w, h-10 )
