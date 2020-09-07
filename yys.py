@@ -47,7 +47,7 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（为崽而战）
+        10 当前活动（幻境试炼）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
@@ -122,9 +122,9 @@ def tupo():
         
         #奖励
         for i in ['jujue','queding',\
-                  'shibai','ying','jiangli','jixu',\
+                  'shibai','ying','jiangli',\
                   'jingong','jingong2',\
-                  'lingxunzhang','lingxunzhang2','shuaxin']:
+                  'lingxunzhang','lingxunzhang2']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -133,7 +133,7 @@ def tupo():
             if not len(pts)==0:
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(30,80) / 100
+                t = random.randint(50,100) / 100
                 if i == 'shibai':
                     refresh=False
                     cishu = cishu - 1
@@ -162,15 +162,7 @@ def yuhun():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900) #上部并排
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -185,22 +177,9 @@ def yuhun():
             print('体力不足')
             select_mode()
 
-        #确定退出
-        want = imgs['queding']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('确定退出')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
-            
         #自动点击通关结束后的页面
         for i in ['jujue','yuhuntiaozhan',\
-                  'querenyuhun','ying','jiangli',\
+                  'moren','queding','querenyuhun','ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -229,15 +208,7 @@ def yuhun2():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -315,15 +286,7 @@ def yuhundanren():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-
-        a,b = upleft
-        c,d = downright
-        
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
@@ -373,22 +336,10 @@ def gouliang():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        #debug
-        #cv2.imshow('image',im)
-        #return
-        ############################
+        
         
         #体力不足
         want = imgs['notili']
@@ -501,16 +452,7 @@ def gouliang2():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (2550, 900)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
@@ -587,28 +529,16 @@ def gouliang2():
 ########################################################
 #探索单人
 def gouliang3():
-    cishu=0
+    #print('debug')
+    count=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        #debug
-        #cv2.imshow('image',im)
-        #return
-        ############################
-        
+
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -643,10 +573,10 @@ def gouliang3():
         #进入后
         want=imgs['guding']
 
-        x1 = (785, 606)
-        x2 = downright
-        target = action.cut(screen, x1, x2)
-        pts = action.locate(target,want,0)
+        #x1 = (785, 606)
+        #x2 = downright
+        #target = action.cut(screen, x1, x2)
+        pts = action.locate(screen,want,0)
         if not len(pts) == 0:
             print('正在地图中')
             
@@ -668,13 +598,18 @@ def gouliang3():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
+                    count=count+1
                     print('点击小怪',i)
+                    print('探索次数：',count)
+                    if count>500:
+                        print('次数上限')
+                        select_mode()
                     xx = action.cheat(pts[0], w, h)        
                     pyautogui.click(xx)
                     time.sleep(0.5)
-                    #break
+                    break
 
-            if i=='jian' and len(pts)==0:
+            if len(pts)==0:
                 for i in ['queren','queren2','tuichu']:
                     want = imgs[i]
                     size = want[0].shape
@@ -703,9 +638,6 @@ def gouliang3():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i=='tansuo':
-                    cishu=cishu+1
-                    print('探索次数：',cishu)
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
@@ -721,16 +653,7 @@ def baigui():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
@@ -861,16 +784,7 @@ def douji():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -894,10 +808,9 @@ def douji():
             print('选人界面，准备退出')
             doujiauto=False
         
-        for i in ['jujue','queren','douji','douji2','douji3',\
-                  'doujiend','ying',\
-                  'doujiqueren','doujiother','duanwei',\
-                  'liaotianguanbi','zhunbei','zhunbei2','tui',\
+        for i in ['jujue','queren','douji',\
+                  'doujiqueren','doujiend','ying',\
+                  'zhunbei','zhunbei2','tui',\
                   'doujiquxiao']:
             want = imgs[i]
             size = want[0].shape
@@ -940,8 +853,6 @@ def douji():
 #当前活动
 def huodong():
     count=0
-    doujiauto=True
-    doujipaidui=0
     refresh=False
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -951,74 +862,42 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
-        #判断人机
-        want = imgs['shoudong']
+        #体力不足
+        want = imgs['notili']
         size = want[0].shape
         h, w , ___ = size
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('对面是真人，准备退出')
-            doujiauto=False
+            print('体力不足')
+            select_mode()
 
-        #判断选人
-        want = imgs['zidong']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('选人界面，准备退出')
-            doujiauto=False
-        
-        for i in ['jujue','queren','pipei',\
-                  'doujiend','ying','hdjiangli',\
-                  'doujiqueren','xunzhang','xunzhang2',\
-                  'zhunbei','tui',\
-                  'doujiquxiao']:
+        #自动点击通关结束后的页面
+        for i in ['jujue','hdtiaozhan',\
+                  'ying','jiangli',\
+                  'jixu','shibai']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if doujiauto==True and i=='tui':
-                    #print('准备退出',i)
-                    refresh=False
-                    break
-                elif i=='pipei':
+                if i == 'hdtiaozhan':
                     if refresh==True:
-                        print('无法斗技',i)
+                        print('次数不足')
                         select_mode()
-                    doujipaidui=0
-                    doujiauto=False
                     refresh=True
-                    print('斗技开始',i)
-                    xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
-                    t = random.randint(15,30) / 100
-                    time.sleep(t)
-                    break
-                elif i=='doujiquxiao':
-                    doujipaidui=doujipaidui+1
-                    refresh=False
-                    print('斗技搜索:',doujipaidui)
-                    if doujipaidui>5:
-                        doujipaidui=0
-                        print('取消搜索')
-                        xy = action.cheat(pts[0], w, h-10 )
-                        pyautogui.click(xy)
-                        t = random.randint(15,30) / 100
-                        time.sleep(t)
-                        break
+                    count = count + 1
+                    print('挑战次数：',count)
+                    t = random.randint(1000,1200) / 100
                 else:
                     refresh=False
-                    print('斗技中。。。',i)
-                    xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
-                    t = random.randint(45,80) / 100
-                    time.sleep(t)
-                    break
+                    print('挑战中。。。',i)
+                    t = random.randint(50,100) / 100
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                time.sleep(t)
+                break
 
 ##########################################################
 #合成结界卡
@@ -1028,16 +907,7 @@ def card():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -1078,7 +948,6 @@ def card():
                 pyautogui.moveTo(xy)
 
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
@@ -1098,21 +967,14 @@ def card():
 ##########################################################
 #抽卡
 def chouka():
+    refresh=False
+    count=0
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
@@ -1122,7 +984,11 @@ def chouka():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('抽卡中。。。')
+            if count>200:
+                print('次数上限')
+                select_mode()
+            count=count+1
+            print('抽卡中。。。',count)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             #t = random.randint(1,3) / 100
@@ -1138,16 +1004,7 @@ def shengxing():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
             
@@ -1168,7 +1025,7 @@ def shengxing():
                     t=random.randint(250,300) / 100
                     refresh=True
                 else:
-                    t = random.randint(30,100) / 100
+                    t = random.randint(50,100) / 100
                     refresh=False
                 time.sleep(t)
                 break
@@ -1182,16 +1039,7 @@ def mijing():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
 
-        #截屏，并裁剪以加速
-        upleft = (0, 0)
-        downright = (1358, 900)
-        downright2 = (1280, 720)
-
-        a,b = upleft
-        c,d = downright
-
         #截屏
-        monitor = {"top": b, "left": a, "width": c, "height": d}
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 

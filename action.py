@@ -41,10 +41,10 @@ def locate(target,want, show=bool(0), msg=bool(0)):
     return loc_pos
 
 
-#按【文件内容，匹配精度，名称】格式批量聚聚要查找的目标图片，精度统一为0.85，名称为文件名
+#按【文件内容，匹配精度，名称】格式批量聚聚要查找的目标图片，精度统一为0.95，名称为文件名
 def load_imgs():
     mubiao = {}
-    path = os.getcwd() + '/jpg'
+    path = os.getcwd() + '/png'
     file_list = os.listdir(path)
     for file in file_list:
         name = file.split('.')[0]
