@@ -1,8 +1,19 @@
-import cv2,numpy,time,random
+import cv2,numpy,time,random,os
 import os,sys,pyautogui, traceback
 import numpy as np
 import mss
 import action
+
+#检测系统
+if os.name=='posix':
+    print('操作系统：macOS')
+    scalar=True
+elif os.name=='nt':
+    print('操作系统：Windows')
+    scalar=False
+else:
+    print('操作系统：未知')
+    scalar=False
 
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
@@ -14,8 +25,8 @@ start_time = time.time()
 
 #截屏，并裁剪以加速
 upleft = (0, 0)
-downright = (1358, 900)
-downright2 = (1280, 720)
+downright = (1280, 720)
+downright2 = (1280/2, 720/2)
 a,b = upleft
 c,d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
@@ -67,15 +78,12 @@ def select_mode():
             baigui, douji, huodong,\
             card, chouka, shengxing, mijing, yaoqi]
     try:
-        comand = mode[index]
+        command = mode[index]
     except:
         print('数字超出范围')
         select_mode()
-    try:
-        comand()
-    except:
-        print('出现错误')
-        select_mode()
+    
+    command()
 
 ##########################################################
 #结节突破
@@ -89,6 +97,11 @@ def tupo():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
+        #cv2.imshow("Image", screen)
+        #print(screen.shape)
+        #cv2.waitKey(0) 
 
         #寮突破CD
         want = imgs['liaotupo']
@@ -124,7 +137,9 @@ def tupo():
         for i in ['jujue','queding',\
                   'shibai','ying','jiangli',\
                   'jingong','jingong2',\
-                  'lingxunzhang','lingxunzhang2']:
+                  'lingxunzhang','lingxunzhang2',\
+                  'shuaxin']:
+            #print(i)
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -133,7 +148,7 @@ def tupo():
             if not len(pts)==0:
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(50,100) / 100
+                t = random.randint(15,50) / 100
                 if i == 'shibai':
                     refresh=False
                     cishu = cishu - 1
@@ -165,6 +180,8 @@ def yuhun():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #print('screen shot ok',time.ctime())
         #体力不足
@@ -211,6 +228,8 @@ def yuhun2():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #print('screen shot ok',time.ctime())
         #体力不足
@@ -223,21 +242,8 @@ def yuhun2():
             print('体力不足')
             select_mode()
 
-        #确定退出
-        want = imgs['queding']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('确定退出')
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
-            
         #如果队友推出则自己也退出
-        want = imgs['kaishizhandou']
+        want = imgs['tiaozhanhuise']
         size = want[0].shape
         h, w , ___ = size
         target = screen
@@ -257,7 +263,7 @@ def yuhun2():
                 
         
         #自动点击通关结束后的页面
-        for i in ['jujue','querenyuhun',\
+        for i in ['jujue','moren','queding','querenyuhun',\
                   'ying','jiangli','jixu',\
                   'jieshou2','jieshou','shibai']:
             want = imgs[i]
@@ -289,6 +295,8 @@ def yuhundanren():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         
         #体力不足
         want = imgs['notili']
@@ -339,6 +347,8 @@ def gouliang():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         
         
         #体力不足
@@ -455,6 +465,8 @@ def gouliang2():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         
         #设定目标，开始查找
         #体力不足
@@ -538,6 +550,8 @@ def gouliang3():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #体力不足
         want = imgs['notili']
@@ -656,6 +670,8 @@ def baigui():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         
         #设定目标，开始查找
         #进入后
@@ -787,6 +803,8 @@ def douji():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #判断人机
         want = imgs['shoudong']
@@ -861,6 +879,8 @@ def huodong():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #体力不足
         want = imgs['notili']
@@ -893,7 +913,7 @@ def huodong():
                 else:
                     refresh=False
                     print('挑战中。。。',i)
-                    t = random.randint(50,100) / 100
+                    t = random.randint(80,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
@@ -910,6 +930,8 @@ def card():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         for i in ['taiyin2','sanshinei','taiyin3']:
             want = imgs[i]
@@ -977,6 +999,8 @@ def chouka():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         
         want = imgs['zaicizhaohuan']
         size = want[0].shape
@@ -1007,8 +1031,10 @@ def shengxing():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
             
-        for i in ['jixushengxing','querenshengxing']:
+        for i in ['jineng','jixushengxing','querenshengxing']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1028,7 +1054,7 @@ def shengxing():
                     t = random.randint(50,100) / 100
                     refresh=False
                 time.sleep(t)
-                break
+                
 
 ##########################################################
 #秘境召唤
@@ -1042,6 +1068,8 @@ def mijing():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #检测聊天界面
         want = imgs['liaotianguanbi']
@@ -1092,6 +1120,8 @@ def yaoqi():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        if scalar:
+            screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
 
         #委派任务
         for i in ['jujue','jiangli','jixu','zhunbei',\

@@ -1,7 +1,7 @@
-
 import cv2,numpy,time,os, random
+scalar=False
 
- #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
+#在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
 def locate(target,want, show=bool(0), msg=bool(0)):
     loc_pos=[]
     want,treshold,c_name=want[0],want[1],want[2]
@@ -24,8 +24,10 @@ def locate(target,want, show=bool(0), msg=bool(0)):
 
         if msg:
             print(c_name,'we find it !!! ,at',x,y)
+
+        if scalar:
+            x,y=int(x),int(y)
             
-        x,y=int(x),int(y)
         loc_pos.append([x,y])
 
     if show:  #在图上显示寻找的结果，调试时开启
@@ -44,7 +46,10 @@ def locate(target,want, show=bool(0), msg=bool(0)):
 #按【文件内容，匹配精度，名称】格式批量聚聚要查找的目标图片，精度统一为0.95，名称为文件名
 def load_imgs():
     mubiao = {}
-    path = os.getcwd() + '/png'
+    if scalar:
+        path = os.getcwd() + '/png'
+    else:
+        path = os.getcwd() + '/png'
     file_list = os.listdir(path)
     for file in file_list:
         name = file.split('.')[0]
@@ -76,7 +81,10 @@ def cut(screen,upleft,downright):
 #随机偏移坐标，防止游戏的外挂检测。p是原坐标，w、n是目标图像宽高，返回目标范围内的一个随机坐标
 def cheat(p, w, h):
     a,b = p
-    w, h = int(w/3), int(h/3)
+    if scalar:
+        w, h = int(w/3), int(h/3)
+    else:
+        w, h = int(w/3), int(h/3)
     c,d = random.randint(-w, w),random.randint(-h, h)
     e,f = a + c, b + d
     y = [e, f]
