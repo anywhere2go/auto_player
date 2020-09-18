@@ -1,5 +1,11 @@
 import cv2,numpy,time,os, random
-scalar=False
+#检测系统
+if os.name=='posix':
+    scalar=True
+elif os.name=='nt':
+    scalar=False
+else:
+    scalar=False
 
 #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
 def locate(target,want, show=bool(0), msg=bool(0)):
@@ -26,6 +32,8 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
+            x,y=int(x),int(y)
+        else:
             x,y=int(x),int(y)
             
         loc_pos.append([x,y])

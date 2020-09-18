@@ -97,6 +97,7 @@ def tupo():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        #print(scalar)
         if scalar:
             screen = cv2.resize(screen, (0,0), fx=0.5, fy=0.5)
         #cv2.imshow("Image", screen)
@@ -151,8 +152,10 @@ def tupo():
                 t = random.randint(15,50) / 100
                 if i == 'shibai':
                     refresh=False
-                    cishu = cishu - 1
+                    if cishu>0:
+                        cishu = cishu - 1
                     print('进攻次数：',cishu)
+                    t = random.randint(100,200) / 100
                 elif i=='jingong' or i=='jingong2':
                     if refresh==True:
                         print('需要刷新')
@@ -903,7 +906,7 @@ def huodong():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 if i == 'hdtiaozhan':
-                    if refresh==True:
+                    if refresh==True or count>100:
                         print('次数不足')
                         select_mode()
                     refresh=True
