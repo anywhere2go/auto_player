@@ -32,7 +32,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x),int(y)
+            x,y=int(x/2),int(y/2)
         else:
             x,y=int(x),int(y)
             
@@ -90,7 +90,7 @@ def cut(screen,upleft,downright):
 def cheat(p, w, h):
     a,b = p
     if scalar:
-        w, h = int(w/3), int(h/3)
+        w, h = int(w/3/2), int(h/3/2)
     else:
         w, h = int(w/3), int(h/3)
     c,d = random.randint(-w, w),random.randint(-h, h)
