@@ -368,8 +368,6 @@ def gouliang():
         size = want[0].shape
         h, w , ___ = size
         target = screen
-        #x1,x2 = upleft, (965, 522)
-        #target = action.cut(screen, x1, x2)
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
             print('确认退出')
@@ -387,10 +385,6 @@ def gouliang():
         #设定目标，开始查找
         #进入后
         want=imgs['guding']
-
-        #x1 = (785, 606)
-        #x2 = downright
-        #target = action.cut(screen, x1, x2)
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
@@ -497,8 +491,7 @@ def gouliang2():
             print('正在地图中')
             
             want = imgs['xiao']
-            x1,x2 = (5, 405), (119, 560)
-            target = action.cut(screen, x1, x2)
+            target = screen
             pts = action.locate(target,want,0)
             
             if not len(pts) == 0:
@@ -510,8 +503,7 @@ def gouliang2():
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
-                    x1,x2 = upleft, (965, 522)
-                    target = action.cut(screen, x1, x2)
+                    target = screen
                     pts = action.locate(target,want,0)
                     
                     if not len(pts) == 0:
@@ -638,8 +630,7 @@ def gouliang3():
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
-                    x1,x2 = upleft, (965, 522)
-                    target = action.cut(screen, x1, x2)
+                    target = screen
                     pts = action.locate(target,want,0)
                     if not len(pts) == 0:
                         print('退出中',i)
@@ -962,7 +953,6 @@ def card():
 
         for i in range(2):
             #截屏
-            monitor = {"top": b, "left": a, "width": c, "height": d}
             im = np.array(mss.mss().grab(monitor))
             screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
