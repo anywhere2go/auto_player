@@ -318,8 +318,8 @@ def yuhundanren():
             print('次数上限')
             select_mode()
         
-        for i in ['jujue','ying','jiangli','jixu',\
-                  'querenyuhun','tiaozhan','shibai']:
+        for i in ['jujue','ying','querenyuhun','jiangli','jixu',\
+                  'tiaozhan','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -329,11 +329,12 @@ def yuhundanren():
                 print('挑战中。。。',i)
                 if i == 'tiaozhan' or i=='tiaozhan2':
                     if refresh==True:
+                        print('次数不足')
                         select_mode()
                     refresh=True
                     cishu=cishu+1
                     print('挑战次数：',cishu)
-                    t = random.randint(150,300) / 100
+                    t = random.randint(1000,1300) / 100
                 else:
                     refresh=False
                     t = random.randint(15,30) / 100
