@@ -301,8 +301,6 @@ def yuhundanren():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-        
         #体力不足
         want = imgs['notili']
         size = want[0].shape
