@@ -292,7 +292,7 @@ def yuhun2():
 #御魂单人
 def yuhundanren():
     cishu=0
-    refresh=False
+    refresh=0
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -318,8 +318,8 @@ def yuhundanren():
             print('次数上限')
             select_mode()
         
-        for i in ['jujue','ying','querenyuhun','jiangli','jixu',\
-                  'tiaozhan','shibai']:
+        for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
+                  'tiaozhan','tiaozhan2','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -328,15 +328,14 @@ def yuhundanren():
             if not len(pts)==0:
                 print('挑战中。。。',i)
                 if i == 'tiaozhan' or i=='tiaozhan2':
-                    if refresh==True:
-                        print('次数不足')
+                    if refresh>2:
                         select_mode()
-                    refresh=True
+                    refresh=refresh+1
                     cishu=cishu+1
                     print('挑战次数：',cishu)
-                    t = random.randint(1000,1300) / 100
+                    t = random.randint(150,300) / 100
                 else:
-                    refresh=False
+                    refresh=0
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -386,6 +385,10 @@ def gouliang():
         #设定目标，开始查找
         #进入后
         want=imgs['guding']
+
+        #x1 = (785, 606)
+        #x2 = downright
+        #target = action.cut(screen, x1, x2)
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
@@ -492,8 +495,7 @@ def gouliang2():
             print('正在地图中')
             
             want = imgs['xiao']
-            target = screen
-            pts = action.locate(target,want,0)
+            pts = action.locate(screen,want,0)
             
             if not len(pts) == 0:
                 print('组队状态中')
@@ -504,8 +506,7 @@ def gouliang2():
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
-                    target = screen
-                    pts = action.locate(target,want,0)
+                    pts = action.locate(screen,want,0)
                     
                     if not len(pts) == 0:
                         print('退出中',i)
@@ -631,8 +632,7 @@ def gouliang3():
                     want = imgs[i]
                     size = want[0].shape
                     h, w , ___ = size
-                    target = screen
-                    pts = action.locate(target,want,0)
+                    pts = action.locate(screen,want,0)
                     if not len(pts) == 0:
                         print('退出中',i)
                         try:
