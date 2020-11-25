@@ -904,9 +904,10 @@ def huodong():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 if i == 'hdtiaozhan':
-                    if refresh==True or count>100:
+                    if refresh==True:
                         print('次数不足')
                         t = random.randint(2000,3000) / 100
+                        count = count - 1
                         #select_mode()
                     refresh=True
                     count = count + 1
