@@ -893,7 +893,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','zhunbei',\
+        for i in ['jujue','hdguanbi','hdtiaozhan','zhunbei',\
                   'hdjiangli',\
                   'ying','jiangli',\
                   'jixu','shibai']:
@@ -912,6 +912,9 @@ def huodong():
                     count = count + 1
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
+                elif i == 'hdguanbi':
+                    print('疲劳度不足，等待1分钟')
+                    t = random.randint(60,61)
                 else:
                     refresh=False
                     print('挑战中。。。',i)
