@@ -60,7 +60,7 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（幻境试炼）
+        10 当前活动（超鬼王）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
@@ -893,7 +893,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','querenyuhun',\
+        for i in ['jujue','hdtiaozhan','zhunbei',\
                   'hdjiangli',\
                   'ying','jiangli',\
                   'jixu','shibai']:
@@ -906,11 +906,12 @@ def huodong():
                 if i == 'hdtiaozhan':
                     if refresh==True or count>100:
                         print('次数不足')
-                        select_mode()
+                        t = random.randint(2000,3000) / 100
+                        #select_mode()
                     refresh=True
                     count = count + 1
                     print('挑战次数：',count)
-                    t = random.randint(1000,1200) / 100
+                    t = random.randint(100,200) / 100
                 else:
                     refresh=False
                     print('挑战中。。。',i)
