@@ -396,7 +396,10 @@ def gouliang():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                right = (854/2, 526/2)
+                if scalar:
+                    right=(854/2, 528/2)
+                else:
+                    right = (854, 527)
                 right = action.cheat(right, 10, 10)
                 pyautogui.click(right)
                 t = random.randint(50,80) / 100
