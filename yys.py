@@ -829,7 +829,7 @@ def douji():
             print('选人界面，准备退出')
             doujiauto=False
         
-        for i in ['jujue','queren','douji',\
+        for i in ['jujue','queren','douji','douji3',\
                   'doujiqueren','doujiend','ying',\
                   'zhunbei','zhunbei2','tui',\
                   'doujiquxiao']:
