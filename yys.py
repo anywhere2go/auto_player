@@ -92,6 +92,7 @@ def select_mode():
 def tupo():
     cishu = 0
     refresh=False
+    liaotu=None
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -106,22 +107,39 @@ def tupo():
         #print(screen.shape)
         #cv2.waitKey(0) 
 
-        #寮突破CD
-        want = imgs['liaotupo']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('寮突破')
-            if cishu > 6:
+        #寮突破判断
+        if liaotu==None:
+            want = imgs['liaotupo']
+            size = want[0].shape
+            h, w , ___ = size
+            pts = action.locate(screen,want,0)
+            if not len(pts) == 0:
+                liaotu=True
+                print('寮突破')
+
+            want = imgs['gerentupo']
+            size = want[0].shape
+            h, w , ___ = size
+            pts = action.locate(screen,want,0)
+            if not len(pts) == 0:
+                liaotu=False
+                print('个人突破')
+
+            
+        if liaotu==True:
+            if cishu >= 6:
                 print('等待5分钟CD')
                 t = 5*60
+                #t=2
                 time.sleep(t)
-                cishu=0
-        elif cishu >= 30:
-            print('进攻次数上限')
-            select_mode()
+                cishu=cishu-1
+        elif liaotu==False:
+            if cishu >= 30:
+                print('进攻次数上限')
+                select_mode()
+
+
+
 
         want = imgs['jingonghuise']
         size = want[0].shape
@@ -132,7 +150,7 @@ def tupo():
             if refresh==True:
                 print('需要刷新')
                 select_mode()
-            cishu=cishu+7
+            cishu=6
             print('进攻次数上限:',cishu)
             refresh=True
         
