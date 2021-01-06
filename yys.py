@@ -895,7 +895,7 @@ def douji():
 #当前活动
 def huodong():
     count=0
-    refresh=False
+    refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -928,20 +928,25 @@ def huodong():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 if i == 'hdtiaozhan':
-                    if refresh==True:
+                    if refresh>=2:
                         print('次数不足')
                         t = random.randint(2000,3000) / 100
                         count = count - 1
                         #select_mode()
-                    refresh=True
+                    refresh=refresh+1
                     count = count + 1
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
                 elif i == 'hdchufa':
+                    if refresh>=2:
+                        print('次数不足')
+                        count = count - 1
+                        select_mode()
                     print('抽步数')
-                    t = random.randint(300,500) / 100
+                    refresh=refresh+1
+                    t = random.randint(100,200) / 100
                 else:
-                    refresh=False
+                    refresh=0
                     print('挑战中。。。',i)
                     t = random.randint(80,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
