@@ -938,7 +938,7 @@ def huodong():
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
                 elif i == 'hdchufa':
-                    if refresh>=2:
+                    if refresh>=8:
                         print('次数不足')
                         count = count - 1
                         select_mode()
