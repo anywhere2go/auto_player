@@ -1116,7 +1116,7 @@ def mijing():
         if not len(pts) == 0:
             #print('搜索秘境车中。。。')
 
-            for i in ['jujue','mijingzhaohuan','mijingzhaohuan2','mijingzhaohuan3']:
+            for i in ['jujue','mijingzhaohuan','mijingzhaohuan2']:
                 want = imgs[i]
                 size = want[0].shape
                 h, w , ___ = size
