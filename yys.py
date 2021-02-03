@@ -60,7 +60,7 @@ def select_mode():
         7 自动探索副本(单刷)
         8 百鬼夜行
         9 斗技
-        10 当前活动（彼岸花活动）
+        10 当前活动（鬼灭之刃）
         11 结界自动合卡，自动选择前三张合成
         12 抽卡
         13 式神升星
@@ -928,10 +928,12 @@ def huodong():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 if i == 'hdtiaozhan':
+                    if not refresh==0:
+                        count = count - 1
                     if refresh>=2:
                         print('次数不足')
                         t = random.randint(2000,3000) / 100
-                        count = count - 1
+                        
                         #select_mode()
                     refresh=refresh+1
                     count = count + 1
