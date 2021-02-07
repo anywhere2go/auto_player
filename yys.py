@@ -917,7 +917,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','hdxuanding','hdchufa','zhunbei',\
+        for i in ['jujue','hdtiaozhan','hdchufa','zhunbei',\
                   'hdjiangli',\
                   'ying','jiangli',\
                   'jixu','shibai']:
@@ -927,25 +927,16 @@ def huodong():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i == 'hdtiaozhan':
+                if i == 'hdtiaozhan' or i == 'hdchufa':
                     if not refresh==0:
                         count = count - 1
-                    if refresh>=2:
+                    if refresh>=3:
                         print('次数不足')
                         t = random.randint(2000,3000) / 100
-                        
-                        #select_mode()
+                        select_mode()
                     refresh=refresh+1
                     count = count + 1
                     print('挑战次数：',count)
-                    t = random.randint(100,200) / 100
-                elif i == 'hdchufa':
-                    if refresh>=8:
-                        print('次数不足')
-                        count = count - 1
-                        select_mode()
-                    print('抽步数')
-                    refresh=refresh+1
                     t = random.randint(100,200) / 100
                 else:
                     refresh=0
