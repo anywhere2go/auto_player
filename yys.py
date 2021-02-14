@@ -365,6 +365,7 @@ def yuhundanren():
 #探索司机
 def gouliang():
     count=0
+    refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -434,7 +435,13 @@ def gouliang():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
-                    count=count+1
+                    if refresh==0:
+                        count=count+1
+                    elif refresh>2:
+                        print('达到上限')
+                        select_mode()
+                    refresh=refresh+1
+                    
                     print('点击小怪',i)
                     print('探索次数：',count)
                     if count>500:
@@ -467,7 +474,8 @@ def gouliang():
                         break
                 continue
 
-        for i in ['jujue','queding','ying','jiangli','jixu',\
+        for i in ['jujue','queding','ying','querenyuhun',\
+                  'jiangli','jixu',\
                   'yuhuntiaozhan','ditu']:
             want = imgs[i]
             size = want[0].shape
@@ -475,6 +483,7 @@ def gouliang():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                refresh=0
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
