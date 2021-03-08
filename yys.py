@@ -1065,8 +1065,6 @@ def chouka():
 ##########################################################
 #式神升星
 def shengxing():
-    cishu=0
-    refresh=False
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -1075,10 +1073,8 @@ def shengxing():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
             
-            
-        for i in ['jineng','jixushengxing','querenshengxing']:
+        for i in ['jiarugouliang','jineng','jixushengxing','querenshengxing']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1088,18 +1084,13 @@ def shengxing():
                 print('升星中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                if i=='querenshengxing':
-                    if refresh==True:
-                        print('无式神')
-                        select_mode()
-                    t=random.randint(250,300) / 100
-                    refresh=True
+                if i=='jiarugouliang':
+                    print('无式神')
+                    select_mode()
                 else:
-                    t = random.randint(50,100) / 100
-                    refresh=False
-                time.sleep(t)
+                    t = random.randint(20,100) / 100
+                    time.sleep(t)
                 
-
 ##########################################################
 #秘境召唤
 chat=False
