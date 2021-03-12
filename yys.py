@@ -346,10 +346,10 @@ def yuhundanren():
                 if i == 'tiaozhan' or i=='tiaozhan2':
                     if refresh>2:
                         select_mode()
-                    elif refresh==1:
-                        cishu=cishu
-                    else:
+                    elif refresh==0:
                         cishu=cishu+1
+                    else:
+                        cishu=cishu
                     refresh=refresh+1
                     print('挑战次数：',cishu)
                     t = random.randint(150,300) / 100
