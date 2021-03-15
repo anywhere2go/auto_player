@@ -1160,7 +1160,8 @@ def yaoqi():
 
         #委派任务
         for i in ['jujue','jiangli','jixu','zhunbei',\
-                  'shibai','zidongpipei','zudui2']:
+                  'shibai','zidongpipei','zudui2',\
+                  'ying','tiaozhan3','tiaozhan4']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
