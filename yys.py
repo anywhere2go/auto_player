@@ -1065,6 +1065,8 @@ def chouka():
 ##########################################################
 #式神升星
 def shengxing():
+    count=0
+    refresh=0
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -1087,9 +1089,16 @@ def shengxing():
                 if i=='jiarugouliang':
                     print('无式神')
                     select_mode()
+                elif i=='querenshengxing':
+                    if refresh==0:
+                        count=count+1
+                    refresh=refresh+1
+                    print('升星个数：',count)
+                    t = random.randint(250,350) / 100
                 else:
+                    refresh=0
                     t = random.randint(20,100) / 100
-                    time.sleep(t)
+                time.sleep(t)
                 
 ##########################################################
 #秘境召唤
