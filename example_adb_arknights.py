@@ -20,12 +20,12 @@
 * ADB版本： 电脑向手机发送ADB命令截屏和点击（可以用连接真实手机或模板器）
 
 ## 使用说明：
-setting.py是设置文件，里面mode=1就是桌面模式，mode设置为0就是ADB模式。默认1。
+
 wanted文件夹是要查找的目标图标，比如开始按键确认按键等截图保存到这里，文件后缀为.jpg。
 screen文件夹是用来自动可在当前截屏的。
 auto_player.py是主体文件，导入后就可以使用下面两个API。
-example_adb_arknights.py是ADB模式的明日方舟脚本，用的自己手机，明日方舟所有地图开始结束界面都一样，超简单。
-example_desktop_YYS.py是桌面模式的阴阳师挂机脚本，用的官方客户端，只写了一个简单的单人御魂模式，供大家参考。
+example_adb_arknights.py是ADB模式的明日方舟脚本，明日方舟所有地图开始结束界面都一样，超简单。
+example_desktop_YYS.py是桌面模式的阴阳师挂机脚本，只写了一个简单的单人御魂模式，供大家参考。
 
 ### find_touch(target, tap=True)。 
 * 功能：截屏，查找target图标在截屏上的位置，并点击所在位置
