@@ -834,7 +834,6 @@ def baigui():
 ########################################################
 #斗技
 def douji():
-    doujiauto=True
     doujipaidui=0
     refresh=False
     while True:   #直到取消，或者出错
@@ -847,29 +846,10 @@ def douji():
         
             
 
-        #判断人机
-        want = imgs['shoudong']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('对面是真人，准备退出')
-            doujiauto=False
-
-        #判断选人
-        want = imgs['zidong']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('选人界面，准备退出')
-            doujiauto=False
-        
-        for i in ['jujue','queren','douji','douji3',\
+        for i in ['jujue','shoudong','zidong','queren',\
+                  'douji','douji3',\
                   'doujiqueren','doujiend','ying',\
-                  'zhunbei','zhunbei2','tui',\
+                  'zhunbei','zhunbei2',\
                   'doujiquxiao']:
             want = imgs[i]
             size = want[0].shape
@@ -877,12 +857,8 @@ def douji():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if doujiauto==True and i=='tui':
-                    #print('准备退出',i)
-                    break
-                elif i=='douji':
+                if i=='douji':
                     doujipaidui=0
-                    doujiauto=True
                     print('斗技开始',i)
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
@@ -904,7 +880,7 @@ def douji():
                     print('斗技中。。。',i)
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
-                    t = random.randint(15,30) / 100
+                    t = random.randint(50,100) / 100
                     time.sleep(t)
                     break
 
