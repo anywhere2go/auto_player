@@ -50,22 +50,22 @@ def log(f):
 
 @log
 def select_mode():
-    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面,
+    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面
         1 结界突破
-        2 自动御魂通关(司机)
-        3 自动御魂通关(打手)
-        4 自动御魂通关(单刷)
-        5 自动探索副本(司机)
-        6 自动探索副本(打手)
-        7 自动探索副本(单刷)
+        2 御魂(司机)
+        3 御魂(打手)
+        4 御魂(单刷)
+        5 探索(司机)
+        6 探索(打手)
+        7 探索(单刷)
         8 百鬼夜行
-        9 斗技
+        9 自动斗技
         10 当前活动（鬼灭之刃）
-        11 结界自动合卡，自动选择前三张合成
-        12 抽卡
+        11 结界自动合卡（太阴和伞室内）
+        12 厕纸抽卡
         13 式神升星
         14 秘境召唤
-        15 妖气封印
+        15 妖气封印和秘闻
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
@@ -1130,7 +1130,7 @@ def mijing():
                     break
 
 ########################################################
-#妖气封印
+#妖气封印和秘闻
 def yaoqi():
     count=0
     while True:   #直到取消，或者出错
@@ -1141,8 +1141,6 @@ def yaoqi():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         #委派任务
         for i in ['jujue','jiangli','jixu','zhunbei',\
                   'shibai','zidongpipei','zudui2',\
@@ -1157,6 +1155,9 @@ def yaoqi():
                     count=count+1
                     print('次数：',count)
                     t=100/100
+                elif i=='shibai':
+                    print('自动结束')
+                    select_mode()
                 else:
                     print('活动中。。。',i)
                     t = random.randint(30,80) / 100

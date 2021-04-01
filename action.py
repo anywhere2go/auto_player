@@ -1,4 +1,4 @@
-import cv2,numpy,time,os, random
+import cv2,numpy,time,os, random, sys
 #检测系统
 if os.name=='posix':
     scalar=True
@@ -67,15 +67,14 @@ def load_imgs():
 
     return mubiao
 
-#蜂鸣报警器，参数n为鸣叫资料
+#蜂鸣报警器，参数n为鸣叫次数
 def alarm(n):
     frequency = 1500
-    last = 500
+    duration = 500
 
-    print('\a')
-        #for n in range(n):
-        #Beep(frequency,last)
-        #time.sleep(0.05)
+    if os.name=='nt':
+        import winsound
+        winsound.Beep(frequency, duration)
 
 #裁剪图片以缩小匹配范围，screen为原图内容，upleft、downright是目标区域的左上角、右下角坐标
 def cut(screen,upleft,downright): 
