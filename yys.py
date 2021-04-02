@@ -1,4 +1,4 @@
-import cv2,numpy,time,random,os
+import cv2,numpy,time,random,os, datetime
 import os,sys,pyautogui, traceback
 import numpy as np
 import mss
@@ -50,6 +50,7 @@ def log(f):
 
 @log
 def select_mode():
+    print (datetime.datetime.now())
     print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面
         1 结界突破
         2 御魂(司机)
