@@ -32,6 +32,7 @@ else:
 a,b = upleft
 c,d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
+start = time.time()
 
 
 #以上启动，载入设置
@@ -50,7 +51,13 @@ def log(f):
 
 @log
 def select_mode():
+    global start
+    end = time.time()
+    hours, rem = divmod(end-start, 3600)
+    minutes, seconds = divmod(rem, 60)
+    print("运行时间：{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
     print (datetime.datetime.now())
+
     print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面
         1 结界突破
         2 御魂(司机)
@@ -85,7 +92,8 @@ def select_mode():
     except:
         print('数字超出范围')
         select_mode()
-    
+
+    start = time.time()
     command()
 
 ##########################################################
