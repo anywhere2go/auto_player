@@ -68,7 +68,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（鬼灭之刃）
+        10 当前活动（帝释天）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 式神升星
@@ -204,6 +204,7 @@ def tupo():
 #御魂司机
 def yuhun():
     cishu=0
+    refresh=0
     while True :
         #鼠标移到最右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -213,8 +214,6 @@ def yuhun():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         #print('screen shot ok',time.ctime())
         #体力不足
         want = imgs['notili']
@@ -236,12 +235,19 @@ def yuhun():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i == 'yuhuntiaozhan':
-                    cishu = cishu + 1
+                if i == 'tiaozhan' or i=='tiaozhan2':
+                    if refresh>2:
+                        select_mode()
+                    elif refresh==0:
+                        cishu=cishu+1
+                    else:
+                        cishu=cishu
+                    refresh=refresh+1
                     print('挑战次数：',cishu)
-                    t = random.randint(1000,1200) / 100
+                    t = random.randint(250,400) / 100
                 else:
                     print('挑战中。。。',i)
+                    refresh=0
                     t = random.randint(50,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -919,8 +925,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','hdchufa','zhunbei',\
-                  'hdjiangli',\
+        for i in ['jujue','hdtiaozhan','hdshijian','zhunbei',\
                   'ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
@@ -940,6 +945,16 @@ def huodong():
                     count = count + 1
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
+                elif i == 'hdshijian':
+                    #截屏
+                    im = np.array(mss.mss().grab(monitor))
+                    screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+                    want = imgs['hdjiangli']
+                    size = want[0].shape
+                    h, w , ___ = size
+                    pts = action.locate(screen,want,0)
+                    t = random.randint(100,200) / 100
+                    print('挑战结束')
                 else:
                     refresh=0
                     print('挑战中。。。',i)
