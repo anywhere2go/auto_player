@@ -665,7 +665,7 @@ def gouliang3():
                 if not len(pts) == 0:
                     if refresh==0:
                         count=count+1
-                    elif refresh>2:
+                    elif refresh>5:
                         print('达到上限')
                         select_mode()
                     refresh=refresh+1
