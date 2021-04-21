@@ -925,8 +925,8 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','hdshijian','zhunbei',\
-                  'ying','jiangli',\
+        for i in ['jujue','hdtiaozhan','hdend','zhunbei',\
+                  'ying','jiangli','querenyuhun',\
                   'jixu','shibai']:
             want = imgs[i]
             size = want[0].shape
