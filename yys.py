@@ -226,7 +226,7 @@ def yuhun():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','yuhuntiaozhan',\
+        for i in ['jujue','tiaozhan','tiaozhan2',\
                   'moren','queding','querenyuhun','ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
