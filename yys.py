@@ -491,7 +491,7 @@ def gouliang():
 
         for i in ['jujue','queding','ying','querenyuhun',\
                   'jiangli','jixu',\
-                  'yuhuntiaozhan','ditu']:
+                  'tiaozhan','ditu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
