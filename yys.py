@@ -71,7 +71,7 @@ def select_mode():
         10 当前活动（帝释天）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
-        13 式神升星
+        13 蓝蛋升级
         14 秘境召唤
         15 妖气封印和秘闻
         ''')
@@ -1076,28 +1076,30 @@ def shengxing():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
             
-        for i in ['jiarugouliang','jineng','jixushengxing','querenshengxing']:
+        for i in ['jineng','jixushengxing',\
+                  'jixuyucheng','querenshengxing']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                print('升星中。。。',i)
+                print('升级中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                if i=='jiarugouliang':
-                    print('无式神')
-                    select_mode()
-                elif i=='querenshengxing':
+                if i=='querenshengxing':
                     if refresh==0:
                         count=count+1
+                    elif refresh>3:
+                        print('升级结束')
+                        select_mode()
                     refresh=refresh+1
-                    print('升星个数：',count)
+                    print('升级个数：',count)
                     t = random.randint(250,350) / 100
                 else:
                     refresh=0
                     t = random.randint(20,100) / 100
+                    
                 time.sleep(t)
                 
 ##########################################################
