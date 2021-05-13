@@ -21,7 +21,7 @@ upleft = (0, 0)
 if scalar==True:
     downright = (1280/2, 720/2)
 else:
-    downright = (1280, 720)
+    downright = (1200, 700)
 a,b = upleft
 c,d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
