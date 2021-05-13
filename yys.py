@@ -1,19 +1,12 @@
-import cv2,numpy,time,random,os, datetime
+import cv2,time,random,os, datetime
 import os,sys,pyautogui, traceback
 import numpy as np
 import mss
 import action
 
 #检测系统
-if os.name=='posix':
-    print('操作系统：macOS')
-    scalar=True
-elif os.name=='nt':
-    print('操作系统：Windows')
-    scalar=False
-else:
-    print('操作系统：未知')
-    scalar=False
+print('操作系统:', sys.platform)
+scalar=False
 
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
@@ -37,19 +30,6 @@ start = time.time()
 
 #以上启动，载入设置
 ##########################################################
-
-def log(f):
-    def wrap(*agrs, **kwagrs):
-        try:
-            ans = f(*agrs, **kwagrs)
-            return ans
-        except:
-            traceback.print_exc()
-            time.sleep(60)
-
-    return wrap
-
-@log
 def select_mode():
     global start
     end = time.time()
@@ -58,7 +38,7 @@ def select_mode():
     print("运行时间：{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
     print (datetime.datetime.now())
 
-    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面
+    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面，0退出
         1 结界突破
         2 御魂(司机)
         3 御魂(打手)
@@ -93,8 +73,11 @@ def select_mode():
         print('数字超出范围')
         select_mode()
 
-    start = time.time()
-    command()
+    if index==0:
+        quit()
+    else:
+        start = time.time()
+        command()
 
 ##########################################################
 #结节突破
