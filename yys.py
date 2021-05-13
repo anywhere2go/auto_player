@@ -350,7 +350,7 @@ def yuhundanren():
             select_mode()
         
         for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
-                  'tiaozhan','tiaozhan2','shibai']:
+                  'tiaozhan','tiaozhan2','tiaozhan3','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
