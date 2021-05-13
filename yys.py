@@ -341,7 +341,7 @@ def yuhundanren():
             pts=action.locate(target,want,0)
             if not len(pts)==0:
                 print('挑战中。。。',i)
-                if i == 'tiaozhan' or i=='tiaozhan2':
+                if i == 'tiaozhan' or i=='tiaozhan2' or i=='tiaozhan3':
                     if refresh>2:
                         select_mode()
                     elif refresh==0:
