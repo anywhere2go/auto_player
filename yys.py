@@ -6,7 +6,10 @@ import action
 
 #检测系统
 print('操作系统:', sys.platform)
-scalar=False
+if sys.platform=='darwin'
+    scalar=True
+else
+    scalar=False
 
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
@@ -19,7 +22,7 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    downright = (1280/2, 720/2)
+    downright = (600,350)
 else:
     downright = (1200, 700)
 a,b = upleft
