@@ -327,11 +327,6 @@ def yuhundanren():
             print('体力不足')
             select_mode()
 
-        #次数检查
-        if cishu > 500:
-            print('次数上限')
-            select_mode()
-        
         for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
                   'tiaozhan','tiaozhan2','tiaozhan3','shibai']:
             want=imgs[i]
@@ -343,6 +338,7 @@ def yuhundanren():
                 print('挑战中。。。',i)
                 if i == 'tiaozhan' or i=='tiaozhan2' or i=='tiaozhan3':
                     if refresh>2:
+                        print('次数用尽')
                         select_mode()
                     elif refresh==0:
                         cishu=cishu+1
