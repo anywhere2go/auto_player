@@ -22,7 +22,7 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    downright = (600,350)
+    downright = (568,374)
 else:
     downright = (1200, 700)
 a,b = upleft
