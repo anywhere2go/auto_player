@@ -6,9 +6,9 @@ import action
 
 #检测系统
 print('操作系统:', sys.platform)
-if sys.platform=='darwin'
+if sys.platform=='darwin':
     scalar=True
-else
+else:
     scalar=False
 
 # 读取文件 精度控制   显示名字

@@ -1,8 +1,8 @@
 import cv2,numpy,time,os, random, sys
 #检测系统
-if sys.platform=='darwin'
+if sys.platform=='darwin':
     scalar=True
-else
+else:
     scalar=False
 
 #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
