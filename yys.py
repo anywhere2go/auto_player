@@ -30,6 +30,8 @@ c,d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
 start = time.time()
 
+#constants
+last_click=None
 
 #以上启动，载入设置
 ##########################################################
@@ -85,8 +87,9 @@ def select_mode():
 ##########################################################
 #结节突破
 def tupo():
+    global last_click
     cishu = 0
-    refresh=False
+    refresh=0
     liaotu=None
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -142,12 +145,8 @@ def tupo():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            if refresh==True:
-                print('需要刷新')
-                select_mode()
             cishu=6
             print('进攻次数上限:',cishu)
-            refresh=True
         
         #奖励
         for i in ['jujue','queding',\
@@ -162,25 +161,30 @@ def tupo():
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,50) / 100
                 if i == 'shibai':
-                    refresh=False
                     if cishu>0:
                         cishu = cishu - 1
                     print('进攻次数：',cishu)
                     t = random.randint(100,200) / 100
                 elif i=='jingong' or i=='jingong2':
-                    if refresh==True:
-                        print('需要刷新')
-                        select_mode()
-                    refresh=True
-                    cishu = cishu + 1
+                    if refresh==0:
+                        cishu = cishu + 1
                     print('进攻次数：',cishu)
                     t = random.randint(500,800) / 100
                 else:
-                    refresh=False
                     print('突破中。。。',i)
                 time.sleep(t)
                 break
@@ -189,6 +193,7 @@ def tupo():
 ########################################################
 #御魂司机
 def yuhun():
+    global last_click
     cishu=0
     refresh=0
     while True :
@@ -221,19 +226,23 @@ def yuhun():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i == 'tiaozhan' or i=='tiaozhan2':
-                    if refresh>2:
-                        select_mode()
-                    elif refresh==0:
-                        cishu=cishu+1
-                    else:
-                        cishu=cishu
+                if last_click==i:
                     refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
+                if i == 'tiaozhan' or i=='tiaozhan2':
+                    if refresh==0:
+                        cishu=cishu+1
                     print('挑战次数：',cishu)
                     t = random.randint(250,400) / 100
                 else:
                     print('挑战中。。。',i)
-                    refresh=0
                     t = random.randint(50,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -243,7 +252,9 @@ def yuhun():
 ########################################################
 #御魂打手
 def yuhun2():
+    global last_click
     cishu=0
+    refresh=0
     while True :
         #鼠标移到最右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -253,9 +264,6 @@ def yuhun2():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
-        #print('screen shot ok',time.ctime())
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -296,9 +304,16 @@ def yuhun2():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i=='yuhunbeijing':
-                    cishu=cishu+1
-                    print('挑战次数：',cishu)
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -310,6 +325,7 @@ def yuhun2():
 ########################################################
 #御魂单人
 def yuhundanren():
+    global last_click
     cishu=0
     refresh=0
     while True :   #直到取消，或者出错
@@ -338,20 +354,23 @@ def yuhundanren():
             target=screen
             pts=action.locate(target,want,0)
             if not len(pts)==0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('挑战中。。。',i)
                 if i == 'tiaozhan' or i=='tiaozhan2' or i=='tiaozhan3':
-                    if refresh>2:
-                        print('次数用尽')
-                        select_mode()
-                    elif refresh==0:
+                    if refresh==0:
                         cishu=cishu+1
-                    else:
-                        cishu=cishu
-                    refresh=refresh+1
                     print('挑战次数：',cishu)
                     t = random.randint(150,300) / 100
                 else:
-                    refresh=0
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -361,6 +380,7 @@ def yuhundanren():
 ########################################################
 #探索司机
 def gouliang():
+    global last_click
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -432,18 +452,20 @@ def gouliang():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
+                    if last_click==i:
+                        refresh=refresh+1
+                    else:
+                        refresh=0
+                    last_click=i
+                    print('重复次数：',refresh)
+                    if refresh>6:
+                        print('进攻次数上限')
+                        select_mode()
+                    
                     if refresh==0:
                         count=count+1
-                    elif refresh>2:
-                        print('达到上限')
-                        select_mode()
-                    refresh=refresh+1
-                    
                     print('点击小怪',i)
                     print('探索次数：',count)
-                    if count>500:
-                        print('次数上限')
-                        select_mode()
                     xx = action.cheat(pts[0], w, h)        
                     pyautogui.click(xx)
                     time.sleep(0.5)
@@ -480,7 +502,16 @@ def gouliang():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                refresh=0
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
@@ -494,6 +525,8 @@ def gouliang():
 ########################################################
 #探索打手
 def gouliang2():
+    global last_click
+    refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -502,9 +535,6 @@ def gouliang2():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-        
-        #设定目标，开始查找
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -517,7 +547,6 @@ def gouliang2():
         
         #进入后
         want = imgs['guding']
-
         pts = action.locate(screen,want,0)
         if not len(pts) == 0:
             print('正在地图中')
@@ -537,6 +566,16 @@ def gouliang2():
                     pts = action.locate(screen,want,0)
                     
                     if not len(pts) == 0:
+                        if last_click==i:
+                            refresh=refresh+1
+                        else:
+                            refresh=0
+                        last_click=i
+                        print('重复次数：',refresh)
+                        if refresh>6:
+                            print('进攻次数上限')
+                            select_mode()
+                        
                         print('退出中',i)
                         try:
                             queding = pts[1]
@@ -557,6 +596,16 @@ def gouliang2():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
@@ -570,7 +619,7 @@ def gouliang2():
 ########################################################
 #探索单人
 def gouliang3():
-    #print('debug')
+    global last_click
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -581,8 +630,6 @@ def gouliang3():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -645,13 +692,18 @@ def gouliang3():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
+                    if last_click==i:
+                        refresh=refresh+1
+                    else:
+                        refresh=0
+                    last_click=i
+                    print('重复次数：',refresh)
+                    if refresh>6:
+                        print('进攻次数上限')
+                        select_mode()
+                    
                     if refresh==0:
                         count=count+1
-                    elif refresh>5:
-                        print('达到上限')
-                        select_mode()
-                    refresh=refresh+1
-                    
                     print('点击小怪',i)
                     print('探索次数：',count)
                     if count>500:
@@ -669,6 +721,16 @@ def gouliang3():
                     h, w , ___ = size
                     pts = action.locate(screen,want,0)
                     if not len(pts) == 0:
+                        if last_click==i:
+                            refresh=refresh+1
+                        else:
+                            refresh=0
+                        last_click=i
+                        print('重复次数：',refresh)
+                        if refresh>6:
+                            print('进攻次数上限')
+                            select_mode()
+                    
                         print('退出中',i)
                         try:
                             queding = pts[1]
@@ -689,7 +751,16 @@ def gouliang3():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                refresh=0
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
@@ -700,6 +771,7 @@ def gouliang3():
 ########################################################
 #百鬼
 def baigui():
+    global last_click
     cishu=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -831,8 +903,9 @@ def baigui():
 ########################################################
 #斗技
 def douji():
+    global last_click
     doujipaidui=0
-    refresh=False
+    refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -841,8 +914,6 @@ def douji():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         for i in ['jujue','shoudong','zidong','queren',\
                   'douji','douji3',\
                   'doujiqueren','doujiend','ying',\
@@ -854,6 +925,16 @@ def douji():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
                 if i=='douji':
                     doujipaidui=0
                     print('斗技开始',i)
@@ -863,6 +944,7 @@ def douji():
                     time.sleep(t)
                     break
                 elif i=='doujiquxiao':
+                    refresh=0
                     doujipaidui=doujipaidui+1
                     print('斗技搜索:',doujipaidui)
                     if doujipaidui>5:
@@ -884,6 +966,7 @@ def douji():
 ########################################################
 #当前活动
 def huodong():
+    global last_click
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -894,8 +977,6 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         #体力不足
         want = imgs['notili']
         size = want[0].shape
@@ -916,15 +997,19 @@ def huodong():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if i == 'hdtiaozhan' or i == 'hdchufa':
-                    if not refresh==0:
-                        count = count - 1
-                    if refresh>=3:
-                        print('次数不足')
-                        t = random.randint(2000,3000) / 100
-                        select_mode()
+                if last_click==i:
                     refresh=refresh+1
-                    count = count + 1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
+                if i == 'hdtiaozhan' or i == 'hdchufa':
+                    if refresh==0:
+                        count = count + 1
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
                 elif i == 'hdshijian':
@@ -938,7 +1023,6 @@ def huodong():
                     t = random.randint(100,200) / 100
                     print('挑战结束')
                 else:
-                    refresh=0
                     print('挑战中。。。',i)
                     t = random.randint(80,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
@@ -949,6 +1033,8 @@ def huodong():
 ##########################################################
 #合成结界卡
 def card():
+    global last_click
+    refresh=0
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -958,8 +1044,6 @@ def card():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         for i in ['taiyin2','sanshinei','taiyin3']:
             want = imgs[i]
             size = want[0].shape
@@ -967,6 +1051,16 @@ def card():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('结界卡*',i)
                 xy = action.cheat(pts[0], w/2, h-10)
                 pyautogui.click(xy)
@@ -990,6 +1084,16 @@ def card():
                 print('结界卡不足')
                 select_mode()
             else:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click='taiyin'
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('结界卡',i)
                 xy = action.cheat(pts[0], w/2, h-10 )
                 pyautogui.click(xy)
@@ -1005,6 +1109,16 @@ def card():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
+            if last_click==i:
+                refresh=refresh+1
+            else:
+                refresh=0
+            last_click='hecheng'
+            print('重复次数：',refresh)
+            if refresh>6:
+                print('进攻次数上限')
+                select_mode()
+            
             print('合成中。。。')
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
@@ -1015,7 +1129,7 @@ def card():
 ##########################################################
 #抽卡
 def chouka():
-    refresh=False
+    global last_click
     count=0
     while True:
         #鼠标移到右侧中止    
@@ -1025,8 +1139,6 @@ def chouka():
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
-            
         
         want = imgs['zaicizhaohuan']
         size = want[0].shape
@@ -1066,28 +1178,34 @@ def shengxing():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
                 print('升级中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 if i=='querenshengxing':
                     if refresh==0:
                         count=count+1
-                    elif refresh>3:
-                        print('升级结束')
-                        select_mode()
-                    refresh=refresh+1
                     print('升级个数：',count)
                     t = random.randint(250,350) / 100
                 else:
-                    refresh=0
                     t = random.randint(20,100) / 100
                     
                 time.sleep(t)
                 
 ##########################################################
 #秘境召唤
-chat=False
 def mijing():
+    global last_click
+    refresh=0
     while True:
         #鼠标移到右侧中止    
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -1097,8 +1215,6 @@ def mijing():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-            
-
         #检测聊天界面
         want = imgs['liaotianguanbi']
         size = want[0].shape
@@ -1115,6 +1231,16 @@ def mijing():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
+                    if last_click==i:
+                        refresh=refresh+1
+                    else:
+                        refresh=0
+                    last_click=i
+                    print('重复次数：',refresh)
+                    if refresh>6:
+                        print('进攻次数上限')
+                        select_mode()
+                    
                     print('秘境召唤。。。',i)
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
@@ -1129,6 +1255,16 @@ def mijing():
                 target = screen
                 pts = action.locate(target,want,0)
                 if not len(pts) == 0:
+                    if last_click==i:
+                        refresh=refresh+1
+                    else:
+                        refresh=0
+                    last_click=i
+                    print('重复次数：',refresh)
+                    if refresh>6:
+                        print('进攻次数上限')
+                        select_mode()
+                    
                     if i=='canjia':
                         print('加入秘境召唤！',i)
                     xy = action.cheat(pts[0], w, h-10 )
@@ -1140,7 +1276,9 @@ def mijing():
 ########################################################
 #妖气封印和秘闻
 def yaoqi():
+    global last_click
     count=0
+    refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
@@ -1159,8 +1297,19 @@ def yaoqi():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                    
                 if i=='zidongpipei':
-                    count=count+1
+                    if refresh==0:
+                        count=count+1
                     print('次数：',count)
                     t=100/100
                 elif i=='shibai':
