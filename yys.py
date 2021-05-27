@@ -166,7 +166,7 @@ def tupo():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -231,7 +231,7 @@ def yuhun():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -309,7 +309,7 @@ def yuhun2():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -359,7 +359,7 @@ def yuhundanren():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -457,7 +457,7 @@ def gouliang():
                     else:
                         refresh=0
                     last_click=i
-                    print('重复次数：',refresh)
+                    #print('重复次数：',refresh)
                     if refresh>6:
                         print('进攻次数上限')
                         select_mode()
@@ -507,7 +507,7 @@ def gouliang():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -571,7 +571,7 @@ def gouliang2():
                         else:
                             refresh=0
                         last_click=i
-                        print('重复次数：',refresh)
+                        #print('重复次数：',refresh)
                         if refresh>6:
                             print('进攻次数上限')
                             select_mode()
@@ -601,7 +601,7 @@ def gouliang2():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -697,7 +697,7 @@ def gouliang3():
                     else:
                         refresh=0
                     last_click=i
-                    print('重复次数：',refresh)
+                    #print('重复次数：',refresh)
                     if refresh>6:
                         print('进攻次数上限')
                         select_mode()
@@ -726,7 +726,7 @@ def gouliang3():
                         else:
                             refresh=0
                         last_click=i
-                        print('重复次数：',refresh)
+                        #print('重复次数：',refresh)
                         if refresh>6:
                             print('进攻次数上限')
                             select_mode()
@@ -756,7 +756,7 @@ def gouliang3():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -930,7 +930,7 @@ def douji():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -1002,7 +1002,7 @@ def huodong():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -1056,7 +1056,7 @@ def card():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -1089,7 +1089,7 @@ def card():
                 else:
                     refresh=0
                 last_click='taiyin'
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -1114,7 +1114,7 @@ def card():
             else:
                 refresh=0
             last_click='hecheng'
-            print('重复次数：',refresh)
+            #print('重复次数：',refresh)
             if refresh>6:
                 print('进攻次数上限')
                 select_mode()
@@ -1183,7 +1183,7 @@ def shengxing():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
@@ -1236,7 +1236,7 @@ def mijing():
                     else:
                         refresh=0
                     last_click=i
-                    print('重复次数：',refresh)
+                    #print('重复次数：',refresh)
                     if refresh>6:
                         print('进攻次数上限')
                         select_mode()
@@ -1260,7 +1260,7 @@ def mijing():
                     else:
                         refresh=0
                     last_click=i
-                    print('重复次数：',refresh)
+                    #print('重复次数：',refresh)
                     if refresh>6:
                         print('进攻次数上限')
                         select_mode()
@@ -1302,7 +1302,7 @@ def yaoqi():
                 else:
                     refresh=0
                 last_click=i
-                print('重复次数：',refresh)
+                #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
