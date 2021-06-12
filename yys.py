@@ -162,7 +162,10 @@ def tupo():
             pts=action.locate(target,want,0)
             if not len(pts)==0:
                 if last_click==i:
-                    refresh=refresh+1
+                    if i=='jingong' or i=='jingong2':
+                        refresh=refresh+7
+                    else:
+                        refresh=refresh+1
                 else:
                     refresh=0
                 last_click=i
