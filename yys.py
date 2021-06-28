@@ -1310,7 +1310,7 @@ def yaoqi():
                     print('进攻次数上限')
                     select_mode()
                     
-                if i=='zidongpipei':
+                if i=='zidongpipei' or i=='tiaozhan3' or i=='tiaozhan4':
                     if refresh==0:
                         count=count+1
                     print('次数：',count)
