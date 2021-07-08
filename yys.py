@@ -316,7 +316,9 @@ def yuhun2():
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
-                
+                elif refresh==0 and i=='jiangli':
+                    cishu=cishu+1
+                    print('挑战次数：',cishu)
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
