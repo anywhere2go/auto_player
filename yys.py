@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（阿修罗）
+        10 当前活动（sp面灵气）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -993,7 +993,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','hdend','zhunbei',\
+        for i in ['jujue','hdtiaozhan','hdrukou','zhunbei',\
                   'ying','jiangli','querenyuhun',\
                   'jixu','shibai']:
             want = imgs[i]
