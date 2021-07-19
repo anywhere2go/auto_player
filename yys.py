@@ -993,8 +993,12 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdtiaozhan','hdrukou','zhunbei',\
-                  'ying','jiangli','querenyuhun',\
+        for i in ['jujue','hdzidong',\
+                  'hdshijian','hdshijian1','hdshijian2','hdshijian3',\
+                  'hdboss','zhunbei',\
+                  'hdjinbi','hdqueren','hdjixu',\
+                  'querenyuhun','hdshangdian','hdguanbi',\
+                  'ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -1017,23 +1021,13 @@ def huodong():
                         count = count + 1
                     print('挑战次数：',count)
                     t = random.randint(100,200) / 100
-                elif i == 'hdshijian':
-                    #截屏
-                    im = np.array(mss.mss().grab(monitor))
-                    screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-                    want = imgs['hdjiangli']
-                    size = want[0].shape
-                    h, w , ___ = size
-                    pts = action.locate(screen,want,0)
-                    t = random.randint(100,200) / 100
-                    print('挑战结束')
                 else:
                     print('挑战中。。。',i)
                     t = random.randint(80,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
-                break
+                
 
 ##########################################################
 #合成结界卡
