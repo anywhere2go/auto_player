@@ -995,7 +995,7 @@ def huodong():
         #自动点击通关结束后的页面
         for i in ['jujue','hdzidong',\
                   'hdshijian','hdshijian1','hdshijian2','hdshijian3',\
-                  'hdshijian4','hdboss','zhunbei',\
+                  'hdshijian4','hdshijian5','hdboss','zhunbei',\
                   'hdjinbi','hdqueren','hdjixu',\
                   'querenyuhun','hdshangdian','hdguanbi',\
                   'ying','jiangli',\
@@ -1027,6 +1027,8 @@ def huodong():
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
+                if not i=='hdjinbi':
+                    break
                 
 
 ##########################################################
