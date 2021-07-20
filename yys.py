@@ -994,8 +994,9 @@ def huodong():
 
         #自动点击通关结束后的页面
         for i in ['jujue','hdzidong',\
-                  'hdshijian','hdshijian1','hdshijian2','hdshijian3',\
-                  'hdshijian4','hdshijian5','hdjixu','hdboss','zhunbei',\
+                  'hdjixu','hdshijian','hdshijian1','hdshijian2','hdshijian3',\
+                  'hdshijian4','hdshijian5','hdshijian6',\
+                  'hdboss','zhunbei',\
                   'hdjinbi','hdqueren','hdend','hdqianwang',\
                   'querenyuhun','hdshangdian','hdguanbi',\
                   'ying','jiangli',\
