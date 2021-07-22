@@ -996,9 +996,10 @@ def huodong():
         for i in ['jujue','hdzidong',\
                   'hdjixu','hdshijian','hdshijian1','hdshijian2','hdshijian3',\
                   'hdshijian4','hdshijian5','hdshijian6',\
-                  'hdboss','zhunbei',\
+                  'zhunbei',\
                   'hdjinbi','hdqueren','hdend','hdqianwang',\
-                  'querenyuhun','hdshangdian','hdguanbi',\
+                  'querenyuhun','hdshangdian','hdshangdian2','hdguanbi',\
+                  'hdboss','hdxuanze',\
                   'ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
