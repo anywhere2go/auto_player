@@ -1162,8 +1162,9 @@ def chouka():
             #time.sleep(t)
 
 ##########################################################
-#式神升星
+#蓝蛋升级
 def shengxing():
+    global last_click
     count=0
     refresh=0
     while True:
