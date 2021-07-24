@@ -309,6 +309,8 @@ def yuhun2():
             if not len(pts) == 0:
                 if last_click==i:
                     refresh=refresh+1
+                elif i=='querenyuhun':
+                    refresh=refresh+5
                 else:
                     refresh=0
                 last_click=i
