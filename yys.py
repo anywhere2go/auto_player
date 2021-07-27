@@ -146,6 +146,7 @@ def tupo():
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
             cishu=6
+            refresh=refresh+1
             print('进攻次数上限:',cishu)
         
         #奖励
@@ -231,6 +232,8 @@ def yuhun():
             if not len(pts) == 0:
                 if last_click==i:
                     refresh=refresh+1
+                elif i=='querenyuhun':
+                    refresh=refresh+5
                 else:
                     refresh=0
                 last_click=i
@@ -995,7 +998,7 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdzidong',\
+        for i in ['jujue','hdzidong','tiaoguo',\
                   'hdjixu','hdshijian','hdshijian1','hdshijian2','hdshijian3',\
                   'hdshijian4','hdshijian5','hdshijian6',\
                   'zhunbei',\
