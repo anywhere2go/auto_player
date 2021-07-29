@@ -233,7 +233,7 @@ def yuhun():
                 if last_click==i:
                     refresh=refresh+1
                 elif i=='querenyuhun':
-                    refresh=refresh+5
+                    refresh=refresh+2
                 else:
                     refresh=0
                 last_click=i
@@ -998,13 +998,8 @@ def huodong():
             select_mode()
 
         #自动点击通关结束后的页面
-        for i in ['jujue','hdzidong','tiaoguo',\
-                  'hdjixu','hdshijian','hdshijian1','hdshijian2','hdshijian3',\
-                  'hdshijian4','hdshijian5','hdshijian6',\
-                  'zhunbei',\
-                  'hdjinbi','hdqueren','hdend','hdqianwang',\
-                  'querenyuhun','hdshangdian','hdshangdian2','hdguanbi',\
-                  'hdboss','hdxuanze',\
+        for i in ['jujue','hdzidong','hdrukou',\
+                  'hdjixu',\
                   'ying','jiangli',\
                   'jixu','shibai']:
             want = imgs[i]
@@ -1023,7 +1018,7 @@ def huodong():
                     print('进攻次数上限')
                     select_mode()
                     
-                if i == 'hdtiaozhan' or i == 'hdchufa':
+                if i == 'hdtiaozhan' or i == 'hdrukou':
                     if refresh==0:
                         count = count + 1
                     print('挑战次数：',count)
