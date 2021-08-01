@@ -313,7 +313,7 @@ def yuhun2():
                 if last_click==i:
                     refresh=refresh+1
                 elif i=='querenyuhun':
-                    refresh=refresh+5
+                    refresh=refresh+2
                 else:
                     refresh=0
                 last_click=i
