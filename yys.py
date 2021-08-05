@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（sp面灵气）
+        10 当前活动（为崽而战）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -919,7 +919,6 @@ def douji():
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
-
         #截屏
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
@@ -987,21 +986,11 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        #体力不足
-        want = imgs['notili']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('体力不足')
-            select_mode()
-
-        #自动点击通关结束后的页面
-        for i in ['jujue','hdzidong','hdrukou',\
-                  'hdjixu',\
-                  'ying','jiangli',\
-                  'jixu','shibai']:
+        for i in ['jujue','doujiqueren','queren','shoudong','zidong',\
+                  'pipei',\
+                  'jixu','ying',\
+                  'zhunbei','zhunbei2',\
+                  'doujiquxiao']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1018,18 +1007,48 @@ def huodong():
                     print('进攻次数上限')
                     select_mode()
                     
-                if i == 'hdtiaozhan' or i == 'hdrukou':
-                    if refresh==0:
-                        count = count + 1
-                    print('挑战次数：',count)
-                    t = random.randint(100,200) / 100
+                if i=='pipei':
+                    doujipaidui=0
+                    print('斗技开始',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(15,30) / 100
+                    time.sleep(t)
+                    break
+                elif i=='doujiquxiao':
+                    refresh=0
+                    doujipaidui=doujipaidui+1
+                    print('斗技搜索:',doujipaidui)
+                    if doujipaidui>5:
+                        doujipaidui=0
+                        print('取消搜索')
+                        xy = action.cheat(pts[0], w, h-10 )
+                        pyautogui.click(xy)
+                        t = random.randint(15,30) / 100
+                        time.sleep(t)
+                        break
+                elif i=='shoudong' or i=='zidong':
+                    print('遇到真人，准备退出',i)
+                    want = imgs['tui']
+                    size = want[0].shape
+                    h, w , ___ = size
+                    target = screen
+                    pts = action.locate(target,want,0)
+                    if not len(pts) == 0:
+                        print('退出')
+                        xy = action.cheat(pts[0], w, h-10 )
+                        pyautogui.click(xy)
+                        pyautogui.moveTo(xy)
+                        t = random.randint(30,40) / 100
+                        time.sleep(t)
+                        break
+                    
                 else:
-                    print('挑战中。。。',i)
-                    t = random.randint(80,100) / 100
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                time.sleep(t)
-                if not i=='hdjinbi':
+                    print('斗技中。。。',i)
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(50,100) / 100
+                    time.sleep(t)
                     break
                 
 
