@@ -1003,12 +1003,13 @@ def huodong():
                     refresh=0
                 last_click=i
                 #print('重复次数：',refresh)
-                if refresh>6:
+                if refresh>6 or count>50:
                     print('进攻次数上限')
                     select_mode()
                     
                 if i=='pipei':
                     doujipaidui=0
+                    count=count+1
                     print('斗技开始',i)
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
