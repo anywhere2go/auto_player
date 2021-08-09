@@ -88,6 +88,7 @@ def select_mode():
 #结节突破
 def tupo():
     global last_click
+    count=0 #总次数
     cishu = 0
     refresh=0
     liaotu=None
@@ -132,7 +133,7 @@ def tupo():
                 time.sleep(t)
                 cishu=cishu-1
         elif liaotu==False:
-            if cishu >= 30:
+            if cishu >= 31:
                 print('进攻次数上限')
                 select_mode()
 
@@ -181,12 +182,15 @@ def tupo():
                 if i == 'shibai':
                     if cishu>0:
                         cishu = cishu - 1
-                    print('进攻次数：',cishu)
+                    if count>0:
+                        count = count - 1
+                    print('进攻总次数：',count)
                     t = random.randint(100,200) / 100
                 elif i=='jingong' or i=='jingong2':
                     if refresh==0:
                         cishu = cishu + 1
-                    print('进攻次数：',cishu)
+                        count=count+1
+                    print('进攻总次数：',cishu)
                     t = random.randint(500,800) / 100
                 else:
                     print('突破中。。。',i)
