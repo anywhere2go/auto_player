@@ -190,7 +190,7 @@ def tupo():
                     if refresh==0:
                         cishu = cishu + 1
                         count=count+1
-                    print('进攻总次数：',cishu)
+                    print('进攻总次数：',count)
                     t = random.randint(500,800) / 100
                 else:
                     print('突破中。。。',i)
