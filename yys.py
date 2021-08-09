@@ -148,7 +148,7 @@ def tupo():
         if not len(pts) == 0:
             cishu=6
             refresh=refresh+1
-            print('进攻次数上限:',cishu)
+            print('进攻次数上限:',count)
         
         #奖励
         for i in ['jujue','queding',\
