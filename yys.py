@@ -991,7 +991,7 @@ def huodong():
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         for i in ['jujue','doujiqueren','queren','shoudong','zidong',\
-                  'pipei',\
+                  'pipei','tui',\
                   'jixu','ying',\
                   'zhunbei','zhunbei2',\
                   'doujiquxiao']:
