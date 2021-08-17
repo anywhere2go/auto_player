@@ -991,7 +991,7 @@ def huodong():
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
         for i in ['jujue','hdtiaozhan',\
-                  'jixu','ying','hdend']:
+                  'jiangli','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
