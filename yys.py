@@ -990,11 +990,8 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        for i in ['jujue','doujiqueren','queren','shoudong','zidong',\
-                  'pipei','tui',\
-                  'jixu','ying',\
-                  'zhunbei','zhunbei2',\
-                  'doujiquxiao']:
+        for i in ['jujue','hdtiaozhan',\
+                  'jixu','ying','hdend']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1007,54 +1004,21 @@ def huodong():
                     refresh=0
                 last_click=i
                 #print('重复次数：',refresh)
+                print('活动中',i)
                 if refresh>6 or count>50:
                     print('进攻次数上限')
                     select_mode()
                     
-                if i=='pipei':
-                    doujipaidui=0
-                    count=count+1
-                    print('斗技开始',i)
-                    xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
-                    t = random.randint(15,30) / 100
-                    time.sleep(t)
-                    break
-                elif i=='doujiquxiao':
-                    refresh=0
-                    doujipaidui=doujipaidui+1
-                    print('斗技搜索:',doujipaidui)
-                    if doujipaidui>5:
-                        doujipaidui=0
-                        print('取消搜索')
-                        xy = action.cheat(pts[0], w, h-10 )
-                        pyautogui.click(xy)
-                        t = random.randint(15,30) / 100
-                        time.sleep(t)
-                        break
-                elif i=='shoudong' or i=='zidong':
-                    print('遇到真人，准备退出',i)
-                    want = imgs['tui']
-                    size = want[0].shape
-                    h, w , ___ = size
-                    target = screen
-                    pts = action.locate(target,want,0)
-                    if not len(pts) == 0:
-                        print('退出')
-                        xy = action.cheat(pts[0], w, h-10 )
-                        pyautogui.click(xy)
-                        pyautogui.moveTo(xy)
-                        t = random.randint(30,40) / 100
-                        time.sleep(t)
-                        break
-                    
-                else:
-                    print('斗技中。。。',i)
-                    xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
-                    t = random.randint(50,100) / 100
-                    time.sleep(t)
-                    break
+                if i=='hdtiaozhan':
+                    if refresh==0:
+                        count=count+1
+                    print('挑战次数：',count)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                t = random.randint(15,30) / 100
+                time.sleep(t)
+                break
+                
                 
 
 ##########################################################
