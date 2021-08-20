@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（夜行荒河）
+        10 当前活动（sp花鸟）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -990,7 +990,7 @@ def huodong():
         im = np.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         
-        for i in ['jujue','hdtiaozhan',\
+        for i in ['jujue','hdtiaozhan','zhunbei',\
                   'jiangli','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
