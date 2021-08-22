@@ -1015,7 +1015,7 @@ def huodong():
                     print('挑战次数：',count)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(15,30) / 100
+                t = random.randint(80,150) / 100
                 time.sleep(t)
                 break
                 
