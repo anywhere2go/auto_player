@@ -192,6 +192,8 @@ def tupo():
                         count=count+1
                     print('进攻总次数：',count)
                     t = random.randint(500,800) / 100
+                elif i=='lingxunzhang' or i=='lingxunzhang2':
+                    t = random.randint(80,100) / 100
                 else:
                     print('突破中。。。',i)
                 time.sleep(t)
@@ -320,17 +322,19 @@ def yuhun2():
                     refresh=refresh+2
                 else:
                     refresh=0
-                last_click=i
+                
                 #print('重复次数：',refresh)
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
-                elif refresh==0 and i=='jiangli':
+                elif refresh==0 and i=='jiangli' and not last_click=='querenyuhun':
+                    #print('last',last_click)
                     cishu=cishu+1
                     print('挑战次数：',cishu)
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
+                last_click=i
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 break
