@@ -22,7 +22,7 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    downright = (568,374)
+    downright = (1140,700)
 else:
     downright = (1200, 700)
 a,b = upleft
@@ -97,9 +97,10 @@ def tupo():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        #im = np.array(mss.mss().grab(monitor))
+        #screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         #print(scalar)
+        screen=action.screenshot(monitor)
         
             
         #cv2.imshow("Image", screen)
@@ -212,8 +213,7 @@ def yuhun():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #print('screen shot ok',time.ctime())
         #体力不足
@@ -273,8 +273,7 @@ def yuhun2():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #体力不足
         want = imgs['notili']
@@ -351,8 +350,7 @@ def yuhundanren():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #体力不足
         want = imgs['notili']
@@ -406,8 +404,7 @@ def gouliang():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
 
         #体力不足
         want = imgs['notili']
@@ -550,8 +547,7 @@ def gouliang2():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #体力不足
         want = imgs['notili']
@@ -645,8 +641,7 @@ def gouliang3():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #体力不足
         want = imgs['notili']
@@ -796,11 +791,8 @@ def baigui():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        
-            
-        
+        screen=action.screenshot(monitor)
+
         #设定目标，开始查找
         #进入后
         for i in ['baigui','gailv','douzihuoqu']:
@@ -928,8 +920,7 @@ def douji():
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         for i in ['jujue','shoudong','zidong','queren',\
                   'douji','douji3',\
@@ -991,8 +982,7 @@ def huodong():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         for i in ['jujue','hdtiaozhan','zhunbei',\
                   'jiangli','jixu','hdend']:
@@ -1036,8 +1026,7 @@ def card():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         for i in ['taiyin2','sanshinei','taiyin3']:
             want = imgs[i]
@@ -1095,8 +1084,7 @@ def card():
                 pyautogui.moveTo(xy)
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
 
         want = imgs['hecheng']
         size = want[0].shape
@@ -1132,8 +1120,7 @@ def chouka():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         want = imgs['zaicizhaohuan']
         size = want[0].shape
@@ -1163,8 +1150,7 @@ def shengxing():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
             
         for i in ['jineng','jixushengxing',\
                   'jixuyucheng','querenshengxing']:
@@ -1208,8 +1194,7 @@ def mijing():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #检测聊天界面
         want = imgs['liaotianguanbi']
@@ -1280,8 +1265,7 @@ def yaoqi():
             select_mode()
 
         #截屏
-        im = np.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen=action.screenshot(monitor)
         
         #委派任务
         for i in ['jujue','jiangli','jixu','zhunbei',\

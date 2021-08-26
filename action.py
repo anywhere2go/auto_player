@@ -1,10 +1,29 @@
-import cv2,numpy,time,os, random, sys
+import cv2,time,os, random,sys,mss
+import numpy
+
 #检测系统
 if sys.platform=='darwin':
     scalar=True
 else:
     scalar=False
 
+def screenshot(monitor):
+    im = numpy.array(mss.mss().grab(monitor))
+    if scalar:
+        width = int(im.shape[1]/2)
+        height = int(im.shape[0]/2)
+        dim = (width, height)
+        resized = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen = cv2.resize(resized, dim, interpolation = cv2.INTER_AREA)
+        #cv2.imshow("Image", screen)
+        #print(screen.shape)
+        #cv2.waitKey(0)
+    else:
+        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+
+    return screen
+
+    
 #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
 def locate(target,want, show=bool(0), msg=bool(0)):
     loc_pos=[]
@@ -30,7 +49,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x/2),int(y/2)
+            x,y=int(x),int(y)
         else:
             x,y=int(x),int(y)
             
