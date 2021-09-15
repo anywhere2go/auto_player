@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（sp花鸟）
+        10 当前活动（周年庆）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -984,7 +984,7 @@ def huodong():
         #截屏
         screen=action.screenshot(monitor)
         
-        for i in ['jujue','hdtiaozhan','zhunbei',\
+        for i in ['jujue','hdtiaozhan','zhunbei','querenyuhun',\
                   'jiangli','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
