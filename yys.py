@@ -983,6 +983,16 @@ def huodong():
 
         #截屏
         screen=action.screenshot(monitor)
+
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足 ')
+            select_mode()
         
         for i in ['jujue','hdtiaozhan','zhunbei','querenyuhun',\
                   'jiangli','jixu','hdend']:
@@ -999,7 +1009,7 @@ def huodong():
                 last_click=i
                 #print('重复次数：',refresh)
                 print('活动中',i)
-                if refresh>6 or count>50:
+                if refresh>6:
                     print('进攻次数上限')
                     select_mode()
                     
