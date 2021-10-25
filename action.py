@@ -7,6 +7,9 @@ if sys.platform=='darwin':
 else:
     scalar=False
 
+#截屏起点
+a=0
+
 def screenshot(monitor):
     im = numpy.array(mss.mss().grab(monitor))
     if scalar:
@@ -49,9 +52,9 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x),int(y)
+            x,y=int(x)+a,int(y)
         else:
-            x,y=int(x),int(y)
+            x,y=int(x)+a,int(y)
             
         loc_pos.append([x,y])
 

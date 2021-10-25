@@ -602,7 +602,7 @@ def gouliang2():
                         break
                 continue
 
-        for i in ['jujue','jieshou','ying',\
+        for i in ['jujue','jieshou','querenyuhun','ying',\
                   'jiangli','jixu']:
             want = imgs[i]
             size = want[0].shape
