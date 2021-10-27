@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（周年庆）
+        10 当前活动（超鬼王）
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -995,7 +995,7 @@ def huodong():
             select_mode()
         
         for i in ['jujue','hdchufa','hdtiaozhan','zhunbei','querenyuhun',\
-                  'jiangli','ying','jixu','hdend']:
+                  'jiangli','ying','shibai','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1019,7 +1019,7 @@ def huodong():
                     print('挑战次数：',count)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(100,300) / 100
+                t = random.randint(300,500) / 100
                 time.sleep(t)
                 break
                 
