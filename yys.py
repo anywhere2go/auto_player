@@ -995,7 +995,7 @@ def huodong():
             select_mode()
         
         for i in ['jujue','hdchufa','hdtiaozhan','zhunbei','querenyuhun',\
-                  'jiangli','ying','shibai','jixu','hdend']:
+                  'jiangli','ying','shibai','jixu','hdend','hdguanbi']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1017,11 +1017,16 @@ def huodong():
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
+                if i=='hdend':
+                    if refresh==0:
+                        print('疲劳度满，休息1小时')
+                        t = 60*60
+                        time.sleep(t)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(300,500) / 100
                 time.sleep(t)
-                break
+                
                 
                 
 
