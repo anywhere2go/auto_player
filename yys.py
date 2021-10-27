@@ -994,8 +994,8 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','hdtiaozhan','zhunbei','querenyuhun',\
-                  'jiangli','jixu','hdend']:
+        for i in ['jujue','hdchufa','hdtiaozhan','zhunbei','querenyuhun',\
+                  'jiangli','ying','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1019,7 +1019,7 @@ def huodong():
                     print('挑战次数：',count)
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
-                t = random.randint(80,150) / 100
+                t = random.randint(100,300) / 100
                 time.sleep(t)
                 break
                 
