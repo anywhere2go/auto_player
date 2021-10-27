@@ -1022,10 +1022,11 @@ def huodong():
                         print('疲劳度满，休息1小时')
                         t = 60*60
                         time.sleep(t)
-                xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
-                t = random.randint(300,500) / 100
-                time.sleep(t)
+                else:
+                    xy = action.cheat(pts[0], w, h-10 )
+                    pyautogui.click(xy)
+                    t = random.randint(300,500) / 100
+                    time.sleep(t)
                 
                 
                 
