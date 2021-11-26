@@ -252,10 +252,11 @@ def yuhun():
                     if refresh==0:
                         cishu=cishu+1
                     print('挑战次数：',cishu)
-                    t = random.randint(250,400) / 100
+                    t = random.randint(150,300) / 100
+                    time.sleep(t)
                 else:
                     print('挑战中。。。',i)
-                    t = random.randint(50,100) / 100
+                    t = random.randint(500,200) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
