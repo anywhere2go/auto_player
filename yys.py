@@ -256,7 +256,7 @@ def yuhun():
                     time.sleep(t)
                 else:
                     print('挑战中。。。',i)
-                    t = random.randint(500,200) / 100
+                    t = random.randint(50,200) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
