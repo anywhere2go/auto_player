@@ -17,7 +17,8 @@ def screenshot(monitor):
         height = int(im.shape[0]/2)
         dim = (width, height)
         resized = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        screen = cv2.resize(resized, dim, interpolation = cv2.INTER_AREA)
+        screen = resized
+        #screen = cv2.resize(resized, dim, interpolation = cv2.INTER_AREA)
         #cv2.imshow("Image", screen)
         #print(screen.shape)
         #cv2.waitKey(0)
@@ -52,7 +53,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x)+a,int(y)
+            x,y=int(x)/2+a,int(y)/2
         else:
             x,y=int(x)+a,int(y)
             
