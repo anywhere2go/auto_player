@@ -252,11 +252,11 @@ def yuhun():
                     if refresh==0:
                         cishu=cishu+1
                     print('挑战次数：',cishu)
-                    t = random.randint(150,300) / 100
+                    t = random.randint(50,150) / 100
                     time.sleep(t)
                 else:
                     print('挑战中。。。',i)
-                    t = random.randint(50,200) / 100
+                    t = random.randint(50,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 time.sleep(t)
@@ -995,7 +995,8 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','hdchufa','hdtiaozhan','zhunbei','querenyuhun',\
+        for i in ['jujue','hdxuanze','hdxuanze2','hdzhandou','hdjieshou',\
+                  'hdtiaozhan','zhunbei','querenyuhun',\
                   'jiangli','ying','shibai','jixu','hdend','hdguanbi']:
             want = imgs[i]
             size = want[0].shape
