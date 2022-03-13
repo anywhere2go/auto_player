@@ -53,7 +53,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x)/2+a,int(y)/2
+            x,y=int(x)+a,int(y)
         else:
             x,y=int(x)+a,int(y)
             
