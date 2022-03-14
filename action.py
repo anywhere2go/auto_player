@@ -1,5 +1,6 @@
 import cv2,time,os, random,sys,mss
 import numpy
+from PIL import ImageGrab
 
 #检测系统
 if sys.platform=='darwin':
@@ -11,11 +12,13 @@ else:
 a=0
 
 def screenshot(monitor):
-    im = numpy.array(mss.mss().grab(monitor))
+    
     if scalar:
-        width = int(im.shape[1]/2)
-        height = int(im.shape[0]/2)
-        dim = (width, height)
+        #width = int(im.shape[1]/2)
+        #height = int(im.shape[0]/2)
+        #dim = (width, height)
+        screen = ImageGrab.grab(bbox=(0,0,700,800))
+        im = numpy.array(screen)
         resized = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         screen = resized
         #screen = cv2.resize(resized, dim, interpolation = cv2.INTER_AREA)
@@ -23,6 +26,7 @@ def screenshot(monitor):
         #print(screen.shape)
         #cv2.waitKey(0)
     else:
+        im = numpy.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
 
     return screen
