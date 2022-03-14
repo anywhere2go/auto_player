@@ -186,7 +186,7 @@ def tupo():
                     if count>0:
                         count = count - 1
                     print('进攻总次数：',count)
-                    t = random.randint(100,200) / 100
+                    t = random.randint(50,100) / 100
                 elif i=='jingong' or i=='jingong2':
                     if refresh==0:
                         cishu = cishu + 1
@@ -194,11 +194,11 @@ def tupo():
                     print('进攻总次数：',count)
                     t = random.randint(500,800) / 100
                 elif i=='lingxunzhang' or i=='lingxunzhang2':
-                    t = random.randint(80,100) / 100
+                    t = random.randint(50,100) / 100
                 else:
                     print('突破中。。。',i)
                 time.sleep(t)
-                break
+                #break
 
 
 ########################################################
