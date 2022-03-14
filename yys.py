@@ -102,10 +102,8 @@ def tupo():
         #print(scalar)
         screen=action.screenshot(monitor)
         
-        #screen.show()
-        #cv2.imshow("Image", screen)
-        #print(screen.shape)
-        #cv2.waitKey(0) 
+        cv2.imshow("Image", screen)
+        cv2.waitKey(0) 
 
         #寮突破判断
         if liaotu==None:
