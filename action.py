@@ -17,7 +17,8 @@ def screenshot(monitor):
         #width = int(im.shape[1]/2)
         #height = int(im.shape[0]/2)
         #dim = (width, height)
-        screen = ImageGrab.grab(bbox=(0,0,700,800))
+        monitor2=(0,0,1136,700)
+        screen = ImageGrab.grab(monitor2)
         im = numpy.array(screen)
         resized = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
         screen = resized
