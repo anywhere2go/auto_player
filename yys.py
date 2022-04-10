@@ -993,9 +993,10 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','hdxuanze','hdxuanze2','hdzhandou','hdjieshou',\
-                  'hdtiaozhan','zhunbei','querenyuhun',\
-                  'jiangli','ying','shibai','jixu','hdend','hdguanbi']:
+        for i in ['jujue','hdxuanze','hdxuanze2','hdqueding',\
+                  'hdtiaozhan','hdtiaozhan2','zhunbei','querenyuhun','hdzhandou',\
+                  'jiangli','ying','shibai','jixu','hdchufa','hdchufa2',\
+                  'hdend','hdguanbi']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
