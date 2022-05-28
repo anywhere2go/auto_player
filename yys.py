@@ -993,7 +993,7 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','hdxuanze','hdxuanze2','hdqueding',\
+        for i in ['jujue','hdxuanze','hdxuanze2','hdqueding','hdjinbi',\
                   'hdtiaozhan','hdtiaozhan2','zhunbei','querenyuhun','hdzhandou',\
                   'jiangli','ying','shibai','jixu','hdchufa','hdchufa2',\
                   'hdend','hdguanbi']:
