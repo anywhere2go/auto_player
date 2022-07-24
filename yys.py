@@ -923,7 +923,7 @@ def douji():
         
         for i in ['jujue','shoudong','zidong','queren',\
                   'douji','douji3','douji4',\
-                  'doujiqueren','doujiend','ying',\
+                  'doujiqueren','doujiend','ying','jixus',\
                   'zhunbei','zhunbei2',\
                   'doujiquxiao']:
             want = imgs[i]
