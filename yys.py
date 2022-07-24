@@ -922,7 +922,7 @@ def douji():
         screen=action.screenshot(monitor)
         
         for i in ['jujue','shoudong','zidong','queren',\
-                  'douji','douji3',\
+                  'douji','douji3','douji4',\
                   'doujiqueren','doujiend','ying',\
                   'zhunbei','zhunbei2',\
                   'doujiquxiao']:
