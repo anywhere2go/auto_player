@@ -942,7 +942,7 @@ def douji():
                     print('进攻次数上限')
                     select_mode()
                     
-                if i=='douji':
+                if i=='douji' or i=='douji4':
                     doujipaidui=0
                     print('斗技开始',i)
                     xy = action.cheat(pts[0], w, h-10 )
