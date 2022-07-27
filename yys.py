@@ -993,10 +993,9 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','hdshoudong','hdzidong','hdqueding','hdjinbi',\
-                  'hdtiaozhan','hdtiaozhan2','zhunbei','querenyuhun','hdzhandou',\
-                  'jiangli','ying','shibai','jixu','hdchufa','hdchufa2',\
-                  'hdend','hdguanbi']:
+        for i in ['jujue','querenyuhun','hdtuichu','tuichu',\
+                  'hdtiaozhan','hdtiaozhan2',
+                  'jiangli','ying','shibai','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1026,8 +1025,8 @@ def huodong():
                 else:
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
-                    t = random.randint(300,500) / 100
-                    time.sleep(t)
+                    #t = random.randint(300,500) / 100
+                    #time.sleep(t)
                 
                 
                 
