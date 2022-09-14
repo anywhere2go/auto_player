@@ -127,7 +127,7 @@ def tupo():
         if liaotu==True:
             if cishu >= 6:
                 print('等待5分钟CD')
-                t = 5*60-20
+                #t = 5*60-20
                 #t=2
                 time.sleep(t)
                 cishu=cishu-1
