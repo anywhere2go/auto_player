@@ -53,7 +53,7 @@ def select_mode():
         7 探索(单刷)
         8 百鬼夜行
         9 自动斗技
-        10 当前活动（超鬼王）
+        10 当前活动
         11 结界自动合卡（太阴和伞室内）
         12 厕纸抽卡
         13 蓝蛋升级
@@ -993,7 +993,7 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','querenyuhun','zhunbei',\
+        for i in ['jujue','querenyuhun',\
                   'hdtiaozhan',
                   'jiangli','ying','shibai','jixu']:
             want = imgs[i]
