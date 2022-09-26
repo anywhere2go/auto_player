@@ -993,8 +993,8 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','querenyuhun',\
-                  'hdtiaozhan',
+        for i in ['jujue','querenyuhun','zhunbei',\
+                  'hdtiaozhan','hdtiaozhan2','hdjiacheng',
                   'jiangli','ying','shibai','jixu']:
             want = imgs[i]
             size = want[0].shape
@@ -1002,7 +1002,9 @@ def huodong():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if last_click==i:
+                if i=='hdjiacheng':
+                    refresh=0
+                elif last_click==i:
                     refresh=refresh+1
                 else:
                     refresh=0
