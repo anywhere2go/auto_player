@@ -153,7 +153,7 @@ def tupo():
         for i in ['jujue','queding',\
                   'shibai','ying','jiangli',\
                   'jingong','jingong2',\
-                  'lingxunzhang','lingxunzhang2',\
+                  'lingxunzhang','lingxunzhang2','lingxunzhang4',\
                   'shuaxin']:
             #print(i)
             want=imgs[i]
@@ -609,6 +609,10 @@ def gouliang2():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                if i=='jieshou':
+                    a,b=pts[0]
+                    if a<50:
+                        break
                 if last_click==i:
                     refresh=refresh+1
                 else:
