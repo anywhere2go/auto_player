@@ -1018,16 +1018,15 @@ def huodong():
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
-                    
+
+                t = 0
                 if i=='hdtiaozhan':
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
                     t=15
-                    time.sleep(t)
                 if i=='hdfaxian':
                     t=5
-                    time.sleep(t)
                 if i=='hdend':
                     if refresh==0:
                         print('疲劳度满，休息10分钟')
@@ -1036,11 +1035,8 @@ def huodong():
                 else:
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
-                    #t = random.randint(300,500) / 100
-                    #time.sleep(t)
                 
-                
-                
+                time.sleep(t)
 
 ##########################################################
 #合成结界卡
