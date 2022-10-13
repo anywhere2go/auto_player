@@ -997,7 +997,7 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','querenyuhun','zhunbei','guanbi','hdend',\
+        for i in ['jujue','querenyuhun','queding','zhunbei','guanbi','hdend',\
                   'hdtiaozhan','hdfaxian','hdjixu',
                   'jiangli','ying','shibai','jixu']:
             want = imgs[i]
@@ -1030,8 +1030,8 @@ def huodong():
                     time.sleep(t)
                 if i=='hdend':
                     if refresh==0:
-                        print('疲劳度满，休息1小时')
-                        t = 60*60
+                        print('疲劳度满，休息10分钟')
+                        t = 10*60
                         time.sleep(t)
                 else:
                     xy = action.cheat(pts[0], w, h-10 )
