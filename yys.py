@@ -1025,7 +1025,7 @@ def huodong():
                         count=count+1
                     print('挑战次数：',count)
                     t=15
-                if i=='hdfaxian':
+                if i=='hdfaxian' or i=='hdfaxian2':
                     t=5
                 if i=='hdend':
                     if refresh==0:
