@@ -251,7 +251,6 @@ def yuhun():
                         cishu=cishu+1
                     print('挑战次数：',cishu)
                     t = random.randint(50,150) / 100
-                    time.sleep(t)
                 else:
                     print('挑战中。。。',i)
                     t = random.randint(50,100) / 100
