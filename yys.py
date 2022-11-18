@@ -154,7 +154,7 @@ def tupo():
                   'shibai','ying','jiangli',\
                   'jingong','jingong2',\
                   'lingxunzhang','lingxunzhang2','lingxunzhang4',\
-                  'shuaxin']:
+                  'shuaxin','zhunbei']:
             #print(i)
             want=imgs[i]
             size = want[0].shape
