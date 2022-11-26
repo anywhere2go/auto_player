@@ -996,8 +996,8 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','querenyuhun','queding','zhunbei','guanbi','hdend',\
-                  'hdtiaozhan','hdfaxian','hdfaxian2','hdjixu',
+        for i in ['jujue','querenyuhun','queding','zhunbei','hdend',\
+                  'hdtiaozhan','hddiaocha',
                   'jiangli','ying','shibai','jixu']:
             want = imgs[i]
             size = want[0].shape
@@ -1023,7 +1023,7 @@ def huodong():
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
-                    t=15
+                    t=1
                 if i=='hdfaxian' or i=='hdfaxian2':
                     t=5
                 if i=='hdend':
