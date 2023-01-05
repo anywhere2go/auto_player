@@ -787,6 +787,7 @@ def gouliang3():
 #百鬼
 def baigui():
     global last_click
+    refresh=0
     cishu=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -815,7 +816,7 @@ def baigui():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('正在百鬼中')
+            #print('正在百鬼中')
             
             want = imgs['blank']
             target = screen
@@ -829,29 +830,42 @@ def baigui():
                 time.sleep(0.5)
                 continue
 
-        want = imgs['jinru']
+        i='jinru'
+        want = imgs[i]
         size = want[0].shape
         h, w , ___ = size
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
+            if last_click==i:
+                refresh=refresh+1
+            else:
+                refresh=0
+                last_click=i
+            #print('重复次数：',refresh)
+            if refresh>6:
+                print('进攻次数上限')
+                select_mode()
             cishu=cishu+1
             print('进入百鬼:',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             pyautogui.click(xy)
             pyautogui.moveTo(xy)
-            t = random.randint(300,400) / 100
+            t = random.randint(10,20) / 100
             time.sleep(t)
 
-        want = imgs['kaishi']
+        
+
+        i='kaishi'
+        want = imgs[i]
         size = want[0].shape
         h, w , ___ = size
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            print('选择界面: ',pts[0])
-
-            want = imgs['ya']
+            print('选择押注界面')
+            i='ya'
+            want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
             target = screen
@@ -872,7 +886,7 @@ def baigui():
                 xy = action.cheat(pts2, w, h-10 )
                 pyautogui.click(xy)
                 pyautogui.moveTo(xy)
-                t = random.randint(15,30) / 100
+                t = random.randint(50,100) / 100
                 time.sleep(t)
 
                 xy = action.cheat(pts[0], w, h-10 )
