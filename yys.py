@@ -797,7 +797,7 @@ def baigui():
 
         #设定目标，开始查找
         #进入后
-        for i in ['baigui','gailv','douzihuoqu','baiguijieshu']:
+        for i in ['baigui','gailv','douzihuoqu','miaozhun','baiguijieshu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
