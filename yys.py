@@ -797,7 +797,7 @@ def baigui():
 
         #设定目标，开始查找
         #进入后
-        for i in ['baigui','gailv','douzihuoqu']:
+        for i in ['baigui','gailv','douzihuoqu','baiguijieshu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -811,28 +811,11 @@ def baigui():
                 time.sleep(t)
                 continue
 
-        want=imgs['youxiang']
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('正在邮箱中')
-            want = imgs['guanbi']
-            size = want[0].shape
-            h, w , ___ = size
-            target = screen
-            pts2 = action.locate(target,want,0)
-            if not len(pts2) == 0:
-                print('关闭窗口',pts2)
-                xx = action.cheat(pts2[0], w, h)
-                pyautogui.click(xx)
-                time.sleep(0.5)
-                
-        
         want=imgs['inbaigui']
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
-            #print('正在百鬼中')
+            print('正在百鬼中')
             
             want = imgs['blank']
             target = screen
@@ -898,19 +881,6 @@ def baigui():
                 t = random.randint(15,30) / 100
                 time.sleep(t)
 
-        want = imgs['fenxiang']
-        size = want[0].shape
-        h, w , ___ = size
-        target = screen
-        pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            print('结束界面: ',pts[0])
-            pts[0]=(1200, 100)
-            xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
-            pyautogui.moveTo(xy)
-            t = random.randint(15,30) / 100
-            time.sleep(t)
 
 ########################################################
 #斗技
