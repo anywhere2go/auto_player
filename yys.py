@@ -805,6 +805,7 @@ def baigui():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
+                refresh=0
                 print('点击',i)
                 xy = action.cheat(pts[0], w, h )
                 pyautogui.click(xy)
@@ -817,11 +818,11 @@ def baigui():
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
             #print('正在百鬼中')
-            
             want = imgs['blank']
             target = screen
             pts = action.locate(target,want,0)
             if len(pts) == 0:
+                refresh=0
                 #小怪出现！
                 print('点击小怪')
                 pts2 = (640, 450)
@@ -842,7 +843,7 @@ def baigui():
             else:
                 refresh=0
                 last_click=i
-            #print('重复次数：',refresh)
+            print('重复次数：',refresh)
             if refresh>6:
                 print('进攻次数上限')
                 select_mode()
@@ -863,6 +864,7 @@ def baigui():
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
+            refresh=0
             print('选择押注界面')
             i='ya'
             want = imgs[i]
