@@ -1,186 +1,182 @@
-import cv2, numpy,time, os, random, threading
-import pyautogui
-from winsound import Beep
+import time, os, random, threading
+import cv2, numpy, pyautogui
 from PIL import ImageGrab
-from settings import *
 
 #桌面模式下的鼠标操作延迟，程序已经设置随机延迟这里无需设置修改
-pyautogui.PAUSE = 0.01
+pyautogui.PAUSE = 0.001
+cwd = __file__.replace('auto_player.py', '')  #当前文件目录
+wanted_path = f'{cwd}\\wanted'      #目标图片目录
+#上面都不用改，下面是adb.exe文件所在路径要改，
+#如果你已经加入系统PATH环境，就直接adb = 'adb',我的没加。 只用桌面模式话不用管
+adb = 'd: && cd \\mysys\\Nox\\bin\\ && nox_adb.exe' #ADB文件路径
+nxfd = 'C:\\Users\\Administrator\\Nox_share\\ImageShare' #模拟器共享文件路径
 
-
-#adb模式下设置连接测试
-def adb_test():
-    if mode == 1:
-        return
-    raw_content = os.popen('adb devices').read()
-    row_list = raw_content.split('List of devices attached\n')[1].split('\n')
-    devices_list = [i for i in row_list if len(i) > 1]
-    print(raw_content)
-    devices_count = len(devices_list)
-    assert devices_count > 0, 'adb连接设备数量为 ' + devices_count
-
-
-#超时3秒未完成则重试,传输图片时有极小概率卡死
-def time_out(func):
-    def wrap_func(*args,**kwargs):
-        restart = lambda : func(*args,**kwargs)
-        timer = threading.Timer(3, restart)
-        timer.start()
-        func(*args,**kwargs)
-        timer.cancel()
-    return wrap_func
-
-#匹配图片时小概率出错，一般是图片传输时损坏，重新截图匹配
-def retry(func):
-    def wrap_func(*args,**kwargs):
-        try:
-            re = func(*args,**kwargs)
-        except:
-            print("图片匹配错误，稍后重试")
-            time.sleep(3)
-            re = func(*args,**kwargs)
-        return re
-    return wrap_func
-
-#截屏并发送到目录./screen, 默认返回cv2读取后的图片
-def screen_shot():
-    if mode == 0: #adb截屏并传输文件
-        a = "adb shell screencap -p sdcard/screen.jpg"
-        b = "adb pull sdcard/screen.jpg ./screen"
-        for row in [a, b]:
-            time.sleep(0.1)
-            os.system(row)
-    else:  #桌面截屏
-        screen = ImageGrab.grab()
-        screen.save('./screen/screen.jpg')        
-    print('截图已完成 ', time.ctime())
-    screen = cv2.imread('./screen/screen.jpg')
-    return screen
-
-# ADB命令模拟点击屏幕，参数pos为目标坐标(x, y)
-def touch(pos):
-    x, y = pos
-    if mode == 0:  #adb点击
-        a = "adb shell input touchscreen tap {0} {1}" .format(x, y)
-        os.system(a)
-    else:   #桌面鼠标点击
-        pyautogui.moveTo(x, y)
-        pyautogui.click(x, y)
-
-#蜂鸣报警器，参数n为鸣叫次数，可用于提醒出错或任务完成
-def alarm(n=3):
-    frequency = 1500
-    last = 500
-    for n in range(n):   
-        Beep(frequency,last)
-        time.sleep(0.05)
-
-#按【cv2读取文件内容，匹配精度，图片名称】格式批量读取要查找的目标图片，名称为文件名
-def load_imgs():
-    imgs = {}
-    treshold = accuracy
-    path = wanted_path
-    file_list = os.listdir(path)
-
-    for file in file_list:
-        name = file.split('.')[0]
-        file_path = path + '/' + file
-        a = [ cv2.imread(file_path) , treshold, name]
-        imgs[name] = a
-
-    return imgs
-imgs = load_imgs()
-
- #在背景查找目标图片，以列表形式返回查找目标的中心坐标，
- #screen是截屏图片，wanted是找的图片【按上面load_imgs的格式】，show是否以图片形式显示匹配结果【调试用】
-def locate(screen, wanted, show=0):
-    loc_pos = []
-    wanted, treshold, c_name = wanted
-    result = cv2.matchTemplate(screen, wanted, cv2.TM_CCOEFF_NORMED)
-    location = numpy.where(result >= treshold)
-
-    h,w = wanted.shape[:-1] 
-
-    n,ex,ey = 1,0,0
-    for pt in zip(*location[::-1]):   
-        x,y = pt[0] + int(w/2), pt[1] + int(h/2)
-        if (x-ex) + (y-ey) < 15:  #去掉邻近重复的点
-            continue
-        ex,ey = x,y
-
-        cv2.circle(screen, (x, y), 10, (0, 0, 255), 3)
-            
-        x,y = int(x), int(y)
-        loc_pos.append([x, y])
-
-    if show:  #在图上显示寻找的结果，调试时开启
-        cv2.imshow('we get', screen)
-        cv2.waitKey(0) 
-        cv2.destroyAllWindows()
-
-    return loc_pos
-
-#裁剪图片以缩小匹配范围，screen为原图内容，upleft、downright是目标区域的左上角、右下角坐标
-def cut(screen, upleft, downright): 
-    a,b = upleft
-    c,d = downright
-    screen = screen[b:d,a:c]
-    return screen
-
-#随机偏移坐标，防止游戏的外挂检测。p是原坐标(x, y)，w、n是目标图像宽高，返回目标范围内的一个随机坐标
-def random_offset(p, w=40, h=20):
-    a,b = p
-    w, h = int(w/3), int(h/3)
-    c,d = random.randint(-w, w),random.randint(-h, h)
-    e,f = a + c, b + d
-    y = [e, f]
-    return(y)
-
-#随机延迟点击，防止游戏外挂检测，延迟时间范围为【x, y】秒之间
-def random_delay(x=0.1, y=0.2):
-    t = random.uniform(x, y)
-    time.sleep(t)
-
-
-#寻找并点击, tap为FALSE则只寻找不点击，返回结果是否找到TURE/FALSE
-def find_touch(target, tap=True):
-    screen = screen_shot()
-    print('单个目标 ', target)
-    wanted = imgs[target]
-    size = wanted[0].shape
-    h, w , ___ = size
-    pts = locate(screen, wanted)
-    if pts:
-        print('Y 已找到目标 ',  target)
-        xx = pts[0]
-        xx = random_offset(xx, w, h)
-        if tap:    
-            touch(xx)
-            random_delay()
-        return True
-    else:
-        print('N 未找到目标 ', target)
-        return False
-
-#寻找并点击,找到返回目标名，未找到返回NONE
-def find_touch_any(target_list, tap=True):
-    screen = screen_shot()
-    print('目标列表 ', target_list)
-    re = None
-    for target in target_list:
-        wanted = imgs[target]
-        size = wanted[0].shape
-        h, w , ___ = size
-        pts = locate(screen, wanted)
-        if pts:
-            print('Y 已找到目标 ', target, '位置 ', pts[0])
-            xx = pts[0]
-            xx = random_offset(xx, w, h)
-            if tap:      
-                touch(xx)
-                random_delay()
-            re = target
-            break
+class Player(object):
+    """docstring for Player"""
+       # accuracy 匹配精准度 0~1 #adb_mode开启ADB模式  #adb_num连接第几台ADB设备
+    def __init__(self, accuracy=0.8, adb_mode=False, adb_num=0):
+        super(Player, self).__init__()
+        self.accuracy = accuracy  
+        self.adb_mode = adb_mode  
+        self.load_target()  
+        if self.adb_mode:
+            re = os.popen(f'{adb} devices').read()
+            print(re)
+            device_list = [e.split('\t')[0] for e in re.split('\n') if '\tdevice' in e]
+            assert len(device_list) >= 1, '未检测到ADB连接设备'
+            self.device = device_list[adb_num] 
+            re = os.popen(f'{adb} -s {self.device} shell wm size').read()
+            print(re)
         else:
-            print('N 未找到目标', target)
-    return re
+            w, h = pyautogui.size()
+            print(f'Physical size: {w}x{h}')
+
+    #读取要查找的目标图片，名称为文件名
+    #返回字典{name1:[cv2_image1, name1], name2:...}
+    def load_target(self):
+        target_map = {}
+        path = wanted_path
+        file_list = os.listdir(path)
+        for file in file_list:
+            name = file.split('.')[0]
+            file_path = path + '/' + file
+            content = [ cv2.imread(file_path) , name]
+            target_map[name] = content
+        print(target_map.keys())
+        self.target_map = target_map
+        return target_map
+
+    #截屏并发送到目录./screen, 默认返回cv2读取后的图片
+    def screen_shot(self, name='screen'):
+        if self.adb_mode:         
+            a = f'{adb} -s {self.device} shell screencap -p sdcard/Pictures/{name}.jpg'
+            b = f'{adb} -s {self.device} pull sdcard/Pictures/{name}.jpg {cwd}\\screen'
+            for cmd in [a, b]:
+                os.system(cmd)
+                time.sleep(0.02)
+            screen = cv2.imread(f'{cwd}\\screen\\{name}.jpg')
+            #screen = cv2.imread(f'{nxfd}\\{name}.jpg')
+            #大部分模拟器截图自动同步到共享文件夹 其实不用PULL的
+        else:
+            screen = ImageGrab.grab()            
+            if name != 'screen': #非默认情况才保存硬盘 否则直接读取内存文件
+                screen.save(f'{cwd}\\screen\\{name}.jpg')
+            screen = cv2.cvtColor(numpy.array(screen),cv2.COLOR_RGB2BGR)  
+        print('截图已完成 ', time.ctime())        
+        self.screen = screen
+        return self.screen
+
+    #随机位置偏移，默认左右5个像素
+    def random_offset(self, position, range=5):
+        x, y = position
+        x += random.randint(-range, range)
+        y += random.randint(-range, range)
+        return (x, y)
+
+    # ADB命令模拟点击屏幕，参数pos为目标坐标(x, y), 自带随机偏移
+    # 或pyautogui鼠标点击，带偏移与延迟
+    def touch(self, position):
+        x, y = self.random_offset(position)
+        if self.adb_mode: #手机点击
+            cmd = f'{adb} -s {self.device} shell input touchscreen tap {x} {y}'
+            os.system(cmd)
+        else: #电脑点击
+            origin = pyautogui.position()
+            dt = random.uniform(0.01, 0.02)
+            pyautogui.moveTo(x, y, duration=dt)
+            pyautogui.mouseDown(button='left')
+            time.sleep(dt) #有的游戏就是不能识别click,但是可以down加up，很奇怪
+            pyautogui.mouseUp(button='left')
+            pyautogui.moveTo(*origin, duration=dt)
+
+    #拖动或长按
+    def drag(self, position_start, end, second=0.2):
+        sx, sy = random_offset(position_start)
+        ex, ey = random_offset(end)
+        if self.adb_mode:
+            cmd = f'{adb} -s {self.device} shell input touchscreen swipe {sx} {sy} {ex} {ey}'
+            os.system(cmd)
+        else:
+            origin = pyautogui.position() #记录原位，点完返回
+            dt = random.uniform(0.01, 0.02)
+            pyautogui.moveTo(sx, sy, duration=dt)
+            pyautogui.dragTo(ex, ey, duration=second+dt)
+            pyautogui.moveTo(*origin, duration=dt)
+
+    #在图上标记位置p1左上，p2右下
+    def mark(self, background, p1, p2):
+        cv2.rectangle(background, p1, p2, (0, 0, 255), 3)
+
+    #核心功能， 在background大图片上定位target_name对应的小图片位置
+    #debug开启则会以图片形式显示查找结果
+    def locate(self, background, target_name, debug=0):
+        loc_pos = []
+        target, c_name = self.target_map[target_name]
+        h, w, _ = target.shape
+        result = cv2.matchTemplate(background, target, cv2.TM_CCOEFF_NORMED)
+        location = numpy.where(result >= self.accuracy)        
+        dis = lambda a, b: ((a[0]-b[0])**2 + (a[1]-b[1])**2) **0.5 #计算两点距离
+        for y, x in zip(*location):
+            center = x + int(w/2), y + int(h/2)
+            if loc_pos and dis(loc_pos[-1], center) < 20:  #忽略邻近重复的点
+                continue
+            else:
+                loc_pos.append(center)
+                p2 = x + w, y + h
+                self.mark(background, (x, y), p2)
+
+        if debug:  #在图上显示寻找的结果，调试时开启
+            cv2.imshow(f'result for {target_name}:', background)
+            cv2.waitKey(0) 
+            cv2.destroyAllWindows()
+        res = len(loc_pos)
+        msg = f'查找结果：{c_name} 匹配到 {res} 个位置'
+        print(msg)
+        return loc_pos
+
+
+    #裁剪Img以加速检测， area[h1,h2,w1,w2]为高宽范围百分比
+    #选中区域为高h1%到h2% 宽w1%到w2%，返回裁剪后图片与左上角位置
+    def cut(self, img, area=[0, 50, 0, 50]):
+        h1, h2, w1, w2 = [e/100 for e in area]
+        h, w, c = img.shape
+        h1, h2 = int(h*h1), int(h*h2)
+        w1, w2 = int(w*w1), int(w*w2)
+        small = img[h1:h2, w1:w2, :]
+        start = [w1, h1]
+        return small, start
+
+    #判断name_list中哪些目标存在，但不点击，全部目标遍历，返回同长度真假列表
+    #输入[name1,name2...]返回[name1_result, name2_result...]
+    def exist(self, name_list, area=None): 
+        background = self.screen_shot()
+        if area:
+            background, start = self.cut(background, area)
+        re = []
+        name_list = name_list if type(name_list) == list else [name_list,]
+        for name in name_list:
+            loc_pos = self.locate(background, name)
+            cur = len(loc_pos) > 0
+            re.append(cur)
+        re = re[0] if len(re) == 1 else re
+        return re
+
+    #寻找name_list中的目标，并点击第一个找到的目标，然后中止
+    #注意有优先级顺序，找到了前面的就不会再找后面的
+    #只返回第一个找到并点击的name，都没找到返回false
+    def find_touch(self, name_list, area=None):
+        background = self.screen_shot()
+        if area:
+            background, start = self.cut(background, area)
+        re = False
+        name_list = name_list if type(name_list) == list else [name_list,]
+        for name in name_list:
+            loc_pos = self.locate(background, name)
+            if len(loc_pos) > 0:
+                if area: #从裁剪后的坐标还原回裁前的坐标
+                    loc_pos[0][0] += start[0] 
+                    loc_pos[0][1] += start[1]
+                self.touch(loc_pos[0]) #同一目标多个结果时只点第一个
+                re = name
+                break            
+        return re
