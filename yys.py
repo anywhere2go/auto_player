@@ -982,8 +982,8 @@ def huodong():
             print('体力不足 ')
             select_mode()
         
-        for i in ['jujue','querenyuhun','queding','zhunbei','hdend',\
-                  'hdtiaozhan','hddiaocha',
+        for i in ['jujue','querenyuhun','queding',\
+                  'hdtiaozhan',\
                   'jiangli','ying','shibai','jixu']:
             want = imgs[i]
             size = want[0].shape
