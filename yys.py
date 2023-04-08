@@ -124,30 +124,21 @@ def tupo():
                 print('个人突破')
 
             
-        if liaotu==True:
-            if cishu >= 6:
-                print('等待5分钟CD')
-                #t = 5*60-20
-                #t=2
-                time.sleep(t)
-                cishu=cishu-1
-        elif liaotu==False:
+        if liaotu==False:
             if cishu >= 31:
                 print('进攻次数上限')
                 select_mode()
-
-
-
 
         want = imgs['jingonghuise']
         size = want[0].shape
         h, w , ___ = size
         target = screen
         pts = action.locate(target,want,0)
-        if not len(pts) == 0:
-            cishu=6
+        if not len(pts) == 0 and liaotu==True:
             refresh=refresh+1
-            print('进攻次数上限:',count)
+            print('进攻CD，暂停5分钟')
+            t=60*5
+            time.sleep(t)
         
         #奖励
         for i in ['jujue','queding',\
