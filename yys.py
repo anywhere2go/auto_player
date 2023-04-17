@@ -142,7 +142,7 @@ def tupo():
         
         #奖励
         for i in ['jujue','queding',\
-                  'shibai','ying','jiangli',\
+                  'shibai','ying','jiangli','jixu',\
                   'jingong','jingong2',\
                   'lingxunzhang','lingxunzhang2','lingxunzhang4',\
                   'shuaxin','zhunbei']:
@@ -182,8 +182,9 @@ def tupo():
                         count=count+1
                     print('进攻总次数：',count)
                     t = random.randint(500,800) / 100
-                elif i=='lingxunzhang' or i=='lingxunzhang2':
-                    t = random.randint(50,100) / 100
+                elif i=='lingxunzhang' or i=='lingxunzhang2' or i=='lingxunzhang4':
+                    print('选择结界。。。',i)
+                    t = random.randint(5,50) / 100
                 else:
                     print('突破中。。。',i)
                 time.sleep(t)
