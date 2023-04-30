@@ -184,7 +184,7 @@ def tupo():
                     t = random.randint(500,800) / 100
                 elif i=='lingxunzhang' or i=='lingxunzhang2' or i=='lingxunzhang4':
                     print('选择结界。。。',i)
-                    t = random.randint(5,50) / 100
+                    t = random.randint(50,150) / 100
                 else:
                     print('突破中。。。',i)
                 time.sleep(t)
@@ -976,7 +976,7 @@ def huodong():
         
         for i in ['jujue','querenyuhun','queding',\
                   'hdtiaozhan',\
-                  'jiangli','ying','shibai','jixu']:
+                  'jiangli','shibai','jixu']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
