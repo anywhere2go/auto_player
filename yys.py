@@ -976,7 +976,7 @@ def huodong():
         
         for i in ['jujue','querenyuhun','queding',\
                   'hdtiaozhan','ying',\
-                  'shibai','jixu','hdend']:
+                  'shibai','jixu','hdend','liaotianguanbi']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
