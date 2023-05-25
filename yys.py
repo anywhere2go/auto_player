@@ -976,7 +976,7 @@ def huodong():
         
         for i in ['jujue','querenyuhun','queding',\
                   'hdtiaozhan','ying',\
-                  'shibai','jixu']:
+                  'shibai','jixu','hdend']:
             want = imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1004,15 +1004,13 @@ def huodong():
                     t=1
                 if i=='hdfaxian' or i=='hdfaxian2':
                     t=5
-                if i=='hdend':
-                    if refresh==0:
-                        print('疲劳度满，休息10分钟')
-                        t = 10*60
-                        time.sleep(t)
-                else:
-                    xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
-                
+                #if i=='hdend':
+                #    if refresh==0:
+                #        print('疲劳度满，休息10分钟')
+                        #t = 10*60
+                        #time.sleep(t)
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
                 time.sleep(t)
 
 ##########################################################
