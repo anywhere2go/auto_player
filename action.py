@@ -118,6 +118,8 @@ def cheat(p, w, h):
         w, h = int(w/3/2), int(h/3/2)
     else:
         w, h = int(w/3), int(h/3)
+    if h<0:
+        h=1
     c,d = random.randint(-w, w),random.randint(-h, h)
     e,f = a + c, b + d
     y = [e, f]

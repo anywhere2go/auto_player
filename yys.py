@@ -165,7 +165,6 @@ def tupo():
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
-                    
                 xy = action.cheat(pts[0], w, h-10 )
                 pyautogui.click(xy)
                 t = random.randint(15,50) / 100
@@ -1009,7 +1008,7 @@ def huodong():
                 #        print('疲劳度满，休息10分钟')
                         #t = 10*60
                         #time.sleep(t)
-                xy = action.cheat(pts[0], w, h-10 )
+                xy = action.cheat(pts[0], w, h)
                 pyautogui.click(xy)
                 time.sleep(t)
 
