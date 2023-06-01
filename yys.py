@@ -352,7 +352,7 @@ def yuhundanren():
             select_mode()
 
         for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
-                  'tiaozhan','tiaozhan2','tiaozhan3','shibai']:
+                  'tiaozhan','tiaozhan2','tiaozhan3','tancha','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -370,7 +370,7 @@ def yuhundanren():
                     select_mode()
                 
                 print('挑战中。。。',i)
-                if i == 'tiaozhan' or i=='tiaozhan2' or i=='tiaozhan3':
+                if i == 'tiaozhan' or i=='tiaozhan2' or i=='tiaozhan3' or i=='tancha':
                     if refresh==0:
                         cishu=cishu+1
                     print('挑战次数：',cishu)
