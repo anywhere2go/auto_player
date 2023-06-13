@@ -59,6 +59,7 @@ def select_mode():
         13 蓝蛋升级
         14 秘境召唤
         15 妖气封印和秘闻
+        16 Debug模式
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
@@ -71,7 +72,8 @@ def select_mode():
     mode = [0, tupo, yuhun, yuhun2, yuhundanren,\
             gouliang, gouliang2, gouliang3,\
             baigui, douji, huodong,\
-            card, chouka, shengxing, mijing, yaoqi]
+            card, chouka, shengxing, mijing, yaoqi,\
+            debug]
     try:
         command = mode[index]
     except:
@@ -103,7 +105,7 @@ def tupo():
         screen=action.screenshot(monitor)
         
         #cv2.imshow("Image", screen)
-        #cv2.waitKey(0) 
+        #cv2.waitKey(0)
 
         #寮突破判断
         if liaotu==None:
@@ -1311,7 +1313,21 @@ def yaoqi():
         if not len(pts) == 0:
             print('体力不足')
             select_mode()
-            
+##################################################################
+
+def debug():
+    while True :   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截屏
+        #im = np.array(mss.mss().grab(monitor))
+        #screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        #print(scalar)
+        screen=action.screenshot(monitor)
+        
+        cv2.imshow("Image", screen)
+        cv2.waitKey(0)
 ####################################################
 if __name__ == '__main__':
     select_mode()
