@@ -1318,6 +1318,7 @@ def yaoqi():
 def debug():
     while True :   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            cv2.destroyAllWindows()
             select_mode()
 
         #截屏
@@ -1328,6 +1329,8 @@ def debug():
         
         cv2.imshow("Image", screen)
         cv2.waitKey(100)
+        cv2.destroyAllWindows()
+        cv2.waitKey(1)
 ####################################################
 if __name__ == '__main__':
     select_mode()
