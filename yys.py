@@ -1327,7 +1327,7 @@ def debug():
         screen=action.screenshot(monitor)
         
         cv2.imshow("Image", screen)
-        cv2.waitKey(0)
+        cv2.waitKey(100)
 ####################################################
 if __name__ == '__main__':
     select_mode()
