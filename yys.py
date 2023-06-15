@@ -1316,21 +1316,14 @@ def yaoqi():
 ##################################################################
 
 def debug():
-    while True :   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            cv2.destroyAllWindows()
-            select_mode()
-
-        #截屏
-        #im = np.array(mss.mss().grab(monitor))
-        #screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        #print(scalar)
-        screen=action.screenshot(monitor)
-        
-        cv2.imshow("Image", screen)
-        cv2.waitKey(100)
-        cv2.destroyAllWindows()
-        cv2.waitKey(1)
+    #截屏
+    screen=action.screenshot(monitor)
+    cv2.imshow("Image", screen)
+    print('点击截图，按任意键返回')
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    cv2.waitKey(1)
+    select_mode()
 ####################################################
 if __name__ == '__main__':
     select_mode()
