@@ -1338,8 +1338,8 @@ def qilingdanren():
             print('体力不足')
             select_mode()
 
-        for i in ['jujue','ying','jiangli','jixu','tancha',\
-                  'qiling1',\
+        for i in ['jujue','ying','jiangli','jixu',\
+                  'qiling1','mingqi','queren3',\
                   'tiaozhan5','shibai','xiaozhiren']:
             want=imgs[i]
             size = want[0].shape
@@ -1362,7 +1362,9 @@ def qilingdanren():
                     if refresh==0:
                         cishu=cishu+1
                     print('挑战次数：',cishu)
-                    t = random.randint(150,300) / 100
+                    t = random.randint(50,150) / 100
+                elif i=='queren3':
+                    t = random.randint(350,450) / 100
                 else:
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
