@@ -59,7 +59,8 @@ def select_mode():
         13 蓝蛋升级
         14 秘境召唤
         15 妖气封印和秘闻
-        16 Debug模式
+        16 契灵（单刷）
+        17 Debug模式
         ''')
     action.alarm(1)
     raw = input("选择功能模式：")
@@ -73,7 +74,7 @@ def select_mode():
             gouliang, gouliang2, gouliang3,\
             baigui, douji, huodong,\
             card, chouka, shengxing, mijing, yaoqi,\
-            debug]
+            qilingdanren, debug]
     try:
         command = mode[index]
     except:
@@ -354,7 +355,7 @@ def yuhundanren():
             select_mode()
 
         for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
-                  'tiaozhan','tiaozhan2','tiaozhan3','tancha','shibai']:
+                  'tiaozhan','tiaozhan2','tiaozhan3','shibai']:
             want=imgs[i]
             size = want[0].shape
             h, w , ___ = size
@@ -1313,8 +1314,64 @@ def yaoqi():
         if not len(pts) == 0:
             print('体力不足')
             select_mode()
-##################################################################
 
+########################################################
+#契灵单人
+def qilingdanren():
+    global last_click
+    cishu=0
+    refresh=0
+    while True :   #直到取消，或者出错
+        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
+            select_mode()
+
+        #截屏
+        screen=action.screenshot(monitor)
+        
+        #体力不足
+        want = imgs['notili']
+        size = want[0].shape
+        h, w , ___ = size
+        target = screen
+        pts = action.locate(target,want,0)
+        if not len(pts) == 0:
+            print('体力不足')
+            select_mode()
+
+        for i in ['jujue','ying','jiangli','jixu','tancha',\
+                  'qiling1',\
+                  'tiaozhan5','shibai','xiaozhiren']:
+            want=imgs[i]
+            size = want[0].shape
+            h, w , ___ = size
+            target=screen
+            pts=action.locate(target,want,0)
+            if not len(pts)==0:
+                if last_click==i:
+                    refresh=refresh+1
+                else:
+                    refresh=0
+                last_click=i
+                #print('重复次数：',refresh)
+                if refresh>6:
+                    print('进攻次数上限')
+                    select_mode()
+                
+                print('挑战中。。。',i)
+                if i=='tancha' or i=='tiaozhan5':
+                    if refresh==0:
+                        cishu=cishu+1
+                    print('挑战次数：',cishu)
+                    t = random.randint(150,300) / 100
+                else:
+                    t = random.randint(15,30) / 100
+                xy = action.cheat(pts[0], w, h-10 )
+                pyautogui.click(xy)
+                time.sleep(t)
+                break
+
+
+##################################################################
 def debug():
     #截屏
     screen=action.screenshot(monitor)
