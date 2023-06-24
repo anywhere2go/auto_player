@@ -1003,8 +1003,6 @@ def huodong():
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
-                    if count>20:
-                        select_mode()
                     t=1
                 if i=='hdfaxian' or i=='hdfaxian2':
                     t=5
