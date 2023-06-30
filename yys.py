@@ -1336,7 +1336,7 @@ def qilingdanren():
             print('体力不足')
             select_mode()
 
-        for i in ['jujue','ying','jiangli','jixu',\
+        for i in ['jujue','ying','jiangli','jixu','queding',\
                   'qiling1','mingqi','queren3',\
                   'tiaozhan5','shibai','xiaozhiren']:
             want=imgs[i]
