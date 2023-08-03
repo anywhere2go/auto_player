@@ -977,7 +977,7 @@ def huodong():
             select_mode()
         
         for i in ['jujue','querenyuhun','queding',\
-                  'hdtiaozhan','ying',\
+                  'hdtiaozhan','ying','hdqueding',\
                   'shibai','jixu','hdend','liaotianguanbi']:
             want = imgs[i]
             size = want[0].shape
