@@ -377,6 +377,8 @@ def yuhundanren():
                     if refresh==0:
                         cishu=cishu+1
                     print('挑战次数：',cishu)
+                    if cishu>200:
+                        select_mode()
                     t = random.randint(150,300) / 100
                 else:
                     t = random.randint(15,30) / 100
