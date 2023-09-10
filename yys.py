@@ -220,7 +220,8 @@ def yuhun():
 
         #自动点击通关结束后的页面
         for i in ['jujue','tiaozhan','tiaozhan2',\
-                  'moren','queding','querenyuhun','ying','jiangli',\
+                  'moren','queding','querenyuhun','ying',\
+                  'jiangli','jiangli2',\
                   'jixu','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -299,7 +300,7 @@ def yuhun2():
         
         #自动点击通关结束后的页面
         for i in ['jujue','moren','queding','querenyuhun',\
-                  'ying','jiangli','jixu',\
+                  'ying','jiangli','jiangli2','jixu',\
                   'jieshou2','jieshou','shibai']:
             want = imgs[i]
             size = want[0].shape
@@ -354,7 +355,7 @@ def yuhundanren():
             print('体力不足')
             select_mode()
 
-        for i in ['jujue','querenyuhun','ying','jiangli','jixu',\
+        for i in ['jujue','querenyuhun','ying','jiangli','jiangli2','jixu',\
                   'tiaozhan','tiaozhan2','tiaozhan3','queding','tancha','shibai']:
             want=imgs[i]
             size = want[0].shape
