@@ -14,21 +14,17 @@ a=0
 def screenshot(monitor):
     
     if scalar:
-        #width = int(im.shape[1]/2)
-        #height = int(im.shape[0]/2)
-        #dim = (width, height)
-        monitor2=(0,0,1136,710)
-        screen = ImageGrab.grab(monitor2)
-        im = numpy.array(screen)
-        resized = cv2.cvtColor(im, cv2.COLOR_RGBA2BGR)
-        screen = resized
-        #screen = cv2.resize(resized, dim, interpolation = cv2.INTER_AREA)
-        #cv2.imshow("Image", screen)
-        #print(screen.shape)
-        #cv2.waitKey(0)
+        #MSS
+        sct = mss.mss()
+        screen = numpy.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
+        #PIL
+        #screen = ImageGrab.grab(monitor)
+        #screen = numpy.array(screen)
+        #screen = cv2.cvtColor(screen, cv2.COLOR_RGBA2BGR)
     else:
-        im = numpy.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
+        screen = numpy.array(mss.mss().grab(monitor))
+        screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
 
     return screen
 

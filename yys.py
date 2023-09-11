@@ -22,9 +22,9 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    downright = (1136,700)
+    downright = (1136/2,800/2)
 else:
-    downright = (1200, 700)
+    downright = (1136, 700)
 a,b = upleft
 c,d = downright
 monitor = {"top": b, "left": a, "width": c, "height": d}
@@ -1379,6 +1379,7 @@ def debug():
     #截屏
     screen=action.screenshot(monitor)
     cv2.imshow("Image", screen)
+    print(monitor)
     print('点击截图，按任意键返回')
     cv2.waitKey(0)
     cv2.destroyAllWindows()
