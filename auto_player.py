@@ -8,13 +8,13 @@ cwd = __file__.replace('auto_player.py', '')  #当前文件目录
 wanted_path = f'{cwd}\\wanted'      #目标图片目录
 #上面都不用改，下面是adb.exe文件所在路径要改，
 #如果你已经加入系统PATH环境，就直接adb = 'adb',我的没加。 只用桌面模式话不用管
-adb = 'd: && cd \\mysys\\Nox\\bin\\ && nox_adb.exe' #ADB文件路径
+adb = 'D:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe' #ADB文件路径
 nxfd = 'C:\\Users\\Administrator\\Nox_share\\ImageShare' #模拟器共享文件路径
 
 class Player(object):
     """docstring for Player"""
        # accuracy 匹配精准度 0~1 #adb_mode开启ADB模式  #adb_num连接第几台ADB设备
-    def __init__(self, accuracy=0.8, adb_mode=False, adb_num=0):
+    def __init__(self, accuracy=0.8, adb_mode=True, adb_num=16384):
         super(Player, self).__init__()
         self.accuracy = accuracy  
         self.adb_mode = adb_mode  
@@ -91,8 +91,8 @@ class Player(object):
 
     #拖动或长按
     def drag(self, position_start, end, second=0.2):
-        sx, sy = random_offset(position_start)
-        ex, ey = random_offset(end)
+        sx, sy = self.random_offset(position_start)
+        ex, ey = self.random_offset(end)
         if self.adb_mode:
             cmd = f'{adb} -s {self.device} shell input touchscreen swipe {sx} {sy} {ex} {ey}'
             os.system(cmd)
