@@ -23,7 +23,7 @@ class Player(object):
             re = os.popen(f'{adb} devices').read()
             print(re)
             device_list = [e.split('\t')[0] for e in re.split('\n') if '\tdevice' in e]
-            assert len(device_list) >= 1, '未检测到ADB连接设备'
+            assert len(device_list) <= 1, '未检测到ADB连接设备'
             self.device = device_list[adb_num] 
             re = os.popen(f'{adb} -s {self.device} shell wm size').read()
             print(re)
@@ -91,8 +91,8 @@ class Player(object):
 
     #拖动或长按
     def drag(self, position_start, end, second=0.2):
-        sx, sy = random_offset(position_start)
-        ex, ey = random_offset(end)
+        sx, sy = self.random_offset(position_start)
+        ex, ey = self.random_offset(end)
         if self.adb_mode:
             cmd = f'{adb} -s {self.device} shell input touchscreen swipe {sx} {sy} {ex} {ey}'
             os.system(cmd)
