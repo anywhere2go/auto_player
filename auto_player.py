@@ -23,7 +23,7 @@ class Player(object):
             re = os.popen(f'{adb} devices').read()
             print(re)
             device_list = [e.split('\t')[0] for e in re.split('\n') if '\tdevice' in e]
-            assert len(device_list) >= 1, '未检测到ADB连接设备'
+            assert len(device_list) <= 1, '未检测到ADB连接设备'
             self.device = device_list[adb_num] 
             re = os.popen(f'{adb} -s {self.device} shell wm size').read()
             print(re)
