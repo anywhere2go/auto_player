@@ -901,11 +901,16 @@ def douji():
     global last_click
     doujipaidui=0
     refresh=0
+    cishu=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
             select_mode()
         #截屏
         screen=action.screenshot(monitor)
+
+        if cishu>50:
+            print('斗技次数上限')
+            select_mode()
         
         for i in ['jujue','shoudong','zidong','queren',\
                   'douji','douji3','douji4',\
@@ -930,7 +935,9 @@ def douji():
                     
                 if i=='douji' or i=='douji4':
                     doujipaidui=0
-                    print('斗技开始',i)
+                    print('斗技次数：',cishu)
+                    if refresh==0:
+                        cishu=cishu+1
                     xy = action.cheat(pts[0], w, h-10 )
                     pyautogui.click(xy)
                     t = random.randint(15,30) / 100
@@ -943,6 +950,7 @@ def douji():
                     if doujipaidui>5:
                         doujipaidui=0
                         print('取消搜索')
+                        cishu=cishu-1
                         xy = action.cheat(pts[0], w, h-10 )
                         pyautogui.click(xy)
                         t = random.randint(15,30) / 100
