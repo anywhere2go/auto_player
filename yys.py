@@ -319,7 +319,7 @@ def yuhun2():
                 if refresh>6:
                     print('进攻次数上限')
                     select_mode()
-                elif refresh==0 and i=='jiangli' and not last_click=='querenyuhun':
+                elif refresh==0 and 'jiangli' in i and not last_click=='querenyuhun':
                     #print('last',last_click)
                     cishu=cishu+1
                     print('挑战次数：',cishu)
