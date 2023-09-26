@@ -908,10 +908,6 @@ def douji():
         #截屏
         screen=action.screenshot(monitor)
 
-        if cishu>50:
-            print('斗技次数上限')
-            select_mode()
-        
         for i in ['jujue','shoudong','zidong','queren',\
                   'douji','douji3','douji4',\
                   'doujiqueren','doujiend','ying','jixu',\
@@ -934,6 +930,9 @@ def douji():
                     select_mode()
                     
                 if i=='douji' or i=='douji4':
+                    if cishu>50:
+                        print('斗技次数上限')
+                        select_mode()
                     doujipaidui=0
                     print('斗技次数：',cishu)
                     if refresh==0:
