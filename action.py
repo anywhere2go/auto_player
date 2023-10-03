@@ -1,12 +1,14 @@
-import cv2,time,os, random,sys,mss
+import cv2,time,os,random,sys,mss,copy
 import numpy
 from PIL import ImageGrab
 
 #检测系统
 if sys.platform=='darwin':
     scalar=True
+    scaling_factor=1/2/0.75
 else:
     scalar=False
+    scaling_factor=1
 
 #截屏起点
 a=0
@@ -16,16 +18,22 @@ def screenshot(monitor):
     if scalar:
         #MSS
         sct = mss.mss()
-        screen = numpy.array(mss.mss().grab(monitor))
+        #{"top": b, "left": a, "width": c, "height": d}
+        #shrink monitor to half due to macOS default DPI scaling
+        monitor2=copy.deepcopy(monitor)
+        monitor2["width"]=int(monitor2["width"]*scaling_factor)
+        monitor2["height"]=int(monitor2["height"]*scaling_factor)
+        screen=mss.mss().grab(monitor2)
+        #mss.tools.to_png(screen.rgb, screen.size, output="screenshot.png")
+        screen = numpy.array(screen)
+        #print('Screen size: ',screen.shape)
+        #MuMu助手默认拉伸4/3倍
+        screen = cv2.resize(screen, (int(screen.shape[1]*0.75), int(screen.shape[0]*0.75)))
+        #print('Screen size: ',screen.shape)
         screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
-        #PIL
-        #screen = ImageGrab.grab(monitor)
-        #screen = numpy.array(screen)
-        #screen = cv2.cvtColor(screen, cv2.COLOR_RGBA2BGR)
     else:
         screen = numpy.array(mss.mss().grab(monitor))
         screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
-
     return screen
 
     
@@ -35,6 +43,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
     want,treshold,c_name=want[0],want[1],want[2]
     result=cv2.matchTemplate(target,want,cv2.TM_CCOEFF_NORMED)
     location=numpy.where(result>=treshold)
+    #print(location)
 
     if msg:  #显示正式寻找目标名称，调试时开启
         print(c_name,'searching... ')
@@ -54,7 +63,8 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            x,y=int(x/2),int(y/2)
+            print('debug')
+            x,y=int(x*scaling_factor),int(y*scaling_factor)
         else:
             x,y=int(x),int(y)
             

@@ -7,6 +7,7 @@ import action
 #检测系统
 print('操作系统:', sys.platform)
 if sys.platform=='darwin':
+    print('监测到macOS，默认匹配MuMu助手窗口大小')
     scalar=True
 else:
     scalar=False
@@ -22,7 +23,8 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    downright = (1136/2,800/2)
+    #MuMu助手顶部边框
+    downright = (1136,750)
 else:
     downright = (1136, 700)
 a,b = upleft
@@ -102,9 +104,7 @@ def tupo():
         #截屏
         #im = np.array(mss.mss().grab(monitor))
         #screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
-        #print(scalar)
         screen=action.screenshot(monitor)
-        
         #cv2.imshow("Image", screen)
         #cv2.waitKey(0)
 
@@ -191,7 +191,7 @@ def tupo():
                     print('突破中。。。',i)
                 time.sleep(t)
                 break
-
+ 
 
 ########################################################
 #御魂司机
@@ -1386,7 +1386,7 @@ def debug():
     #截屏
     screen=action.screenshot(monitor)
     cv2.imshow("Image", screen)
-    print(monitor)
+    print('screen: ',screen.shape[1],screen.shape[0])
     print('点击截图，按任意键返回')
     cv2.waitKey(0)
     cv2.destroyAllWindows()
