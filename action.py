@@ -107,6 +107,8 @@ def alarm(n):
     if os.name=='nt':
         import winsound
         winsound.Beep(frequency, duration)
+    else:
+        os.system('afplay /System/Library/Sounds/Sosumi.aiff')
 
 #裁剪图片以缩小匹配范围，screen为原图内容，upleft、downright是目标区域的左上角、右下角坐标
 def cut(screen,upleft,downright): 
