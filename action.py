@@ -63,7 +63,6 @@ def locate(target,want, show=bool(0), msg=bool(0)):
             print(c_name,'we find it !!! ,at',x,y)
 
         if scalar:
-            print('debug')
             x,y=int(x*scaling_factor),int(y*scaling_factor)
         else:
             x,y=int(x),int(y)
@@ -107,6 +106,8 @@ def alarm(n):
     if os.name=='nt':
         import winsound
         winsound.Beep(frequency, duration)
+    else:
+        os.system('afplay /System/Library/Sounds/Sosumi.aiff')
 
 #裁剪图片以缩小匹配范围，screen为原图内容，upleft、downright是目标区域的左上角、右下角坐标
 def cut(screen,upleft,downright): 
