@@ -182,7 +182,7 @@ def tupo():
                     if refresh==0:
                         cishu = cishu + 1
                         count=count+1
-                    print('进攻总次数：',count)
+                    print('进攻总次数。。。：',i,count)
                     t = random.randint(500,800) / 100
                 elif i=='lingxunzhang' or i=='lingxunzhang2' or i=='lingxunzhang4':
                     print('选择结界。。。',i)
