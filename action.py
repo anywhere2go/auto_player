@@ -1,11 +1,20 @@
-import cv2,time,os,random,sys,mss,copy
+import cv2,time,os,random,sys,mss,copy,subprocess
 import numpy
 from PIL import ImageGrab
 
+#检测ADB
+out=subprocess.run("adb devices -l",shell=True,capture_output=True,check=False)
+out=out.stdout.decode('utf-8')
+if "device product" in out:
+    print('监测到ADB设备，默认连接并使用')
+    adb_enable=True
+else:
+    adb_enable=False
+
 #检测系统
-if sys.platform=='darwin':
+if sys.platform=='darwin' and not adb_enable:
     scalar=True
-    scaling_factor=1/2/0.75
+    scaling_factor=1/2
 else:
     scalar=False
     scaling_factor=1
@@ -14,6 +23,14 @@ else:
 a=0
 
 def screenshot(monitor):
+    if adb_enable:
+        image_bytes = subprocess.Popen("adb shell screencap -p",shell=True,stdout=subprocess.PIPE)
+        image_bytes = image_bytes.stdout.read().replace(b'\r\n', b'\n')
+        #print(image_bytes)
+        screen = cv2.imdecode(numpy.fromstring(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
+        #print(screen)
+        #print('screen: ',screen.shape[1],screen.shape[0])
+        return screen
     
     if scalar:
         #MSS
@@ -28,7 +45,8 @@ def screenshot(monitor):
         screen = numpy.array(screen)
         #print('Screen size: ',screen.shape)
         #MuMu助手默认拉伸4/3倍
-        screen = cv2.resize(screen, (int(screen.shape[1]*0.75), int(screen.shape[0]*0.75)))
+        screen = cv2.resize(screen, (int(screen.shape[1]*0.75), int(screen.shape[0]*0.75)),
+                            interpolation = cv2.INTER_LINEAR)
         #print('Screen size: ',screen.shape)
         screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
     else:
@@ -131,3 +149,19 @@ def cheat(p, w, h):
     e,f = a + c, b + d
     y = [e, f]
     return(y)
+
+# 点击屏幕，参数pos为目标坐标
+def touch(pos):
+    x, y = pos
+    if adb_enable:
+        command="adb shell input tap {0} {1}" .format(x, y)
+        #print('Command: ',command)
+        subprocess.run(command,shell=True)
+    else:
+        pyautogui.click(pos)
+
+
+
+
+
+

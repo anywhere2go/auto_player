@@ -2,12 +2,11 @@ import cv2,time,random,os, datetime
 import os,sys,pyautogui, traceback
 import numpy as np
 import mss
-import action
+import action, action_adb
 
 #检测系统
 print('操作系统:', sys.platform)
 if sys.platform=='darwin':
-    print('监测到macOS，默认匹配MuMu助手窗口大小')
     scalar=True
 else:
     scalar=False
@@ -23,7 +22,6 @@ start_time = time.time()
 #截屏，并裁剪以加速
 upleft = (0, 0)
 if scalar==True:
-    #MuMu助手顶部边框
     downright = (1136,750)
 else:
     downright = (1136, 700)
@@ -169,7 +167,7 @@ def tupo():
                     print('进攻次数上限')
                     select_mode()
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 t = random.randint(15,50) / 100
                 if i == 'shibai':
                     if cishu>0:
@@ -250,7 +248,7 @@ def yuhun():
                     print('挑战中。。。',i)
                     t = random.randint(50,100) / 100
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 time.sleep(t)
                 break
     
@@ -293,7 +291,7 @@ def yuhun2():
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 
@@ -325,7 +323,7 @@ def yuhun2():
                     print('挑战次数：',cishu)
                 print('挑战中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 last_click=i
                 t = random.randint(15,30) / 100
                 time.sleep(t)
@@ -384,7 +382,7 @@ def yuhundanren():
                 else:
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 time.sleep(t)
                 break
 
@@ -423,7 +421,7 @@ def gouliang():
             except:
                 queding = pts[0]
             xy = action.cheat(queding, w, h)
-            pyautogui.click(xy)
+            action.touch(xy)
             pyautogui.moveTo(xy)
             t = random.randint(15,30) / 100
             time.sleep(t)
@@ -524,7 +522,7 @@ def gouliang():
                     
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
-                pyautogui.click(xy)
+                action.touch(xy)
                 if i=='queding':
                     t = random.randint(150,200) / 100
                 else:
@@ -621,7 +619,7 @@ def gouliang2():
                     
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 if i=='jieshou' or i=='jieshou1':
                     t = random.randint(15,30) / 100
                 else:
@@ -666,7 +664,7 @@ def gouliang3():
             except:
                 queding = pts[0]
             xy = action.cheat(queding, w, h)
-            pyautogui.click(xy)
+            action.touch(xy)
             pyautogui.moveTo(xy)
             t = random.randint(15,30) / 100
             time.sleep(t)
@@ -775,7 +773,7 @@ def gouliang3():
                 
                 print('领取奖励',i)
                 xy = action.cheat(pts[0], w, h )
-                pyautogui.click(xy)
+                action.touch(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 break
@@ -805,7 +803,7 @@ def baigui():
                 refresh=0
                 print('点击',i)
                 xy = action.cheat(pts[0], w, h )
-                pyautogui.click(xy)
+                action.touch(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
                 continue
@@ -847,7 +845,7 @@ def baigui():
             cishu=cishu+1
             print('进入百鬼:',cishu)
             xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
+            action.touch(xy)
             pyautogui.moveTo(xy)
             t = random.randint(10,20) / 100
             time.sleep(t)
@@ -872,7 +870,7 @@ def baigui():
             if not len(pts2) == 0:
                 print('点击开始: ',pts[0])
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 pyautogui.moveTo(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
@@ -883,13 +881,13 @@ def baigui():
                 print('选择押注: ',index)
                 
                 xy = action.cheat(pts2, w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 pyautogui.moveTo(xy)
                 t = random.randint(50,100) / 100
                 time.sleep(t)
 
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 pyautogui.moveTo(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
@@ -938,7 +936,7 @@ def douji():
                     if refresh==0:
                         cishu=cishu+1
                     xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
+                    action.touch(xy)
                     t = random.randint(15,30) / 100
                     time.sleep(t)
                     break
@@ -951,14 +949,14 @@ def douji():
                         print('取消搜索')
                         cishu=cishu-1
                         xy = action.cheat(pts[0], w, h-10 )
-                        pyautogui.click(xy)
+                        action.touch(xy)
                         t = random.randint(15,30) / 100
                         time.sleep(t)
                         break
                 else:
                     print('斗技中。。。',i)
                     xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
+                    action.touch(xy)
                     t = random.randint(50,100) / 100
                     time.sleep(t)
                     break
@@ -1022,7 +1020,7 @@ def huodong():
                         #t = 10*60
                         #time.sleep(t)
                 xy = action.cheat(pts[0], w, h)
-                pyautogui.click(xy)
+                action.touch(xy)
                 time.sleep(t)
 
 ##########################################################
@@ -1057,7 +1055,7 @@ def card():
                 
                 print('结界卡*',i)
                 xy = action.cheat(pts[0], w/2, h-10)
-                pyautogui.click(xy)
+                action.touch(xy)
                 break
         if len(pts) == 0:
                 print('结界卡不足')
@@ -1090,7 +1088,7 @@ def card():
                 
                 print('结界卡',i)
                 xy = action.cheat(pts[0], w/2, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 pyautogui.moveTo(xy)
 
         #截屏
@@ -1114,7 +1112,7 @@ def card():
             
             print('合成中。。。')
             xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
+            action.touch(xy)
             pyautogui.moveTo(xy)
 
         time.sleep(1)
@@ -1144,7 +1142,7 @@ def chouka():
             count=count+1
             print('抽卡中。。。',count)
             xy = action.cheat(pts[0], w, h-10 )
-            pyautogui.click(xy)
+            action.touch(xy)
             #t = random.randint(1,3) / 100
             #time.sleep(t)
 
@@ -1182,7 +1180,7 @@ def shengxing():
                 
                 print('升级中。。。',i)
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 if i=='querenshengxing':
                     if refresh==0:
                         count=count+1
@@ -1234,7 +1232,7 @@ def mijing():
                     
                     print('秘境召唤。。。',i)
                     xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
+                    action.touch(xy)
                     #t = random.randint(10,100) / 100
                     #time.sleep(t)
                     break
@@ -1259,7 +1257,7 @@ def mijing():
                     if i=='canjia':
                         print('加入秘境召唤！',i)
                     xy = action.cheat(pts[0], w, h-10 )
-                    pyautogui.click(xy)
+                    action.touch(xy)
                     t = random.randint(10,30) / 100
                     time.sleep(t)
                     break
@@ -1309,7 +1307,7 @@ def yaoqi():
                     print('活动中。。。',i)
                     t = random.randint(30,80) / 100
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 time.sleep(t)
                 break
         
@@ -1376,7 +1374,7 @@ def qilingdanren():
                 else:
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
-                pyautogui.click(xy)
+                action.touch(xy)
                 time.sleep(t)
                 break
 
@@ -1384,8 +1382,10 @@ def qilingdanren():
 ##################################################################
 def debug():
     #截屏
+    #screen=action_adb.screenshot()
     screen=action.screenshot(monitor)
-    cv2.imshow("Image", screen)
+    print('screen: ',screen.shape[1],screen.shape[0])
+    cv2.imshow("", screen)
     print('screen: ',screen.shape[1],screen.shape[0])
     print('点击截图，按任意键返回')
     cv2.waitKey(0)
