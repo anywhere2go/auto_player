@@ -5,10 +5,12 @@ from PIL import ImageGrab
 #检测ADB
 out=subprocess.run("adb devices -l",shell=True,capture_output=True,check=False)
 out=out.stdout.decode('utf-8')
+print(out)
 if "device product" in out:
-    print('监测到ADB设备，默认连接并使用')
+    print('监测到ADB设备，默认使用模拟器')
     adb_enable=True
 else:
+    print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
 
 #检测系统
