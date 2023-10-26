@@ -154,6 +154,8 @@ def cheat(p, w, h):
 
 # 点击屏幕，参数pos为目标坐标
 def touch(pos):
+    global adb_enable
+    #print(adb_enable)
     x, y = pos
     if adb_enable:
         command="adb shell input tap {0} {1}" .format(x, y)

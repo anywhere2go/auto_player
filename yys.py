@@ -448,7 +448,7 @@ def gouliang():
                 else:
                     right = (854, 527)
                 right = action.cheat(right, 10, 10)
-                pyautogui.click(right)
+                action.touch(right)
                 t = random.randint(50,80) / 100
                 time.sleep(t)
                 continue
@@ -475,7 +475,7 @@ def gouliang():
                     print('点击小怪',i)
                     print('探索次数：',count)
                     xx = action.cheat(pts[0], w, h)        
-                    pyautogui.click(xx)
+                    action.touch(xx)
                     time.sleep(0.5)
                     break
 
@@ -495,7 +495,7 @@ def gouliang():
                         except:
                             queding = pts[0]
                         queding = action.cheat(queding, w, h)
-                        pyautogui.click(queding)
+                        action.touch(queding)
                         t = random.randint(50,80) / 100
                         time.sleep(t)
                         break
@@ -589,7 +589,7 @@ def gouliang2():
                         except:
                             queding = pts[0]
                         queding = action.cheat(queding, w, h)
-                        pyautogui.click(queding)
+                        action.touch(queding)
                         t = random.randint(50,80) / 100
                         time.sleep(t)
                         break
@@ -690,7 +690,7 @@ def gouliang3():
                 else:
                     right = (854, 527)
                 right = action.cheat(right, 10, 10)
-                pyautogui.click(right)
+                action.touch(right)
                 t = random.randint(50,80) / 100
                 time.sleep(t)
                 continue
@@ -720,7 +720,7 @@ def gouliang3():
                         print('次数上限')
                         select_mode()
                     xx = action.cheat(pts[0], w, h)        
-                    pyautogui.click(xx)
+                    action.touch(xx)
                     time.sleep(0.5)
                     break
 
@@ -747,7 +747,7 @@ def gouliang3():
                         except:
                             queding = pts[0]
                         queding = action.cheat(queding, w, h)
-                        pyautogui.click(queding)
+                        action.touch(queding)
                         t = random.randint(50,80) / 100
                         time.sleep(t)
                         break
@@ -822,7 +822,7 @@ def baigui():
                 print('点击小怪')
                 pts2 = (640, 450)
                 xx = action.cheat(pts2, 100, 80)        
-                pyautogui.click(xx)
+                action.touch(xx)
                 time.sleep(0.5)
                 continue
 
