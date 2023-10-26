@@ -431,9 +431,6 @@ def gouliang():
         #进入后
         want=imgs['guding']
 
-        #x1 = (785, 606)
-        #x2 = downright
-        #target = action.cut(screen, x1, x2)
         target = screen
         pts = action.locate(target,want,0)
         if not len(pts) == 0:
@@ -443,10 +440,8 @@ def gouliang():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if scalar:
-                    right=(854/2, 528/2)
-                else:
-                    right = (854, 527)
+                print('向右走')
+                right = (854, 527)
                 right = action.cheat(right, 10, 10)
                 action.touch(right)
                 t = random.randint(50,80) / 100
@@ -674,9 +669,6 @@ def gouliang3():
         #进入后
         want=imgs['guding']
 
-        #x1 = (785, 606)
-        #x2 = downright
-        #target = action.cut(screen, x1, x2)
         pts = action.locate(screen,want,0)
         if not len(pts) == 0:
             print('正在地图中')
@@ -685,10 +677,8 @@ def gouliang3():
             target = screen
             pts = action.locate(target,want,0)
             if not len(pts) == 0:
-                if scalar:
-                    right=(854/2, 528/2)
-                else:
-                    right = (854, 527)
+                print('向右走')
+                right = (854, 527)
                 right = action.cheat(right, 10, 10)
                 action.touch(right)
                 t = random.randint(50,80) / 100
