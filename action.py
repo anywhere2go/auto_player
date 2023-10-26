@@ -1,4 +1,4 @@
-import cv2,time,os,random,sys,mss,copy,subprocess
+import cv2,time,os,random,sys,mss,copy,subprocess,pyautogui
 import numpy
 from PIL import ImageGrab
 

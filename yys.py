@@ -1,8 +1,8 @@
-import cv2,time,random,os, datetime
-import os,sys,pyautogui, traceback
+import cv2,time,random,os,datetime,pyautogui
+import os,sys,traceback
 import numpy as np
 import mss
-import action, action_adb
+import action
 
 #检测系统
 print('操作系统:', sys.platform)
