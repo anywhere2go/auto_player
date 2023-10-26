@@ -422,7 +422,6 @@ def gouliang():
                 queding = pts[0]
             xy = action.cheat(queding, w, h)
             action.touch(xy)
-            pyautogui.moveTo(xy)
             t = random.randint(15,30) / 100
             time.sleep(t)
 
@@ -660,7 +659,6 @@ def gouliang3():
                 queding = pts[0]
             xy = action.cheat(queding, w, h)
             action.touch(xy)
-            pyautogui.moveTo(xy)
             t = random.randint(15,30) / 100
             time.sleep(t)
 
@@ -836,7 +834,6 @@ def baigui():
             print('进入百鬼:',cishu)
             xy = action.cheat(pts[0], w, h-10 )
             action.touch(xy)
-            pyautogui.moveTo(xy)
             t = random.randint(10,20) / 100
             time.sleep(t)
 
@@ -861,7 +858,6 @@ def baigui():
                 print('点击开始: ',pts[0])
                 xy = action.cheat(pts[0], w, h-10 )
                 action.touch(xy)
-                pyautogui.moveTo(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
             else:
@@ -872,13 +868,11 @@ def baigui():
                 
                 xy = action.cheat(pts2, w, h-10 )
                 action.touch(xy)
-                pyautogui.moveTo(xy)
                 t = random.randint(50,100) / 100
                 time.sleep(t)
 
                 xy = action.cheat(pts[0], w, h-10 )
                 action.touch(xy)
-                pyautogui.moveTo(xy)
                 t = random.randint(15,30) / 100
                 time.sleep(t)
 
@@ -1079,7 +1073,6 @@ def card():
                 print('结界卡',i)
                 xy = action.cheat(pts[0], w/2, h-10 )
                 action.touch(xy)
-                pyautogui.moveTo(xy)
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1103,7 +1096,6 @@ def card():
             print('合成中。。。')
             xy = action.cheat(pts[0], w, h-10 )
             action.touch(xy)
-            pyautogui.moveTo(xy)
 
         time.sleep(1)
 
