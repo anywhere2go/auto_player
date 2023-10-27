@@ -3,10 +3,10 @@ import numpy
 from PIL import ImageGrab
 
 #检测ADB
-out=subprocess.run("adb devices -l",shell=True,capture_output=True,check=False)
+out=subprocess.run("adb devices",shell=True,capture_output=True,check=False)
 out=out.stdout.decode('utf-8')
 print(out)
-if "device product" in out:
+if " device" in out:
     print('监测到ADB设备，默认使用模拟器')
     adb_enable=True
 else:
@@ -26,8 +26,8 @@ a=0
 
 def screenshot(monitor):
     if adb_enable:
-        image_bytes = subprocess.Popen("adb shell screencap -p",shell=True,stdout=subprocess.PIPE)
-        image_bytes = image_bytes.stdout.read().replace(b'\r\n', b'\n')
+        image_bytes = subprocess.run("adb shell screencap -p",shell=True,stdout=subprocess.PIPE)
+        image_bytes = image_bytes.stdout
         #print(image_bytes)
         screen = cv2.imdecode(numpy.fromstring(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
         #print(screen)
