@@ -7,8 +7,10 @@ out=subprocess.run("adb devices",shell=True,capture_output=True,check=False)
 out=out.stdout.decode('utf-8')
 print(out)
 if " device" in out:
-    print('监测到ADB设备，默认使用模拟器')
+    print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
+    print('修改成桌面版分辨率')
+    subprocess.run("adb shell wm size 640x1136",shell=True)
 else:
     print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
@@ -23,6 +25,11 @@ else:
 
 #截屏起点
 a=0
+
+def reset_resolution():
+    if adb_enable:
+        print('重置安卓分辨率')
+        subprocess.run("adb shell wm size reset",shell=True)
 
 def screenshot(monitor):
     if adb_enable:

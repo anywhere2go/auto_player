@@ -82,6 +82,7 @@ def select_mode():
         select_mode()
 
     if index==0:
+        action.reset_resolution()
         quit()
     else:
         start = time.time()
