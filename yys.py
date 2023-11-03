@@ -90,7 +90,7 @@ def select_mode():
 ##########################################################
 #结节突破
 def tupo():
-    global last_click
+    last_click=''
     count=0 #总次数
     cishu = 0
     refresh=0
@@ -127,7 +127,7 @@ def tupo():
             
         if liaotu==False:
             if cishu >= 31:
-                print('进攻次数上限')
+                print('进攻次数上限: ',cishu)
                 select_mode()
 
         want = imgs['jingonghuise']
@@ -194,7 +194,7 @@ def tupo():
 ########################################################
 #御魂司机
 def yuhun():
-    global last_click
+    last_click=''
     cishu=0
     refresh=0
     while True :
@@ -255,7 +255,7 @@ def yuhun():
 ########################################################
 #御魂打手
 def yuhun2():
-    global last_click
+    last_click=''
     cishu=0
     refresh=0
     while True :
@@ -333,7 +333,7 @@ def yuhun2():
 ########################################################
 #御魂单人
 def yuhundanren():
-    global last_click
+    last_click=''
     cishu=0
     refresh=0
     while True :   #直到取消，或者出错
@@ -389,7 +389,7 @@ def yuhundanren():
 ########################################################
 #探索司机
 def gouliang():
-    global last_click
+    last_click=''
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -527,7 +527,7 @@ def gouliang():
 ########################################################
 #探索打手
 def gouliang2():
-    global last_click
+    last_click=''
     refresh=0
     while True:   #直到取消，或者出错
         if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
@@ -624,7 +624,7 @@ def gouliang2():
 ########################################################
 #探索单人
 def gouliang3():
-    global last_click
+    last_click=''
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -769,7 +769,7 @@ def gouliang3():
 ########################################################
 #百鬼
 def baigui():
-    global last_click
+    last_click=''
     refresh=0
     cishu=0
     while True:   #直到取消，或者出错
@@ -880,7 +880,7 @@ def baigui():
 ########################################################
 #斗技
 def douji():
-    global last_click
+    last_click=''
     doujipaidui=0
     refresh=0
     cishu=0
@@ -948,7 +948,7 @@ def douji():
 ########################################################
 #当前活动
 def huodong():
-    global last_click
+    last_click=''
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -1010,7 +1010,7 @@ def huodong():
 ##########################################################
 #合成结界卡
 def card():
-    global last_click
+    last_click=''
     refresh=0
     while True:
         #鼠标移到右侧中止    
@@ -1102,7 +1102,7 @@ def card():
 ##########################################################
 #抽卡
 def chouka():
-    global last_click
+    last_click=''
     count=0
     while True:
         #鼠标移到右侧中止    
@@ -1131,7 +1131,7 @@ def chouka():
 ##########################################################
 #蓝蛋升级
 def shengxing():
-    global last_click
+    last_click=''
     count=0
     refresh=0
     while True:
@@ -1176,7 +1176,7 @@ def shengxing():
 ##########################################################
 #秘境召唤
 def mijing():
-    global last_click
+    last_click=''
     refresh=0
     while True:
         #鼠标移到右侧中止    
@@ -1247,7 +1247,7 @@ def mijing():
 ########################################################
 #妖气封印和秘闻
 def yaoqi():
-    global last_click
+    last_click=''
     count=0
     refresh=0
     while True:   #直到取消，或者出错
@@ -1306,7 +1306,7 @@ def yaoqi():
 ########################################################
 #契灵单人
 def qilingdanren():
-    global last_click
+    last_click=''
     cishu=0
     refresh=0
     while True :   #直到取消，或者出错
