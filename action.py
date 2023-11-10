@@ -1,4 +1,4 @@
-import cv2,time,os,random,sys,mss,copy,subprocess,pyautogui
+import cv2,time,os,random,sys,mss,copy,subprocess
 import numpy
 from PIL import ImageGrab
 
@@ -10,10 +10,14 @@ if " device" in out:
     print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
     print('修改成桌面版分辨率')
-    subprocess.run("adb shell wm size 640x1136",shell=True)
+    if sys.platform=='linux':
+        subprocess.run("adb shell wm size 1136x640",shell=True)
+    else:
+        subprocess.run("adb shell wm size 640x1136",shell=True)
 else:
     print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
+    import pyautogui
 
 #检测系统
 if sys.platform=='darwin' and not adb_enable:
@@ -33,9 +37,9 @@ def reset_resolution():
 
 def screenshot(monitor):
     if adb_enable:
-        image_bytes = subprocess.run("adb shell screencap -p",shell=True,stdout=subprocess.PIPE)
+        image_bytes = subprocess.run("adb shell screencap -p",shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         image_bytes = image_bytes.stdout
-        #print(image_bytes)
+        image_bytes = numpy.fromstring(image_bytes, numpy.uint8)
         screen = cv2.imdecode(numpy.fromstring(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
         #print(screen)
         #print('screen: ',screen.shape[1],screen.shape[0])

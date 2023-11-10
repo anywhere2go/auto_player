@@ -1,4 +1,4 @@
-import cv2,time,random,os,datetime,pyautogui
+import cv2,time,random,os,datetime
 import os,sys,traceback
 import numpy as np
 import mss
@@ -14,7 +14,7 @@ else:
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
 #pyautogui.PAUSE = 0.05
-pyautogui.FAILSAFE=False
+#pyautogui.FAILSAFE=False
 
 start_time = time.time()
 #print('程序启动，现在时间', time.ctime())
@@ -43,7 +43,7 @@ def select_mode():
     print("运行时间：{:0>2}:{:0>2}:{:05.2f}".format(int(hours),int(minutes),seconds))
     print (datetime.datetime.now())
 
-    print('''\n菜单：  鼠标移动到最右侧中止并返回菜单页面，0退出
+    print('''\n菜单：  按下CTRL+C停止，0退出
         1 结界突破
         2 御魂(司机)
         3 御魂(打手)
@@ -86,7 +86,11 @@ def select_mode():
         quit()
     else:
         start = time.time()
-        command()
+        try:
+            command()
+        except KeyboardInterrupt:
+            print('已停止！')
+            select_mode()
 
 ##########################################################
 #结节突破
@@ -97,9 +101,6 @@ def tupo():
     refresh=0
     liaotu=None
     while True :   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
-
         #截屏
         #im = np.array(mss.mss().grab(monitor))
         #screen = cv2.cvtColor(im, cv2.COLOR_BGRA2BGR)
@@ -200,8 +201,7 @@ def yuhun():
     refresh=0
     while True :
         #鼠标移到最右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -261,8 +261,7 @@ def yuhun2():
     refresh=0
     while True :
         #鼠标移到最右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -338,8 +337,7 @@ def yuhundanren():
     cishu=0
     refresh=0
     while True :   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -394,8 +392,7 @@ def gouliang():
     count=0
     refresh=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -531,8 +528,7 @@ def gouliang2():
     last_click=''
     refresh=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -629,8 +625,7 @@ def gouliang3():
     count=0
     refresh=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -774,8 +769,7 @@ def baigui():
     refresh=0
     cishu=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -886,8 +880,7 @@ def douji():
     refresh=0
     cishu=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
         #截屏
         screen=action.screenshot(monitor)
 
@@ -953,8 +946,7 @@ def huodong():
     count=0
     refresh=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1015,8 +1007,7 @@ def card():
     refresh=0
     while True:
         #鼠标移到右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1107,8 +1098,7 @@ def chouka():
     count=0
     while True:
         #鼠标移到右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1137,8 +1127,7 @@ def shengxing():
     refresh=0
     while True:
         #鼠标移到右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1181,8 +1170,7 @@ def mijing():
     refresh=0
     while True:
         #鼠标移到右侧中止    
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1252,8 +1240,7 @@ def yaoqi():
     count=0
     refresh=0
     while True:   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
@@ -1311,8 +1298,7 @@ def qilingdanren():
     cishu=0
     refresh=0
     while True :   #直到取消，或者出错
-        if pyautogui.position()[0] >= pyautogui.size()[0] * 0.98:
-            select_mode()
+        
 
         #截屏
         screen=action.screenshot(monitor)
