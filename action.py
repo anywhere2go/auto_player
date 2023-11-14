@@ -6,7 +6,7 @@ from PIL import ImageGrab
 out=subprocess.run("adb devices",shell=True,capture_output=True,check=False)
 out=out.stdout.decode('utf-8')
 print(out)
-if " device" in out:
+if "List" in out:
     print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
     print('修改成桌面版分辨率')
