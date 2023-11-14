@@ -44,28 +44,28 @@ def screenshot(monitor):
         #print(screen)
         #print('screen: ',screen.shape[1],screen.shape[0])
         return screen
-    
-    if scalar:
-        #MSS
-        sct = mss.mss()
-        #{"top": b, "left": a, "width": c, "height": d}
-        #shrink monitor to half due to macOS default DPI scaling
-        monitor2=copy.deepcopy(monitor)
-        monitor2["width"]=int(monitor2["width"]*scaling_factor)
-        monitor2["height"]=int(monitor2["height"]*scaling_factor)
-        screen=mss.mss().grab(monitor2)
-        #mss.tools.to_png(screen.rgb, screen.size, output="screenshot.png")
-        screen = numpy.array(screen)
-        #print('Screen size: ',screen.shape)
-        #MuMu助手默认拉伸4/3倍
-        screen = cv2.resize(screen, (int(screen.shape[1]*0.75), int(screen.shape[0]*0.75)),
-                            interpolation = cv2.INTER_LINEAR)
-        #print('Screen size: ',screen.shape)
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
-    else:
-        screen = numpy.array(mss.mss().grab(monitor))
-        screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
-    return screen
+
+    with mss.mss() as sct:
+        if scalar:
+            #MSS
+            #{"top": b, "left": a, "width": c, "height": d}
+            #shrink monitor to half due to macOS default DPI scaling
+            monitor2=copy.deepcopy(monitor)
+            monitor2["width"]=int(monitor2["width"]*scaling_factor)
+            monitor2["height"]=int(monitor2["height"]*scaling_factor)
+            screen=sct.grab(monitor2)
+            #mss.tools.to_png(screen.rgb, screen.size, output="screenshot.png")
+            screen = numpy.array(screen)
+            #print('Screen size: ',screen.shape)
+            #MuMu助手默认拉伸4/3倍
+            screen = cv2.resize(screen, (int(screen.shape[1]*0.75), int(screen.shape[0]*0.75)),
+                                interpolation = cv2.INTER_LINEAR)
+            #print('Screen size: ',screen.shape)
+            screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
+        else:
+            screen = numpy.array(sct.grab(monitor))
+            screen = cv2.cvtColor(screen, cv2.COLOR_BGRA2BGR)
+        return screen
 
     
 #在背景查找目标图片，并返回查找到的结果坐标列表，target是背景，want是要找目标
