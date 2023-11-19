@@ -1,7 +1,7 @@
 感谢anywheretogo大佬提供的脚本框架，此脚本在原作基础上加入了很多功能，也修复了一些问题。开发测试均基于体验服，平台为电脑桌面版新引擎测试（模拟器上由于画面不一致可能不能用）。
 
 1. 安装python
-此脚本兼容Windows/Mac系统，并支持ADB使用模拟器，对于不了解python的用户，首先要安装python官方的必要安装包：推荐3.10.11版本避免内存泄漏问题。下载地址: https://www.python.org/downloads/release/python-31011/， 选择对应的系统就好。
+此脚本兼容Windows/Mac系统，并支持ADB使用模拟器，对于不了解python的用户，首先要安装python官方的必要安装包。下载地址: https://www.python.org/downloads/release/python-31011/， 选择对应的系统就好。
 
 2. 配置程序环境
 安装好python后还需要另外安装三个python库，分别是opencv，pyautogui，和mss。这个步骤Windows和Mac略有不同：
