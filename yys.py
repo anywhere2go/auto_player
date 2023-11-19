@@ -910,9 +910,9 @@ def douji():
                         print('斗技次数上限')
                         select_mode()
                     doujipaidui=0
-                    print('斗技次数：',cishu)
                     if refresh==0:
                         cishu=cishu+1
+                    print('斗技次数：',cishu)
                     xy = action.cheat(pts[0], w, h-10 )
                     action.touch(xy)
                     t = random.randint(15,30) / 100
