@@ -18,6 +18,7 @@ else:
     print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
     import pyautogui
+    pyautogui.FAILSAFE=False
 
 #检测系统
 if sys.platform=='darwin' and not adb_enable:
