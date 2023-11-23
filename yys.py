@@ -906,7 +906,7 @@ def douji():
                     select_mode()
                     
                 if i=='douji' or i=='douji4':
-                    if cishu>50:
+                    if cishu>30:
                         print('斗技次数上限')
                         select_mode()
                     doujipaidui=0
