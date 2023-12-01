@@ -3,17 +3,38 @@ import numpy
 from PIL import ImageGrab
 
 #检测ADB
-out=subprocess.run("adb devices",shell=True,capture_output=True,check=False)
-out=out.stdout.decode('utf-8')
-print(out)
-if "List" in out:
+if sys.platform=='win32':
+    adb_path="C:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe"
+    if os.path.isfile(adb_path):
+        print('开始连接MuMu模拟器')
+        comm=[adb_path,'connect','127.0.0.1:7555']
+        out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+        out=out.stdout.decode('utf-8')
+        print(out)
+        comm=[adb_path,'devices']
+        #print(comm)
+        out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+        out=out.stdout.decode('utf-8')
+        print(out)
+    else:
+        out=''
+else:
+    adb_path="adb"
+    comm=[adb_path,'devices']
+    out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+    out=out.stdout.decode('utf-8')
+    print(out)
+out=out.splitlines()[1]
+if len(out)>1:
     print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
     print('修改成桌面版分辨率')
     if sys.platform=='linux':
-        subprocess.run("adb shell wm size 1136x640",shell=True)
+        comm=[adb_path,"shell","wm","size","1136x640"]
+        subprocess.run(comm,shell=True)
     else:
-        subprocess.run("adb shell wm size 640x1136",shell=True)
+        comm=[adb_path,"shell","wm","size","640x1136"]
+        subprocess.run(comm,shell=True)
 else:
     print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
@@ -34,16 +55,21 @@ a=0
 def reset_resolution():
     if adb_enable:
         print('重置安卓分辨率')
-        subprocess.run("adb shell wm size reset",shell=True)
+        comm=[adb_path,"shell","wm","size","reset"]
+        subprocess.run(comm,shell=True)
 
 def screenshot(monitor):
     if adb_enable:
-        image_bytes = subprocess.run("adb shell screencap -p",shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        comm=[adb_path,"shell","screencap","-p"]
+        image_bytes = subprocess.run(comm,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         image_bytes = image_bytes.stdout
+        if sys.platform=='win32':
+            #only for Windows, otherwise it will be None
+            image_bytes = image_bytes.replace(b'\r\n', b'\n')
         image_bytes = numpy.fromstring(image_bytes, numpy.uint8)
         screen = cv2.imdecode(numpy.fromstring(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
-        #print(screen)
-        #print('screen: ',screen.shape[1],screen.shape[0])
+        #print('screen: ',screen)
+        #print('screen size: ',screen.shape[1],screen.shape[0])
         return screen
 
     with mss.mss() as sct:
@@ -170,9 +196,9 @@ def touch(pos):
     #print(adb_enable)
     x, y = pos
     if adb_enable:
-        command="adb shell input tap {0} {1}" .format(x, y)
-        #print('Command: ',command)
-        subprocess.run(command,shell=True)
+        comm=[adb_path,"shell","input","tap",str(x),str(y)]
+        #print('Command: ',comm)
+        subprocess.run(comm,shell=True)
     else:
         pyautogui.click(pos)
 
