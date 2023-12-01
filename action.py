@@ -4,35 +4,39 @@ from PIL import ImageGrab
 
 #检测ADB
 if sys.platform=='win32':
-    adb_path="C:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe"
-    if os.path.isfile(adb_path):
-        print('开始连接MuMu模拟器')
+    print('检测模拟器')
+    mumu_path="C:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe"
+    ld_path="C:\\leidian\\LDPlayer9\\adb.exe"
+    if os.path.isfile(ld_path):
+        print('检测到雷电模拟器')
+        adb_path=ld_path
+    elif os.path.isfile(mumu_path):
+        print('检测到MuMu模拟器')
+        adb_path=mumu_path
         comm=[adb_path,'connect','127.0.0.1:7555']
         out=subprocess.run(comm,shell=False,capture_output=True,check=False)
         out=out.stdout.decode('utf-8')
         print(out)
-        comm=[adb_path,'devices']
-        #print(comm)
-        out=subprocess.run(comm,shell=False,capture_output=True,check=False)
-        out=out.stdout.decode('utf-8')
-        print(out)
     else:
+        adb_path=''
         out=''
 else:
     adb_path='adb'
+
+if len(adb_path)>0:
     comm=[adb_path,'devices']
     #print(comm)
     out=subprocess.run(comm,shell=False,capture_output=True,check=False)
     out=out.stdout.decode('utf-8')
     print(out)
-out=out.splitlines()
+    out=out.splitlines()
 if len(out)>1:
     out=out[1]
 if len(out)>1:
     print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
     print('修改成桌面版分辨率')
-    if sys.platform=='linux':
+    if sys.platform=='linux' or adb_path==ld_path:
         comm=[adb_path,"shell","wm","size","1136x640"]
         subprocess.run(comm,shell=False)
     else:
