@@ -8,20 +8,21 @@ if sys.platform=='win32':
     if os.path.isfile(adb_path):
         print('开始连接MuMu模拟器')
         comm=[adb_path,'connect','127.0.0.1:7555']
-        out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+        out=subprocess.run(comm,shell=False,capture_output=True,check=False)
         out=out.stdout.decode('utf-8')
         print(out)
         comm=[adb_path,'devices']
         #print(comm)
-        out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+        out=subprocess.run(comm,shell=False,capture_output=True,check=False)
         out=out.stdout.decode('utf-8')
         print(out)
     else:
         out=''
 else:
-    adb_path="adb"
+    adb_path='adb'
     comm=[adb_path,'devices']
-    out=subprocess.run(comm,shell=True,capture_output=True,check=False)
+    #print(comm)
+    out=subprocess.run(comm,shell=False,capture_output=True,check=False)
     out=out.stdout.decode('utf-8')
     print(out)
 out=out.splitlines()
@@ -33,10 +34,10 @@ if len(out)>1:
     print('修改成桌面版分辨率')
     if sys.platform=='linux':
         comm=[adb_path,"shell","wm","size","1136x640"]
-        subprocess.run(comm,shell=True)
+        subprocess.run(comm,shell=False)
     else:
         comm=[adb_path,"shell","wm","size","640x1136"]
-        subprocess.run(comm,shell=True)
+        subprocess.run(comm,shell=False)
 else:
     print('未监测到ADB设备，默认使用桌面版')
     adb_enable=False
@@ -58,12 +59,12 @@ def reset_resolution():
     if adb_enable:
         print('重置安卓分辨率')
         comm=[adb_path,"shell","wm","size","reset"]
-        subprocess.run(comm,shell=True)
+        subprocess.run(comm,shell=False)
 
 def screenshot(monitor):
     if adb_enable:
         comm=[adb_path,"shell","screencap","-p"]
-        image_bytes = subprocess.run(comm,shell=True,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         image_bytes = image_bytes.stdout
         if sys.platform=='win32':
             #only for Windows, otherwise it will be None
@@ -200,7 +201,7 @@ def touch(pos):
     if adb_enable:
         comm=[adb_path,"shell","input","tap",str(x),str(y)]
         #print('Command: ',comm)
-        subprocess.run(comm,shell=True)
+        subprocess.run(comm,shell=False)
     else:
         pyautogui.click(pos)
 
