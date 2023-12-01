@@ -24,7 +24,9 @@ else:
     out=subprocess.run(comm,shell=True,capture_output=True,check=False)
     out=out.stdout.decode('utf-8')
     print(out)
-out=out.splitlines()[1]
+out=out.splitlines()
+if len(out)>1:
+    out=out[1]
 if len(out)>1:
     print('监测到ADB设备，默认使用安卓截图')
     adb_enable=True
