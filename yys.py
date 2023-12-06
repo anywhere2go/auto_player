@@ -991,11 +991,11 @@ def huodong():
                     t=5
                 if i=='hdsousuo':
                     t=5
-                #if i=='hdend':
-                #    if refresh==0:
-                #        print('疲劳度满，休息10分钟')
-                        #t = 10*60
-                        #time.sleep(t)
+                if i=='hdend':
+                    if refresh==0:
+                        print('疲劳度满，休息10分钟')
+                        t = 10*60
+                        stime.sleep(t)
                 xy = action.cheat(pts[0], w, h)
                 action.touch(xy)
                 time.sleep(t)
