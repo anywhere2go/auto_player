@@ -962,7 +962,7 @@ def huodong():
             select_mode()
         
         for i in ['jujue','querenyuhun','queding',\
-                  'hdtiaozhan','ying','hdqueding',\
+                  'hdtiaozhan','ying','hdsousuo','zhunbei',\
                   'shibai','jixu','liaotianguanbi']:
             want = imgs[i]
             size = want[0].shape
@@ -988,8 +988,8 @@ def huodong():
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
-                    t=1
-                if i=='hdfaxian' or i=='hdfaxian2':
+                    t=5
+                if i=='hdsousuo':
                     t=5
                 #if i=='hdend':
                 #    if refresh==0:
