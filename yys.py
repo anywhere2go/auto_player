@@ -962,7 +962,7 @@ def huodong():
             select_mode()
         
         for i in ['jujue','querenyuhun','queding','hdend',\
-                  'hdtiaozhan','ying','hdsousuo','zhunbei',\
+                  'hdtiaozhan','hdtiaozhan2','ying','hdsousuo','zhunbei',\
                   'shibai','jixu','liaotianguanbi']:
             want = imgs[i]
             size = want[0].shape
@@ -983,8 +983,8 @@ def huodong():
                     print('进攻次数上限')
                     select_mode()
 
-                t = 0
-                if i=='hdtiaozhan':
+                t = 1
+                if 'hdtiaozhan' in i:
                     if refresh==0:
                         count=count+1
                     print('挑战次数：',count)
