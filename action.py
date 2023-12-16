@@ -1,4 +1,4 @@
-import cv2,time,os,random,sys,mss,copy,subprocess
+import cv2,time,os,random,sys,mss,copy,subprocess,pyautogui
 import numpy
 from PIL import ImageGrab
 
@@ -51,7 +51,6 @@ def startup():
     else:
         print('未监测到ADB设备，默认使用桌面版')
         adb_enable=False
-        import pyautogui
         pyautogui.FAILSAFE=False
 
     #检测系统
