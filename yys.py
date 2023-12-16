@@ -10,7 +10,7 @@ if sys.platform=='darwin':
     scalar=True
 else:
     scalar=False
-
+action.startup()
 # 读取文件 精度控制   显示名字
 imgs = action.load_imgs()
 #pyautogui.PAUSE = 0.05

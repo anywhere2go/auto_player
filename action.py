@@ -2,70 +2,78 @@ import cv2,time,os,random,sys,mss,copy,subprocess
 import numpy
 from PIL import ImageGrab
 
-#检测ADB
-if sys.platform=='win32':
-    print('检测模拟器')
-    mumu_path="C:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe"
-    ld_path="C:\\leidian\\LDPlayer9\\adb.exe"
-    if os.path.isfile(ld_path):
-        print('检测到雷电模拟器')
-        adb_path=ld_path
-    elif os.path.isfile(mumu_path):
-        print('检测到MuMu模拟器')
-        adb_path=mumu_path
-        comm=[adb_path,'connect','127.0.0.1:7555']
+def startup():
+    global scalar,adb_enable,adb_path
+    #检测ADB
+    if sys.platform=='win32':
+        print('检测模拟器')
+        mumu_path="C:\\Program Files\\Netease\\MuMuPlayer-12.0\\shell\\adb.exe"
+        ld_path="C:\\leidian\\LDPlayer9\\adb.exe"
+        if os.path.isfile(ld_path):
+            print('检测到雷电模拟器')
+            adb_path=ld_path
+        elif os.path.isfile(mumu_path):
+            print('检测到MuMu模拟器')
+            adb_path=mumu_path
+            comm=[adb_path,'connect','127.0.0.1:7555']
+            out=subprocess.run(comm,shell=False,capture_output=True,check=False)
+            out=out.stdout.decode('utf-8')
+            print(out)
+        else:
+            adb_path=''
+            out=''
+    else:
+        adb_path='adb'
+
+    if len(adb_path)>0:
+        comm=[adb_path,'devices']
+        #print(comm)
         out=subprocess.run(comm,shell=False,capture_output=True,check=False)
         out=out.stdout.decode('utf-8')
         print(out)
+        out=out.splitlines()
+    if len(out)>1:
+        out=out[1]
+    if len(out)>1:
+        print('监测到ADB设备，默认使用安卓截图')
+        adb_enable=True
+        
+        screen=screenshot([])
+        w=screen.shape[0]
+        h=screen.shape[1]
+        print('修改成桌面版分辨率')
+        if w>=h:
+            comm=[adb_path,"shell","wm","size","1136x640"]
+            subprocess.run(comm,shell=False)
+        elif w<h:
+            comm=[adb_path,"shell","wm","size","640x1136"]
+            subprocess.run(comm,shell=False)
     else:
-        adb_path=''
-        out=''
-else:
-    adb_path='adb'
+        print('未监测到ADB设备，默认使用桌面版')
+        adb_enable=False
+        import pyautogui
+        pyautogui.FAILSAFE=False
 
-if len(adb_path)>0:
-    comm=[adb_path,'devices']
-    #print(comm)
-    out=subprocess.run(comm,shell=False,capture_output=True,check=False)
-    out=out.stdout.decode('utf-8')
-    print(out)
-    out=out.splitlines()
-if len(out)>1:
-    out=out[1]
-if len(out)>1:
-    print('监测到ADB设备，默认使用安卓截图')
-    adb_enable=True
-    print('修改成桌面版分辨率')
-    if sys.platform=='linux' or adb_path==ld_path:
-        comm=[adb_path,"shell","wm","size","1136x640"]
-        subprocess.run(comm,shell=False)
+    #检测系统
+    if sys.platform=='darwin' and not adb_enable:
+        scalar=True
+        scaling_factor=1/2
     else:
-        comm=[adb_path,"shell","wm","size","640x1136"]
-        subprocess.run(comm,shell=False)
-else:
-    print('未监测到ADB设备，默认使用桌面版')
-    adb_enable=False
-    import pyautogui
-    pyautogui.FAILSAFE=False
+        scalar=False
+        scaling_factor=1
 
-#检测系统
-if sys.platform=='darwin' and not adb_enable:
-    scalar=True
-    scaling_factor=1/2
-else:
-    scalar=False
-    scaling_factor=1
-
-#截屏起点
-a=0
+    #截屏起点
+    a=0
 
 def reset_resolution():
+    global adb_enable,adb_path
     if adb_enable:
         print('重置安卓分辨率')
         comm=[adb_path,"shell","wm","size","reset"]
         subprocess.run(comm,shell=False)
 
 def screenshot(monitor):
+    global adb_enable,adb_path
     if adb_enable:
         comm=[adb_path,"shell","screencap","-p"]
         image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
@@ -149,6 +157,7 @@ def locate(target,want, show=bool(0), msg=bool(0)):
 
 #按【文件内容，匹配精度，名称】格式批量聚聚要查找的目标图片，精度统一为0.95，名称为文件名
 def load_imgs():
+    global scalar
     mubiao = {}
     if scalar:
         path = os.getcwd() + '/png'
