@@ -41,13 +41,17 @@ def startup():
         screen=screenshot([])
         w=screen.shape[0]
         h=screen.shape[1]
-        print('修改成桌面版分辨率')
-        if w>=h:
-            comm=[adb_path,"shell","wm","size","1136x640"]
-            subprocess.run(comm,shell=False)
-        elif w<h:
-            comm=[adb_path,"shell","wm","size","640x1136"]
-            subprocess.run(comm,shell=False)
+        print('原始分辨率：',w,'x',h)
+        if (w==640 and h==1136) or (h==640 and w==1136):
+            print('无需修改分辨率')
+        else:
+            print('修改成桌面版分辨率')
+            if w>=h:
+                comm=[adb_path,"shell","wm","size","1136x640"]
+                subprocess.run(comm,shell=False)
+            elif w<h:
+                comm=[adb_path,"shell","wm","size","640x1136"]
+                subprocess.run(comm,shell=False)
     else:
         print('未监测到ADB设备，默认使用桌面版')
         adb_enable=False
