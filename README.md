@@ -5,7 +5,7 @@
 
 2. 配置程序环境
 安装好python后还需要另外安装三个python库，分别是opencv，pyautogui，和mss。这个步骤Windows和Mac略有不同：
-Windows/Linux：管理员身份打开命令行（cmd）或者powershell，然后运行 pip install opencv-python pyautogui ss。
+Windows/Linux：管理员身份打开命令行（cmd）或者powershell，然后运行 pip install opencv-python pyautogui mss
 Mac：在终端（terminal）下分别运行 pip3 install opencv-python pyautogui mss
 
 3. 运行脚本
