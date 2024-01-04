@@ -991,7 +991,7 @@ def huodong():
                     t=5
                 if i=='hdsousuo':
                     t=5
-                if i=='hdend':
+                if i=='hdend' and False:
                     if refresh==0:
                         print('疲劳度满，休息10分钟')
                         t = 10*60
