@@ -81,9 +81,16 @@ def screenshot(monitor):
         comm=[adb_path,"shell","screencap","-p"]
         #隐藏终端窗口
         if sys.platform=='win32':
-            si = subprocess.STARTUPINFO()
-            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
-            image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,startupinfo=si)
+            startupinfo = subprocess.STARTUPINFO()
+            startupinfo.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            startupinfo.wShowWindow = subprocess.SW_HIDE
+            creationflags = subprocess.CREATE_NO_WINDOW
+            invisibledict = {
+                "startupinfo": startupinfo,
+                "creationflags": creationflags,
+                "start_new_session": True,
+            }
+            image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,**invisibledict)
         else:
             image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         image_bytes = image_bytes.stdout
