@@ -79,7 +79,13 @@ def screenshot(monitor):
     global adb_enable,adb_path
     if adb_enable:
         comm=[adb_path,"shell","screencap","-p"]
-        image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
+        #隐藏终端窗口
+        if sys.platform=='win32':
+            si = subprocess.STARTUPINFO()
+            si.dwFlags |= subprocess.STARTF_USESHOWWINDOW
+            image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE,startupinfo=si)
+        else:
+            image_bytes = subprocess.run(comm,shell=False,stdout=subprocess.PIPE,stderr=subprocess.PIPE)
         image_bytes = image_bytes.stdout
         if sys.platform=='win32':
             #only for Windows, otherwise it will be None
