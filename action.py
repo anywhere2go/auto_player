@@ -90,8 +90,7 @@ def screenshot(monitor):
         if sys.platform=='win32':
             #only for Windows, otherwise it will be None
             image_bytes = image_bytes.replace(b'\r\n', b'\n')
-        image_bytes = numpy.fromstring(image_bytes, numpy.uint8)
-        screen = cv2.imdecode(numpy.fromstring(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
+        screen = cv2.imdecode(numpy.frombuffer(image_bytes, numpy.uint8),cv2.IMREAD_COLOR)
         #print('screen: ',screen)
         #print('screen size: ',screen.shape[1],screen.shape[0])
         return screen
