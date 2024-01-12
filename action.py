@@ -46,10 +46,10 @@ def startup():
             print('无需修改分辨率')
         else:
             print('修改成桌面版分辨率')
-            if w<h:
+            if w>h:
                 comm=[adb_path,"shell","wm","size","1136x640"]
                 subprocess.run(comm,shell=False)
-            elif w>=h:
+            elif w<=h:
                 comm=[adb_path,"shell","wm","size","640x1136"]
                 subprocess.run(comm,shell=False)
     else:
