@@ -236,7 +236,7 @@ def yuhun():
                     refresh=0
                 last_click=i
                 #print('重复次数：',refresh)
-                if refresh>6:
+                if refresh>6 or cishu>200:
                     print('进攻次数上限')
                     select_mode()
                 
