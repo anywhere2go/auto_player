@@ -9,7 +9,7 @@ Windows/Linux：管理员身份打开命令行（cmd）或者powershell，然后
 Mac：在终端（terminal）下分别运行 pip3 install opencv-python pyautogui mss
 
 3. 运行脚本
-Windows下可使用IDLE或其他方式运行（比如powershell/终端），然后打开yys.py脚本源代码，点击运行（F5）则开启脚本。macOS下推荐使用自带的终端Terminal，使用python3 yys.py 方式运行。
+Windows下可使用IDLE或其他方式运行（比如powershell/终端），然后打开yys.py脚本源代码，点击运行（F5）则开启脚本。安卓模拟器推荐使用自带的终端Terminal，使用python3 yys.py 方式运行。推荐使用雷电模拟器，MuMu模拟器会相对卡一些不知道什么原因。
 桌面版必须使用原始分辨率即1136x640（安卓/模拟器会自动设置成桌面版分辨率），其它分辨率则需要重新截图才能正常工作。另外桌面版（非模拟器）游戏窗口务必要移动到左上角。退出脚本按CTRL+C即可。
 
 解放双手 Have fun!
