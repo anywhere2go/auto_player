@@ -377,7 +377,7 @@ def yuhundanren():
                     print('挑战次数：',cishu)
                     if cishu>200:
                         select_mode()
-                    t = random.randint(150,300) / 100
+                    t = random.randint(500,800) / 100
                 else:
                     t = random.randint(15,30) / 100
                 xy = action.cheat(pts[0], w, h-10 )
