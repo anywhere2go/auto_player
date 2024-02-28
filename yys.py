@@ -352,7 +352,7 @@ def yuhundanren():
             print('体力不足')
             select_mode()
 
-        for i in ['jujue','querenyuhun','ying','jiangli','jiangli2','jixu',\
+        for i in ['jujue','querenyuhun','ying','jiangli','jiangli2','jixu','zhunbei',\
                   'tiaozhan','tiaozhan2','tiaozhan3','queding','tancha','shibai']:
             want=imgs[i]
             size = want[0].shape
